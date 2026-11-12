@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Actualización Política de Chile</title>
+<meta name="description" content="Entérate en un resumen general de lo que pasa en la política actualmente. Se actualiza cada 2 horas.">
+<meta property="og:title" content="Actualización Política de Chile">
+<meta property="og:description" content="Entérate en un resumen general de lo que pasa en la política actualmente. Se actualiza cada 2 horas.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://matisandev.cl/actualizacion-politica">
+<meta name="theme-color" content="#04070c">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2304070c'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='700' fill='%2300ffc9' text-anchor='middle'%3EMS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: estilo matisandev.cl — fondo noche con brillos radiales, tarjetas translúcidas de radio 20px, acento menta. Columna única de 1120px con bloques apilados. */
+:root{
+  --night:#f5f7fb; --navy:#ffffff; --navy-soft:#eef2f8; --line:#d5dde8; --ink:#0d1726; --muted:#52627a;
+  --brand:#00795f; --brand-dim:rgba(0,121,95,.10); --brand-border:rgba(0,121,95,.28); --brand-ink:#ffffff;
+  --surface-header:rgba(255,255,255,.85); --surface-card:rgba(255,255,255,.88); --surface-sunken:rgba(238,242,248,.8);
+  --glow-1:rgba(0,121,95,.08); --glow-2:rgba(56,130,246,.08);
+  --ok:#0f7a3d; --ok-dim:rgba(15,122,61,.12); --warn:#a35a00; --warn-dim:rgba(163,90,0,.12); --bad:#b42318; --bad-dim:rgba(180,35,24,.10); --bad-border:rgba(180,35,24,.35); --info:#1d5fd1; --info-dim:rgba(29,95,209,.10);
+  --radius-card:20px; --radius-sm:12px;
+  --font:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --night:#04070c; --navy:#0b1220; --navy-soft:#111a28; --line:#17263c; --ink:#e8eef6; --muted:#94a3b8;
+  --brand:#00ffc9; --brand-dim:rgba(0,255,201,.12); --brand-border:rgba(0,255,201,.32); --brand-ink:#04070c;
+  --surface-header:rgba(4,7,12,.8); --surface-card:rgba(11,18,32,.6); --surface-sunken:rgba(4,7,12,.6);
+  --glow-1:rgba(0,255,201,.07); --glow-2:rgba(56,130,246,.06);
+  --ok:#4ade80; --ok-dim:rgba(74,222,128,.12); --warn:#fbbf24; --warn-dim:rgba(251,191,36,.12); --bad:#f87171; --bad-dim:rgba(248,113,113,.12); --bad-border:rgba(248,113,113,.4); --info:#60a5fa; --info-dim:rgba(96,165,250,.12);
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --night:#04070c; --navy:#0b1220; --navy-soft:#111a28; --line:#17263c; --ink:#e8eef6; --muted:#94a3b8;
+  --brand:#00ffc9; --brand-dim:rgba(0,255,201,.12); --brand-border:rgba(0,255,201,.32); --brand-ink:#04070c;
+  --surface-header:rgba(4,7,12,.8); --surface-card:rgba(11,18,32,.6); --surface-sunken:rgba(4,7,12,.6);
+  --glow-1:rgba(0,255,201,.07); --glow-2:rgba(56,130,246,.06);
+  --ok:#4ade80; --ok-dim:rgba(74,222,128,.12); --warn:#fbbf24; --warn-dim:rgba(251,191,36,.12); --bad:#f87171; --bad-dim:rgba(248,113,113,.12); --bad-border:rgba(248,113,113,.4); --info:#60a5fa; --info-dim:rgba(96,165,250,.12);
+  color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night);background-image:radial-gradient(960px 640px at 15% -10%,var(--glow-1),transparent 60%),radial-gradient(720px 560px at 100% 10%,var(--glow-2),transparent 60%);background-attachment:fixed;color:var(--ink);font:400 16px/1.6 var(--font);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface-header)}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface-header);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:600}
+.brand:hover{text-decoration:none}
+.mono-badge{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;border:1px solid var(--brand-border);background:var(--brand-dim);color:var(--brand);font:600 13px var(--mono)}
+.actions{display:flex;gap:8px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:var(--radius-sm);border:1px solid var(--line);background:var(--surface-card);color:var(--ink);font:600 13px var(--font);cursor:pointer;transition:border-color .2s var(--ease),background .2s var(--ease)}
+.btn:hover{border-color:var(--brand-border)}
+.btn.primary{background:var(--brand);color:var(--brand-ink);border-color:var(--brand)}
+.btn svg{width:16px;height:16px}
+.btn.icon{width:38px;padding:0;justify-content:center}
+.spin{animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+main{display:flex;flex-direction:column;gap:56px;padding-block:40px 64px}
+.eyebrow{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--brand)}
+h1{font-size:clamp(34px,6vw,60px);line-height:1.05;letter-spacing:-.02em;margin:10px 0 12px;font-weight:600;text-wrap:balance}
+h2{font-size:clamp(24px,3.2vw,32px);line-height:1.15;letter-spacing:-.01em;margin:6px 0 0;font-weight:600;text-wrap:balance}
+h3{font-size:18px;line-height:1.3;margin:0;font-weight:600;text-wrap:balance}
+.lede{color:var(--muted);max-width:62ch;margin:0;font-size:17px}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px;color:var(--muted);font-size:13px}
+.meta-row b{color:var(--ink);font-weight:600}
+.sec-head{display:flex;flex-direction:column;gap:4px;margin-bottom:20px}
+.sec-head p{color:var(--muted);margin:6px 0 0;max-width:65ch}
+.card{background:var(--surface-card);border:1px solid var(--line);border-radius:var(--radius-card);padding:24px}
+/* Esencial */
+.essentials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:28px}
+.ess{display:flex;gap:14px;align-items:flex-start}
+.ess .ic{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--brand-dim);color:var(--brand)}
+.ess .ic svg{width:22px;height:22px}
+.ess p{margin:4px 0 0;color:var(--muted);font-size:14px}
+/* Cuenta regresiva */
+.countdown{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:center}
+.cd-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.cd-cell{background:var(--surface-sunken);border:1px solid var(--line);border-radius:14px;padding:14px 8px;text-align:center}
+.cd-num{font:600 clamp(26px,4.4vw,40px)/1 var(--mono);font-variant-numeric:tabular-nums;color:var(--ink)}
+.cd-lab{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.term-bar{height:12px;border-radius:99px;background:var(--surface-sunken);border:1px solid var(--line);overflow:hidden;margin:14px 0 8px}
+.term-fill{height:100%;background:var(--brand);border-radius:99px}
+.term-legend{display:flex;justify-content:space-between;font:500 12px var(--mono);color:var(--muted);gap:8px;flex-wrap:wrap}
+/* Filtros y noticias */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{height:34px;padding:0 14px;border-radius:99px;border:1px solid var(--line);background:var(--surface-card);color:var(--muted);font:600 13px var(--font);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--brand-dim);border-color:var(--brand-border);color:var(--brand)}
+.news{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.news > .item:last-child:nth-child(odd){grid-column:1/-1}
+.item{display:flex;flex-direction:column;gap:14px;min-width:0}
+.item-top{display:flex;align-items:center;gap:12px}
+.illus{flex:none;width:52px;height:52px;border-radius:14px;display:grid;place-items:center}
+.illus svg{width:28px;height:28px}
+.c-economia{background:var(--warn-dim);color:var(--warn)}
+.c-congreso{background:var(--info-dim);color:var(--info)}
+.c-gobierno{background:var(--brand-dim);color:var(--brand)}
+.c-calle{background:var(--bad-dim);color:var(--bad)}
+.c-ley{background:var(--ok-dim);color:var(--ok)}
+.c-justicia{background:var(--info-dim);color:var(--info)}
+.tagline{display:flex;flex-direction:column;gap:2px;min-width:0}
+.cat{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.date{font-size:13px;color:var(--muted)}
+.item p{margin:0;color:var(--ink);opacity:.92}
+.why{border-left:3px solid var(--brand-border);padding:2px 0 2px 12px;color:var(--muted);font-size:14px}
+.why b{color:var(--ink)}
+.sources{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:4px}
+.src{font:500 12px var(--font);padding:4px 10px;border-radius:99px;border:1px solid var(--line);color:var(--muted);background:var(--surface-sunken)}
+.src:hover{color:var(--brand);border-color:var(--brand-border);text-decoration:none}
+/* Tablero de leyes */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:620px}
+th,td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--line);vertical-align:top;font-size:14px}
+th{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+tr:last-child td{border-bottom:0}
+td .muted{color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding:4px 10px;border-radius:99px;font:600 12px var(--font)}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.s-publicada{background:var(--ok-dim);color:var(--ok)}
+.s-rechazada{background:var(--bad-dim);color:var(--bad)}
+.s-retirado{background:var(--warn-dim);color:var(--warn)}
+.s-tramite{background:var(--info-dim);color:var(--info)}
+/* Gráficos */
+.two{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px}
+.vote{display:grid;grid-template-columns:110px minmax(0,1fr) 70px;gap:10px;align-items:center;font-size:13px;padding:7px 0}
+.vote .name{font-weight:600}
+.vote .bar{display:flex;height:14px;border-radius:99px;overflow:hidden;background:var(--surface-sunken);border:1px solid var(--line)}
+.vote .yes{background:var(--ok)}
+.vote .no{background:var(--bad)}
+.vote .res{font:600 12px var(--mono);text-align:right}
+.vote .res.r{color:var(--bad)}
+.vote .res.a{color:var(--ok)}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);margin-top:10px;flex-wrap:wrap}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.fuel svg{width:100%;height:auto;display:block}
+.fuel text{fill:var(--muted);font:500 12px var(--font)}
+.fuel .big{fill:var(--ink);font:600 15px var(--mono)}
+.bajada{font-size:clamp(19px,2.4vw,24px);line-height:1.35;color:var(--ink);margin:0 0 14px;max-width:40ch;font-weight:500;text-wrap:balance}
+.today-lab{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin-right:6px}
+/* Movilizaciones: bloque destacado */
+.mob{position:relative;border:1px solid var(--bad-border);background:linear-gradient(180deg,var(--bad-dim),transparent 70%),var(--surface-card);border-radius:24px;padding:28px}
+.mob-head{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:24px;align-items:end;margin-bottom:22px}
+.mob-head p{color:var(--muted);margin:8px 0 0;max-width:60ch}
+.mob-eyebrow{color:var(--bad);display:flex;align-items:center;gap:8px}
+.mob h2{font-size:clamp(28px,4.4vw,44px)}
+.live-dot{width:10px;height:10px;border-radius:50%;background:var(--bad);box-shadow:0 0 0 0 var(--bad-dim);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 var(--bad-border)}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.mob-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{background:var(--surface-sunken);border:1px solid var(--line);border-radius:14px;padding:14px}
+.stat b{display:block;font:600 28px/1 var(--mono);color:var(--bad);font-variant-numeric:tabular-nums}
+.stat span{display:block;font-size:12px;color:var(--muted);margin-top:6px}
+.agenda{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.agenda li{display:flex;flex-direction:column;gap:8px;padding:18px;border:1px solid var(--line);border-radius:16px;background:var(--surface-card);min-width:0}
+.agenda li.now{border-color:var(--bad-border)}
+.ag-top{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.when{font:600 13px var(--mono);color:var(--ink)}
+.when small{color:var(--muted);font-weight:500;margin-left:6px}
+.st{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:99px;font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase}
+.st-now{background:var(--bad-dim);color:var(--bad)}
+.st-next{background:var(--warn-dim);color:var(--warn)}
+.agenda h3{font-size:17px}
+.agenda p{margin:0;color:var(--muted);font-size:14px}
+.place{font-size:13px;color:var(--ink)}
+.place::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;border:2px solid var(--bad);margin-right:8px;vertical-align:1px}
+.agenda .sources{padding-top:2px}
+/* Glosario */
+.gloss{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.gloss dt{font-weight:600}
+.gloss dd{margin:6px 0 0;color:var(--muted);font-size:14px}
+.note{font-size:13px;color:var(--muted);margin-top:16px}
+.outlets{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+footer{border-top:1px solid var(--line);padding-block:28px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13.6px}
+footer a{font-weight:600}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);border:1px solid var(--brand-border);color:var(--ink);padding:10px 16px;border-radius:12px;font-size:14px;z-index:20;max-width:calc(100% - 32px)}
+@media (max-width:860px){.essentials{grid-template-columns:1fr}.countdown,.two,.news,.gloss,.mob-head,.agenda{grid-template-columns:1fr}}
+@media (max-width:520px){.btn .lbl{display:none}.btn{padding:0 11px}.cd-grid{gap:6px}.cd-cell{padding:12px 4px}.vote{grid-template-columns:84px minmax(0,1fr) 60px}.mob{padding:20px 16px;border-radius:20px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-economia" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M3 21h12"/><path d="M7 7h4v4H7z"/><path d="M14 9h2.5a1.5 1.5 0 0 1 1.5 1.5V16a1.5 1.5 0 0 0 3 0V8l-3-3"/></symbol>
+  <symbol id="i-congreso" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M4 18h16"/><path d="M6 18v-7M10 18v-7M14 18v-7M18 18v-7"/><path d="M3 9l9-5 9 5z"/></symbol>
+  <symbol id="i-gobierno" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.2c2.9.4 5 2.9 5 5.8"/></symbol>
+  <symbol id="i-calle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v3a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M17 9a4 4 0 0 1 0 6"/><path d="M19.5 6.5a8 8 0 0 1 0 11"/></symbol>
+  <symbol id="i-ley" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></symbol>
+  <symbol id="i-justicia" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M7 21h10"/><path d="M5 7h14"/><path d="M5 7l-3 7a3 3 0 0 0 6 0z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio"><span class="mono-badge">MS</span><span>Actualización Política</span></a>
+    <div class="actions">
+      <button class="btn" id="btn-share" type="button" title="Copiar el enlace para compartir"><svg><use href="#i-share"/></svg><span class="lbl">Compartir</span></button>
+      <button class="btn icon" id="btn-theme" type="button" aria-label="Cambiar entre modo claro y oscuro"><svg id="theme-ic"><use href="#i-moon"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="inicio">
+  <section>
+    <div class="eyebrow">Santiago, Chile · Resumen político diario</div>
+    <h1>Actualización Política de Chile</h1>
+    <p class="bajada">Entérate en un resumen general de lo que pasa en la política actualmente.</p>
+    <p class="lede"><b class="today-lab">Hoy</b> <span id="lede"></span></p>
+    <div class="meta-row">
+      <span>Edición: <b id="ed-date"></b></span>
+      <span>Actualizado: <b id="ed-time"></b></span>
+      <span>Se actualiza <b>cada 2 horas, desde las 9:00</b></span>
+    </div>
+    <div class="essentials" id="essentials"></div>
+  </section>
+
+  <section aria-labelledby="h-agenda" class="mob">
+    <div class="mob-head">
+      <div>
+        <div class="eyebrow mob-eyebrow"><span class="live-dot" aria-hidden="true"></span>Calles y movilizaciones</div>
+        <h2 id="h-agenda">Movilizaciones, paros y marchas</h2>
+        <p>Lo que está pasando ahora y lo que viene. Si te mueves por el centro o por carretera, revisa cortes de tránsito y estaciones de Metro cerradas.</p>
+      </div>
+      <div class="mob-stats" id="mob-stats"></div>
+    </div>
+    <ul class="agenda" id="agenda"></ul>
+  </section>
+
+  <section aria-labelledby="h-mandato">
+    <div class="card countdown">
+      <div>
+        <div class="eyebrow">Mandato presidencial</div>
+        <h2 id="h-mandato">Tiempo restante del gobierno de José Antonio Kast</h2>
+        <p class="lede" style="font-size:15px;margin-top:10px">El período presidencial dura 4 años. Comenzó el 11 de marzo de 2026 y termina con el traspaso de mando del 11 de marzo de 2030.</p>
+        <div class="term-bar" role="progressbar" aria-label="Porcentaje del mandato transcurrido" id="term-bar"><div class="term-fill" id="term-fill"></div></div>
+        <div class="term-legend"><span>11 mar 2026</span><span id="term-pct"></span><span>11 mar 2030</span></div>
+      </div>
+      <div class="cd-grid" aria-live="off">
+        <div class="cd-cell"><div class="cd-num" id="cd-d">0</div><div class="cd-lab">Días</div></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-h">00</div><div class="cd-lab">Horas</div></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-m">00</div><div class="cd-lab">Min</div></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-s">00</div><div class="cd-lab">Seg</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-noticias">
+    <div class="sec-head">
+      <div class="eyebrow">Noticias</div>
+      <h2 id="h-noticias">Lo más relevante de los últimos días</h2>
+      <p>Cada noticia trae un resumen en lenguaje simple, por qué importa y los medios donde puedes leerla completa.</p>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Filtrar noticias por tema"></div>
+    <div class="news" id="news"></div>
+  </section>
+
+  <section aria-labelledby="h-leyes">
+    <div class="sec-head">
+      <div class="eyebrow">Congreso</div>
+      <h2 id="h-leyes">Tablero de leyes y proyectos</h2>
+      <p>Qué se aprobó, qué se rechazó y qué quedó en pausa.</p>
+    </div>
+    <div class="card table-wrap">
+      <table>
+        <thead><tr><th>Ley o proyecto</th><th>Estado</th><th>En simple</th><th>Fecha</th></tr></thead>
+        <tbody id="laws"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-graficos">
+    <div class="sec-head">
+      <div class="eyebrow">En cifras</div>
+      <h2 id="h-graficos">Los números detrás de las noticias</h2>
+    </div>
+    <div class="two">
+      <div class="card">
+        <h3>Presupuesto 2027: votaciones en la Cámara</h3>
+        <p class="note" style="margin-top:6px" id="votes-note"></p>
+        <div id="votes"></div>
+        <div class="legend"><span><i style="background:var(--ok)"></i>A favor</span><span><i style="background:var(--bad)"></i>En contra</span></div>
+      </div>
+      <div class="card fuel">
+        <h3>Diésel: cuánto ha subido en 2026</h3>
+        <p class="note" style="margin-top:6px">Variación de precio según el INE. Explica en parte el paro de camioneros.</p>
+        <svg viewBox="0 0 320 190" role="img" aria-label="Diésel subió 12,3% en octubre y 53,5% en lo que va de 2026">
+          <line x1="20" y1="160" x2="300" y2="160" stroke="var(--line)" stroke-width="1"/>
+          <rect x="50" y="137" width="80" height="23" rx="6" fill="var(--warn)" opacity=".55"/>
+          <text class="big" x="90" y="128" text-anchor="middle">+12,3%</text>
+          <text x="90" y="180" text-anchor="middle">Solo octubre</text>
+          <rect x="190" y="60" width="80" height="100" rx="6" fill="var(--warn)"/>
+          <text class="big" x="230" y="51" text-anchor="middle">+53,5%</text>
+          <text x="230" y="180" text-anchor="middle">Enero a octubre</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-glosario">
+    <div class="sec-head">
+      <div class="eyebrow">Para entender</div>
+      <h2 id="h-glosario">Glosario rápido</h2>
+    </div>
+    <dl class="gloss" id="gloss"></dl>
+  </section>
+
+  <section aria-labelledby="h-fuentes">
+    <div class="card">
+      <div class="eyebrow">Fuentes</div>
+      <h2 id="h-fuentes" style="font-size:22px">De dónde sale esta información</h2>
+      <p class="note">Se contrastan medios de alcance nacional con medios independientes y regionales. Cada noticia enlaza a sus fuentes originales para que puedas leer el detalle y sacar tus propias conclusiones. Cuando un dato aparece en un solo medio, se indica.</p>
+      <div class="outlets" id="outlets"></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Herramienta creada por <a href="https://www.matisandev.cl" target="_blank" rel="noopener">matisandev.cl</a></span>
+    <span id="foot-upd"></span>
+  </div>
+</footer>
+
+<script type="application/json" id="data">
+{
+  "updated": "2026-11-12T11:45:00-03:00",
+  "lede": "Semana tensa para el Gobierno: paro de camioneros por el precio del diésel, congelamiento de combustibles hasta febrero, derrotas en el Presupuesto 2027 y la polémica por rebajas de condena que apunta al ministro de Justicia.",
+  "essentials": [
+    {"cat":"economia","title":"Combustibles congelados","text":"El Gobierno congela precios de bencina y diésel hasta el 3 de febrero de 2027 y busca anular el alza de esta semana."},
+    {"cat":"congreso","title":"Revés en el Presupuesto","text":"La Cámara rechazó las partidas de Educación (empate 72-72) e Interior del Presupuesto 2027."},
+    {"cat":"calle","title":"Movilizaciones en curso","text":"Paro nacional de camioneros desde el 10 de noviembre y jornada de protesta de la CUT el 18 de noviembre."}
+  ],
+  "news": [
+    {"cat":"economia","date":"11 nov 2026","title":"Gobierno congela el precio de los combustibles hasta febrero",
+     "text":"El biministro Claudio Alvarado anunció que el precio de las bencinas y del diésel quedará congelado hasta el 3 de febrero de 2027. Además, el Gobierno enviará un proyecto para anular el alza prevista para esta semana ($42 por litro en diésel y $39 en gasolinas) y extender hasta diciembre de 2027 la devolución del impuesto específico a transportistas.",
+     "why":"Afecta directamente lo que pagas al cargar combustible y el costo de transportar alimentos y productos.",
+     "sources":[{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-anuncia-congelamiento-de-precios-de-combustibles-hasta-febrero-de-2027.shtml"}]},
+    {"cat":"calle","date":"10–12 nov 2026","title":"Paro de camioneros: bloqueos y falta de combustible en regiones",
+     "text":"Desde el martes 10 de noviembre, pequeños y medianos camioneros mantienen un paro nacional. Hubo bloqueos parciales en autopistas, más de 600 transportistas movilizados en Arica y Parinacota y Tarapacá, y falta de bencina y diésel en Temuco y Padre Las Casas. Piden congelar precios, eliminar por un tiempo el impuesto específico y revisar peajes.",
+     "why":"Un paro largo puede provocar desabastecimiento de combustible y alzas en productos básicos, sobre todo en regiones.",
+     "sources":[{"n":"Infobae","u":"https://www.infobae.com/movant/2026/11/12/el-costo-del-diesel-en-chile-empuja-un-paro-de-camioneros-con-efectos-en-el-suministro-regional/"},{"n":"BioBioChile (análisis)","u":"https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/camioneros-presionan-kast-negocia-y-los-chilenos-pagan-el-costo-oculto-de-la-crisis.shtml"},{"n":"Publimetro","u":"https://www.publimetro.cl/noticias/2026/11/11/gobierno-retira-proyecto-para-topar-alzas-de-combustibles-mientras-kast-fija-postura-ante-paro-de-camioneros/"}]},
+    {"cat":"congreso","date":"12 nov 2026","title":"La Cámara rechaza el presupuesto de Educación por empate",
+     "text":"La propuesta del Gobierno para la partida de Educación del Presupuesto 2027 empató 72 a 72, por lo que fue rechazada. Se suma al rechazo de la partida de Interior del martes. Ese mismo día se aprobaron Justicia, Defensa, Obras Públicas y Agricultura.",
+     "why":"El presupuesto define cuánto dinero tendrán colegios, universidades y servicios públicos en 2027. Las partidas rechazadas deben resolverse en el resto del trámite.",
+     "sources":[{"n":"El Mostrador","u":"https://www.elmostrador.cl/noticias/pais/2026/11/12/nuevo-reves-para-kast-camara-rechaza-presupuesto-de-educacion-y-suma-otra-derrota-para-el-gobierno"},{"n":"Infobae","u":"https://www.infobae.com/america/agencias/2026/11/11/congreso-chileno-desafia-recortes-presupuestarios-de-kast-con-rechazo-a-partida-educativa/"}]},
+    {"cat":"justicia","date":"6–11 nov 2026","title":"Crisis por rebajas de condena: el Gobierno apoya derogar la ley",
+     "text":"Tras la polémica por 56 rebajas de condena otorgadas a personas condenadas por delitos graves, varios de ellos sexuales contra menores, el Gobierno respaldó derogar la Ley 19.856 y suspendió las rebajas el 9 de noviembre. Los decretos fueron firmados por el ministro de Justicia, Fernando Rabat. El Presidente reconoció el error pero lo mantiene en el cargo, y la oposición prepara una acusación constitucional en su contra.",
+     "why":"Define si seguirán existiendo rebajas de pena por buena conducta y puede costarle el cargo a un ministro.",
+     "sources":[{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-apuesta-por-derogar-ley-de-rebajas-de-condena-solucion-a-crisis-de-rabat-o-un-nuevo-error.shtml"},{"n":"T13 / Ex-Ante","u":"https://www.t13.cl/noticia/ex-ante/politica/los-detalles-del-polemico-proyecto-rebaja-penas-kast-busca-salir-crisis-12-11-2026"}]},
+    {"cat":"gobierno","date":"10–12 nov 2026","title":"Kast descarta por ahora un cambio de gabinete",
+     "text":"En la reunión con los partidos oficialistas en Cerro Castillo, el Presidente descartó cambiar ministros en el corto plazo. El vocero Gonzalo Arenas informó que se acordó una agenda común. Según un registro de El Periodista, al 30 de octubre el gobierno sumaba 59 salidas o cambios de autoridades: 3 ministras, 8 subsecretarios, 46 seremis y 2 delegados.",
+     "why":"Los cambios de ministros suelen marcar giros en las prioridades del Gobierno.",
+     "sources":[{"n":"El Dínamo","u":"https://www.eldinamo.cl/politica/2026/11/11/gobierno-desecha-idea-de-cambio-de-gabinete-en-cumbre-de-cerro-castillo/"},{"n":"Publimetro","u":"https://www.publimetro.cl/noticias/2026/11/12/kast-descarta-cambio-de-gabinete-y-sella-pacto-de-hermetismo-con-el-oficialismo/"},{"n":"El Periodista","u":"https://www.elperiodista.cl/2026/11/gobierno-de-kast-acumula-59-salidas-y-cambios-de-autoridades/"},{"n":"Radio U. de Chile","u":"https://radio.uchile.cl/2026/11/06/gobierno-insiste-en-cerrar-la-puerta-al-cambio-de-gabinete-todos-los-ministros-cuentan-con-el-respaldo-del-presidente/"}]},
+    {"cat":"calle","date":"11 nov 2026","title":"Protesta estudiantil frente al Mineduc obligó a cortar la Alameda",
+     "text":"La Confech protestó contra los recortes del Presupuesto 2027 frente al Ministerio de Educación. Cerca de una hora después hubo enfrentamientos con Carabineros, que usó gases lacrimógenos, y se cortó el tránsito por la Alameda. Los estudiantes entregaron una carta a la ministra María Paz Arzola pidiendo reponer recursos. No se informó cifra de detenidos.",
+     "why":"Es el inicio de un ciclo de movilizaciones que seguirá hasta diciembre.",
+     "sources":[{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/region-metropolitana/2026/11/11/cortan-la-alameda-en-santiago-tras-incidentes-por-protesta-confech-afuera-del-mineduc.shtml"}]},
+    {"cat":"congreso","date":"10–11 nov 2026","title":"Gobierno retira en menos de 24 horas su proyecto para topar alzas",
+     "text":"La Segpres retiró de la Cámara el proyecto que limitaba a $20 por litro las alzas de bencina y diésel durante 90 días. Había ingresado con discusión inmediata en medio del paro. El Gobierno dijo que lo ajustará y lo volverá a presentar, y luego anunció el congelamiento de precios.",
+     "why":"Muestra la urgencia del Gobierno por responder al paro y la dificultad para encontrar una fórmula.",
+     "sources":[{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-retira-proyecto-de-ley-para-frenar-alza-de-combustibles.shtml"},{"n":"The Clinic","u":"https://www.theclinic.cl/2026/11/11/gobierno-retira-del-congreso-el-proyecto-recien-ingresado-que-limitaba-el-alza-de-los-combustibles-ejecutivo-prepara-ajustes-al-articulado/"}]},
+    {"cat":"ley","date":"Vigente desde nov 2026","title":"Ley de Reconstrucción: lo que empieza a regir este mes",
+     "text":"La Ley 21.850 de Reconstrucción Nacional y Desarrollo Económico y Social se publicó en el Diario Oficial el 17 de octubre. Desde noviembre, el fondo de emergencia por incendios sube a $1,2 billones e incluye a Ñuble y Biobío, además de Valparaíso. También crea un crédito tributario para empresas que exportan servicios y cambia los topes de la franquicia Sence.",
+     "why":"Es la principal reforma económica del Gobierno: trae cambios tributarios y apoyo a zonas afectadas por incendios y a adultos mayores.",
+     "sources":[{"n":"CNN Chile","u":"https://www.cnnchile.com/pais/megarreforma-del-gobierno-es-publicada-en-el-diario-oficial-que-medidas-comenzaran-a-regir-en-noviembre/"},{"n":"Cooperativa","u":"https://www.cooperativa.cl/noticias/pais/politica/agenda-legislativa/publicada-en-el-diario-oficial-la-ley-de-reconstruccion-iniciara-su/2026-10-17/154253.html"},{"n":"SII","u":"https://www.sii.cl/noticias/2026/191026noti01pcr.htm"}]},
+    {"cat":"calle","date":"18 oct 2026","title":"Contexto: 29 detenidos en la marcha por el aniversario del estallido",
+     "text":"En la marcha por los siete años del estallido social, unas 2.800 personas avanzaron por la Alameda. Carabineros informó 29 detenidos por porte de elementos incendiarios y robos a locales. Hubo cortes de tránsito entre Plaza Baquedano y Santa Lucía y cierre preventivo de estaciones de Metro.",
+     "why":"Sirve de referencia sobre cómo pueden desarrollarse las próximas marchas en el centro de Santiago.",
+     "sources":[{"n":"Cooperativa","u":"https://www.cooperativa.cl/noticias/pais/manifestaciones/al-menos-29-detenidos-tras-marcha-por-aniversario-del-estallido-social/2026-10-18/193033.html"}]}
+  ],
+  "laws": [
+    {"name":"Ley 21.850 de Reconstrucción Nacional","status":"publicada","label":"Publicada","text":"Medidas tributarias, fondo para incendios y apoyo a adultos mayores. Sus medidas entran en vigencia por etapas.","date":"17 oct 2026"},
+    {"name":"Presupuesto 2027 · partida Educación","status":"rechazada","label":"Rechazada en la Cámara","text":"Empate 72-72 sobre la propuesta del Gobierno. Sigue el trámite del Presupuesto.","date":"12 nov 2026"},
+    {"name":"Presupuesto 2027 · partida Interior","status":"rechazada","label":"Rechazada en la Cámara","text":"Primera partida rechazada en la Sala esta semana.","date":"10 nov 2026"},
+    {"name":"Tope de $20 a las alzas de combustibles","status":"retirado","label":"Retirado","text":"El Gobierno lo sacó del Congreso para ajustarlo. Lo reemplazó el anuncio de congelamiento de precios.","date":"11 nov 2026"},
+    {"name":"Anulación del alza de combustibles y congelamiento hasta feb. 2027","status":"tramite","label":"Anunciado","text":"El Gobierno enviará un proyecto. Si se aprueba y promulga rápido, el alza de esta semana se revierte.","date":"11 nov 2026"},
+    {"name":"Derogación de la Ley 19.856 (rebajas de condena)","status":"tramite","label":"En discusión","text":"Iniciativa de parlamentarios con apoyo del Gobierno. Las rebajas están suspendidas desde el 9 de noviembre.","date":"6–9 nov 2026"}
+  ],
+  "votes": {
+    "note":"Votos en la Sala de la Cámara, 11 de noviembre de 2026. Fuente: El Mostrador.",
+    "rows":[
+      {"name":"Defensa","yes":124,"no":3,"result":"Aprobada"},
+      {"name":"Obras Públicas","yes":102,"no":29,"result":"Aprobada"},
+      {"name":"Justicia","yes":85,"no":59,"result":"Aprobada"},
+      {"name":"Agricultura","yes":65,"no":61,"result":"Aprobada"},
+      {"name":"Educación","yes":72,"no":72,"result":"Rechazada"}
+    ]
+  },
+  "mobStats": [
+    {"value":"+600","label":"camioneros movilizados en Arica y Parinacota y Tarapacá"},
+    {"value":"3","label":"jornadas de protesta convocadas hasta diciembre"},
+    {"value":"29","label":"detenidos en la última gran marcha en Santiago (18 oct)"},
+    {"value":"+53,5%","label":"alza del diésel en 2026, motivo del paro"}
+  ],
+  "agenda": [
+    {"status":"now","when":"Desde 10 nov","sub":"sin fecha de término","title":"Paro nacional de camioneros","place":"Autopistas y rutas del norte y sur; falta de combustible en Temuco y Padre Las Casas","text":"Pequeños y medianos camioneros piden congelar precios, suspender el impuesto específico y revisar peajes. Tras el anuncio del congelamiento de combustibles, los gremios consultan a sus bases si deponen el paro.","sources":[{"n":"Infobae","u":"https://www.infobae.com/movant/2026/11/12/el-costo-del-diesel-en-chile-empuja-un-paro-de-camioneros-con-efectos-en-el-suministro-regional/"},{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-anuncia-congelamiento-de-precios-de-combustibles-hasta-febrero-de-2027.shtml"}]},
+    {"status":"now","when":"11 nov","sub":"ayer","title":"Protesta de la Confech contra recortes en educación","place":"Mineduc, Alameda (Santiago); Congreso (Valparaíso); Seremis en regiones","text":"Hubo enfrentamientos con Carabineros, gases lacrimógenos y corte de la Alameda. No se informó cifra de detenidos. Abre el ciclo de protestas del Frente Común.","sources":[{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/region-metropolitana/2026/11/11/cortan-la-alameda-en-santiago-tras-incidentes-por-protesta-confech-afuera-del-mineduc.shtml"}]},
+    {"status":"next","when":"18 nov","sub":"miércoles","title":"Jornada nacional de protesta de la CUT","place":"Todo el país","text":"Manifestaciones contra los recortes del Presupuesto 2027 y por el reajuste del sector público.","sources":[{"n":"Canal 9 BioBío","u":"https://www.canal9.cl/episodios/2026/11/10/agrupaciones-de-trabajadores-y-estudiantes-anuncian-movilizaciones-contra-gobierno-desde-el-miercoles"}]},
+    {"status":"next","when":"27 nov","sub":"viernes","title":"Protesta de pobladores frente al Minvu","place":"Ministerio de Vivienda, Santiago","text":"El Movimiento Nacional de Pobladores pedirá la salida del ministro de Vivienda, Iván Poduje. El ciclo de protestas del Frente Común seguiría hasta la primera semana de diciembre.","sources":[{"n":"Canal 9 BioBío","u":"https://www.canal9.cl/episodios/2026/11/10/agrupaciones-de-trabajadores-y-estudiantes-anuncian-movilizaciones-contra-gobierno-desde-el-miercoles"}]}
+  ],
+  "gloss": [
+    {"t":"Partida presupuestaria","d":"Es el capítulo del Presupuesto que corresponde a un ministerio. Rechazar una partida significa que la Cámara no aprobó la propuesta de dinero para ese ministerio."},
+    {"t":"Acusación constitucional","d":"Herramienta del Congreso para hacer responsable a una autoridad. Si se aprueba, la persona es destituida y no puede ejercer cargos públicos por 5 años."},
+    {"t":"Discusión inmediata","d":"Urgencia que pone el Gobierno a un proyecto para que el Congreso lo vote en pocos días."},
+    {"t":"Impuesto específico","d":"Impuesto fijo por litro que se cobra a los combustibles. Los transportistas pueden recuperar una parte."}
+  ],
+  "outlets": [
+    {"n":"BioBioChile","u":"https://www.biobiochile.cl"},
+    {"n":"Cooperativa","u":"https://www.cooperativa.cl"},
+    {"n":"CNN Chile","u":"https://www.cnnchile.com"},
+    {"n":"El Mostrador","u":"https://www.elmostrador.cl"},
+    {"n":"The Clinic","u":"https://www.theclinic.cl"},
+    {"n":"El Dínamo","u":"https://www.eldinamo.cl"},
+    {"n":"Radio U. de Chile","u":"https://radio.uchile.cl"},
+    {"n":"El Periodista","u":"https://www.elperiodista.cl"},
+    {"n":"Publimetro","u":"https://www.publimetro.cl"},
+    {"n":"T13 / Ex-Ante","u":"https://www.t13.cl"},
+    {"n":"Infobae","u":"https://www.infobae.com"},
+    {"n":"Canal 9 BioBío","u":"https://www.canal9.cl"}
+  ]
+}
+</script>
+
+<script>
+(function(){
+  var D = JSON.parse(document.getElementById('data').textContent);
+  var CATS = {economia:'Economía',congreso:'Congreso',gobierno:'Gobierno',calle:'Calles',ley:'Leyes',justicia:'Justicia'};
+  function el(tag, cls, text){var e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e;}
+  function icon(cat){var ns='http://www.w3.org/2000/svg';var s=document.createElementNS(ns,'svg');var u=document.createElementNS(ns,'use');u.setAttribute('href','#i-'+cat);s.appendChild(u);return s;}
+  function safeUrl(u){return /^https:\/\//.test(u)?u:'#';}
+
+  // Fecha de edición
+  var up = new Date(D.updated);
+  var fDate = new Intl.DateTimeFormat('es-CL',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'America/Santiago'}).format(up);
+  var fTime = new Intl.DateTimeFormat('es-CL',{hour:'2-digit',minute:'2-digit',hourCycle:'h23',timeZone:'America/Santiago'}).format(up);
+  document.getElementById('ed-date').textContent = fDate.charAt(0).toUpperCase()+fDate.slice(1);
+  document.getElementById('ed-time').textContent = fTime + ' h';
+  document.getElementById('foot-upd').textContent = 'Última actualización: ' + fDate + ', ' + fTime + ' h';
+  document.getElementById('lede').textContent = D.lede;
+
+  // Esencial
+  var ess = document.getElementById('essentials');
+  D.essentials.forEach(function(x){
+    var c=el('div','card ess'); var ic=el('div','ic c-'+x.cat); ic.appendChild(icon(x.cat));
+    var t=el('div'); t.appendChild(el('h3',null,x.title)); t.appendChild(el('p',null,x.text));
+    c.appendChild(ic); c.appendChild(t); ess.appendChild(c);
+  });
+
+  // Noticias + filtros
+  var newsEl = document.getElementById('news'), filtersEl = document.getElementById('filters');
+  var present = ['todas'].concat(Object.keys(CATS).filter(function(k){return D.news.some(function(n){return n.cat===k;});}));
+  var current = 'todas';
+  try{ var saved = localStorage.getItem('pp-filter'); if(saved && present.indexOf(saved)>-1) current=saved; }catch(e){}
+  function renderNews(){
+    newsEl.textContent='';
+    D.news.filter(function(n){return current==='todas'||n.cat===current;}).forEach(function(n){
+      var a=el('article','card item');
+      var top=el('div','item-top'); var il=el('div','illus c-'+n.cat); il.appendChild(icon(n.cat));
+      var tl=el('div','tagline'); tl.appendChild(el('span','cat',CATS[n.cat]||n.cat)); tl.appendChild(el('span','date',n.date));
+      top.appendChild(il); top.appendChild(tl);
+      a.appendChild(top); a.appendChild(el('h3',null,n.title)); a.appendChild(el('p',null,n.text));
+      var w=el('div','why'); w.appendChild(el('b',null,'Por qué importa: ')); w.appendChild(document.createTextNode(n.why)); a.appendChild(w);
+      var s=el('div','sources'); (n.sources||[]).forEach(function(src){var l=el('a','src',src.n); l.href=safeUrl(src.u); l.target='_blank'; l.rel='noopener'; s.appendChild(l);});
+      a.appendChild(s); newsEl.appendChild(a);
+    });
+  }
+  present.forEach(function(k){
+    var b=el('button','chip',k==='todas'?'Todas':CATS[k]); b.type='button'; b.id='f-'+k;
+    b.setAttribute('aria-pressed', String(k===current));
+    b.addEventListener('click',function(){current=k; try{localStorage.setItem('pp-filter',k);}catch(e){}
+      Array.prototype.forEach.call(filtersEl.children,function(c){c.setAttribute('aria-pressed',String(c===b));}); renderNews();});
+    filtersEl.appendChild(b);
+  });
+  renderNews();
+
+  // Leyes
+  var lawsEl=document.getElementById('laws');
+  D.laws.forEach(function(l){
+    var tr=el('tr'); var td1=el('td'); td1.appendChild(el('b',null,l.name));
+    var td2=el('td'); td2.appendChild(el('span','pill s-'+l.status,l.label));
+    tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(el('td','muted',l.text)); var d=el('td','muted',l.date); d.style.whiteSpace='nowrap'; tr.appendChild(d);
+    lawsEl.appendChild(tr);
+  });
+
+  // Votaciones
+  document.getElementById('votes-note').textContent=D.votes.note;
+  var vEl=document.getElementById('votes');
+  D.votes.rows.forEach(function(r){
+    var tot=r.yes+r.no; var row=el('div','vote');
+    row.appendChild(el('span','name',r.name));
+    var bar=el('div','bar'); bar.setAttribute('role','img'); bar.setAttribute('aria-label',r.name+': '+r.yes+' a favor, '+r.no+' en contra');
+    var y=el('div','yes'); y.style.width=(r.yes/tot*100)+'%'; var n=el('div','no'); n.style.width=(r.no/tot*100)+'%';
+    bar.appendChild(y); bar.appendChild(n); row.appendChild(bar);
+    row.appendChild(el('span','res '+(r.result==='Rechazada'?'r':'a'),r.yes+'–'+r.no));
+    vEl.appendChild(row);
+  });
+
+  // Agenda
+  var ag=document.getElementById('agenda');
+  D.agenda.forEach(function(a){
+    var now=a.status==='now'; var li=el('li',now?'now':null);
+    var top=el('div','ag-top'); var w=el('span','when',a.when); if(a.sub) w.appendChild(el('small',null,a.sub));
+    top.appendChild(w); top.appendChild(el('span','st '+(now?'st-now':'st-next'),now?'En curso / reciente':'Convocada'));
+    li.appendChild(top); li.appendChild(el('h3',null,a.title));
+    if(a.place) li.appendChild(el('div','place',a.place));
+    li.appendChild(el('p',null,a.text));
+    if(a.sources&&a.sources.length){var s=el('div','sources'); a.sources.forEach(function(src){var l=el('a','src',src.n); l.href=safeUrl(src.u); l.target='_blank'; l.rel='noopener'; s.appendChild(l);}); li.appendChild(s);}
+    ag.appendChild(li);
+  });
+  var ms=document.getElementById('mob-stats');
+  (D.mobStats||[]).forEach(function(x){var c=el('div','stat'); c.appendChild(el('b',null,x.value)); c.appendChild(el('span',null,x.label)); ms.appendChild(c);});
+  if(!(D.mobStats||[]).length) ms.hidden=true;
+
+  // Glosario
+  var gl=document.getElementById('gloss');
+  D.gloss.forEach(function(g){var c=el('div','card'); c.appendChild(el('dt',null,g.t)); c.appendChild(el('dd',null,g.d)); gl.appendChild(c);});
+
+  // Medios
+  var ou=document.getElementById('outlets');
+  D.outlets.forEach(function(o){var l=el('a','src',o.n); l.href=safeUrl(o.u); l.target='_blank'; l.rel='noopener'; ou.appendChild(l);});
+
+  // Cuenta regresiva
+  var START=new Date('2026-03-11T12:00:00-03:00').getTime(), END=new Date('2030-03-11T12:00:00-03:00').getTime();
+  function pad(n){return String(n).padStart(2,'0');}
+  function tick(){
+    var now=Date.now(), left=Math.max(0,END-now);
+    var d=Math.floor(left/864e5), h=Math.floor(left%864e5/36e5), m=Math.floor(left%36e5/6e4), s=Math.floor(left%6e4/1e3);
+    document.getElementById('cd-d').textContent=d.toLocaleString('es-CL');
+    document.getElementById('cd-h').textContent=pad(h);
+    document.getElementById('cd-m').textContent=pad(m);
+    document.getElementById('cd-s').textContent=pad(s);
+    var pct=Math.min(100,Math.max(0,(now-START)/(END-START)*100));
+    document.getElementById('term-fill').style.width=pct.toFixed(2)+'%';
+    document.getElementById('term-bar').setAttribute('aria-valuenow',pct.toFixed(1));
+    document.getElementById('term-pct').textContent=pct.toFixed(1).replace('.',',')+'% transcurrido';
+  }
+  tick(); setInterval(tick,1000);
+
+  // Tema claro / oscuro
+  var root=document.documentElement, themeIc=document.querySelector('#theme-ic use');
+  function isDark(){var t=root.getAttribute('data-theme'); return t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;}
+  function syncIcon(){themeIc.setAttribute('href',isDark()?'#i-sun':'#i-moon');}
+  try{var st=localStorage.getItem('pp-theme'); if(st==='dark'||st==='light') root.setAttribute('data-theme',st);}catch(e){}
+  syncIcon();
+  try{window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',syncIcon);}catch(e){}
+  new MutationObserver(syncIcon).observe(root,{attributes:true,attributeFilter:['data-theme']});
+  document.getElementById('btn-theme').addEventListener('click',function(){
+    var next=isDark()?'light':'dark'; root.setAttribute('data-theme',next);
+    try{localStorage.setItem('pp-theme',next);}catch(e){}
+  });
+
+  // Toast
+  function toast(msg){var t=el('div','toast',msg); t.setAttribute('role','status'); document.body.appendChild(t); setTimeout(function(){t.remove();},3200);}
+
+  // Compartir
+  document.getElementById('btn-share').addEventListener('click',function(){
+    var url='https://matisandev.cl/actualizacion-politica';
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url).then(function(){toast('Enlace copiado. Pégalo en WhatsApp o donde quieras.');},function(){toast('Enlace: '+url);});
+    } else toast('Enlace: '+url);
+  });
+})();
+</script>
+
+</body>
+</html>
