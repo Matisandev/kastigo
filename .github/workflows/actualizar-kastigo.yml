@@ -1,0 +1,44 @@
+name: Actualizar Kastigo
+on:
+  schedule:
+    - cron: '0 9 * * *'
+      timezone: America/Santiago
+  workflow_dispatch:
+    inputs:
+      comprobar:
+        description: 'Solo comprobar instalación, sin usar IA ni publicar'
+        type: boolean
+        default: true
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: kastigo-edicion-diaria
+  cancel-in-progress: false
+jobs:
+  actualizar:
+    if: github.repository == 'Matisandev/kastigo' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprobar código
+        run: python3 -m unittest discover -s tests -v
+      - name: Instalar navegador de pruebas
+        run: |
+          npm ci --ignore-scripts
+          npx playwright install --with-deps chromium
+      - name: Investigar, validar y publicar
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          KASTIGO_ENABLED: ${{ vars.KASTIGO_ENABLED }}
+          KASTIGO_CHECK_ONLY: ${{ inputs.comprobar && 'true' || 'false' }}
+        run: python3 tools/cloud_update.py

@@ -1,0 +1,8 @@
+.github-token
+.env
+.env.*
+node_modules/
+__pycache__/
+*.pyc
+.kastigo-*
+_portafolio/
