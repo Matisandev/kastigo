@@ -10,7 +10,7 @@
 <meta property="og:title" content="Kastigo · Resumen político diario">
 <meta property="og:description" content="Resumen político diario basado en hechos sobre el gobierno de José Antonio Kast, explicado en simple y comparado con los gobiernos anteriores.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://kastigo.vercel.app">
+<meta property="og:url" content="https://matisandev.cl/kastigo">
 <meta name="theme-color" content="#04070c">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2304070c'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%23f87171' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -7826,7 +7826,7 @@ header.top .wrap{gap:20px}
   function toast(msg){var t=el('div','toast',msg); t.setAttribute('role','status'); document.body.appendChild(t); setTimeout(function(){t.remove();},3200);}
   function urlFor(hash){return BASE+'?lang='+lang+(hash?'#'+hash:'');}
   function copy(url){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(function(){toast(T.copied);},function(){window.prompt(SHARE_TEXT.copy,url);});} else window.prompt(SHARE_TEXT.copy,url);}
-  function share(url,title,text){if(navigator.share){navigator.share({title:title,url:url,text:text||title}).catch(function(e){if(!e||e.name!=='AbortError')copy(url);});} else copy(url);}
+  function share(url,title,text){var payload={url:url};if(text){payload.title=title;payload.text=text;}if(navigator.share){navigator.share(payload).catch(function(e){if(!e||e.name!=='AbortError')copy(url);});} else copy(url);}
   document.getElementById('btn-share').addEventListener('click',function(){share(urlFor(''),'Kastigo');});
   document.querySelectorAll('section[data-share]').forEach(function(sec){
     var h=sec.querySelector('h2'); if(!h) return;
