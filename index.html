@@ -405,6 +405,7 @@ section.collapsed .card.countdown{padding-block:18px}
 
 .h-btns{display:flex;gap:6px;flex:none}
 .h-row{row-gap:8px}
+footer .stance-wrap{display:block}
 </style>
 </head>
 <body>
@@ -573,7 +574,7 @@ section.collapsed .card.countdown{padding-block:18px}
 </main>
 
 <footer>
-  <div class="wrap stance-wrap"><p class="stance" id="stance"></p></div>
+  <div class="wrap stance-wrap"><p class="stance" id="stance"></p><p class="stance" id="stance-name" style="margin-top:8px"></p></div>
   <div class="wrap">
     <span><span data-i18n="madeBy">Herramienta creada por</span> <a href="https://www.matisandev.cl" target="_blank" rel="noopener">matisandev.cl</a></span>
     <span id="foot-upd"></span>
@@ -2250,7 +2251,8 @@ section.collapsed .card.countdown{padding-block:18px}
    }
   ]
  },
- "stance": "Kastigo no está vinculado a ningún partido ni sector político y se basa solo en hechos verificables. Las consecuencias de las decisiones de los poderes del Estado son temas que toda persona tiene derecho a conocer en términos simples. En un entorno lleno de información manipulada y conclusiones personales, el objetivo es que cada lector saque sus propias conclusiones con información verificada, comparando los resultados de las decisiones de distintos gobiernos sin tomar partido por ningún bando."
+ "stance": "Kastigo no está vinculado a ningún partido ni sector político y se basa solo en hechos verificables. Las consecuencias de las decisiones de los poderes del Estado son temas que toda persona tiene derecho a conocer en términos simples. En un entorno lleno de información manipulada y conclusiones personales, el objetivo es que cada lector saque sus propias conclusiones con información verificada, comparando los resultados de las decisiones de distintos gobiernos sin tomar partido por ningún bando.",
+ "stanceName": "Sobre el nombre: Kastigo se llama así porque su autor no está de acuerdo con las decisiones del gobierno actual. Eso no significa apoyar a otro sector: si este gobierno aplica mejores políticas, leyes o beneficios para la ciudadanía, también se mostrarán aquí con la misma rigurosidad. La postura es neutral frente a los partidos y crítica frente a la gestión del gobierno actual, siempre basada en hechos."
 }
 </script>
 <script type="application/json" id="data-en">
@@ -3923,7 +3925,8 @@ section.collapsed .card.countdown{padding-block:18px}
    }
   ]
  },
- "stance": "Kastigo is not linked to any party or political sector and is based solely on verifiable facts. The consequences of the decisions made by the branches of government are matters that everyone has the right to understand in simple terms. In an environment full of manipulated information and personal conclusions, the goal is for each reader to draw their own conclusions from verified information, comparing the results of decisions by different governments without taking sides."
+ "stance": "Kastigo is not linked to any party or political sector and is based solely on verifiable facts. The consequences of the decisions made by the branches of government are matters that everyone has the right to understand in simple terms. In an environment full of manipulated information and personal conclusions, the goal is for each reader to draw their own conclusions from verified information, comparing the results of decisions by different governments without taking sides.",
+ "stanceName": "About the name: Kastigo is called this because its author disagrees with the current government's decisions. That does not mean supporting another side: if this government applies better policies, laws or benefits for the public, they will also be shown here with the same rigor. The stance is neutral toward political parties and critical of the current government's performance, always based on facts."
 }
 </script>
 <script type="application/json" id="data-pt">
@@ -5596,7 +5599,8 @@ section.collapsed .card.countdown{padding-block:18px}
    }
   ]
  },
- "stance": "O Kastigo não está vinculado a nenhum partido nem setor político e se baseia apenas em fatos verificáveis. As consequências das decisões dos poderes do Estado são temas que toda pessoa tem o direito de conhecer em termos simples. Em um ambiente cheio de informação manipulada e conclusões pessoais, o objetivo é que cada leitor tire suas próprias conclusões com informação verificada, comparando os resultados das decisões de diferentes governos sem tomar partido de nenhum lado."
+ "stance": "O Kastigo não está vinculado a nenhum partido nem setor político e se baseia apenas em fatos verificáveis. As consequências das decisões dos poderes do Estado são temas que toda pessoa tem o direito de conhecer em termos simples. Em um ambiente cheio de informação manipulada e conclusões pessoais, o objetivo é que cada leitor tire suas próprias conclusões com informação verificada, comparando os resultados das decisões de diferentes governos sem tomar partido de nenhum lado.",
+ "stanceName": "Sobre o nome: o Kastigo se chama assim porque seu autor não concorda com as decisões do governo atual. Isso não significa apoiar outro lado: se este governo aplicar melhores políticas, leis ou benefícios para a população, eles também serão mostrados aqui com o mesmo rigor. A postura é neutra em relação aos partidos e crítica em relação à gestão do governo atual, sempre baseada em fatos."
 }
 </script>
 <script>
@@ -5838,6 +5842,7 @@ section.collapsed .card.countdown{padding-block:18px}
       var ms=sources(Mn.sources); ms.style.marginTop='12px'; mb.appendChild(ms);
     }
     var st=document.getElementById('stance'); if(D.stance) st.textContent=D.stance; else st.hidden=true;
+    var sn=document.getElementById('stance-name'); if(D.stanceName) sn.textContent=D.stanceName; else sn.hidden=true;
   });
 
   // Cuenta regresiva
