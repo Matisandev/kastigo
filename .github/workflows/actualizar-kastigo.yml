@@ -39,6 +39,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          KASTIGO_ENABLED: ${{ vars.KASTIGO_ENABLED }}
+          KASTIGO_ENABLED: ${{ (github.event_name == 'workflow_dispatch' && !inputs.comprobar) && 'true' || vars.KASTIGO_ENABLED }}
           KASTIGO_CHECK_ONLY: ${{ inputs.comprobar && 'true' || 'false' }}
         run: python3 tools/cloud_update.py
