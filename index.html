@@ -10,7 +10,7 @@
 <meta property="og:title" content="Kastigo · Resumen político diario">
 <meta property="og:description" content="Resumen político diario basado en hechos sobre el gobierno de José Antonio Kast, explicado en simple y comparado con los gobiernos anteriores.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://matisandev.cl/kastigo">
+<meta property="og:url" content="https://kastigo.vercel.app">
 <meta name="theme-color" content="#04070c">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2304070c'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%23f87171' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -5721,7 +5721,7 @@ footer .stance-wrap{display:block}
 }</script>
 <script>
 (function(){
-  var BASE = 'https://matisandev.cl/kastigo';
+  var BASE = 'https://kastigo.vercel.app';
   var LANGS = ['es','en','pt'];
   var LOC = {es:'es-CL', en:'en-US', pt:'pt-BR'};
   var UI = {
@@ -5738,7 +5738,7 @@ footer .stance-wrap{display:block}
 
   // Idioma: ?lang= > preferencia guardada > idioma del navegador
   var lang='es';
-  try{var q=new URLSearchParams(location.search).get('lang'); if(LANGS.indexOf(q)>-1) lang=q; else { var s=localStorage.getItem('kg-lang'); if(LANGS.indexOf(s)>-1) lang=s; else { var nl=(navigator.language||'es').slice(0,2); if(LANGS.indexOf(nl)>-1) lang=nl; } }}catch(e){}
+  try{var q=new URLSearchParams(location.search).get('lang'); if(LANGS.indexOf(q)>-1) lang=q; else { var s=localStorage.getItem('lang'); if(LANGS.indexOf(s)>-1) lang=s; else { var nl=(navigator.language||'es').slice(0,2); if(LANGS.indexOf(nl)>-1) lang=nl; } }}catch(e){}
   var T=UI[lang], L=LOC[lang];
   var src=document.getElementById(lang==='es'?'data':'data-'+lang)||document.getElementById('data');
   var D=JSON.parse(src.textContent);
@@ -5746,7 +5746,7 @@ footer .stance-wrap{display:block}
   document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n'); if(T[k]!=null) e.textContent=T[k];});
   document.querySelectorAll('[data-i18n-aria]').forEach(function(e){var k=e.getAttribute('data-i18n-aria'); if(T[k]) e.setAttribute('aria-label',T[k]);});
   var ls=document.getElementById('lang-select'); ls.value=lang;
-  ls.addEventListener('change',function(){ var l=ls.value; if(l===lang) return; try{localStorage.setItem('kg-lang',l);}catch(e){} var u=new URL(location.href); if(l==='es') u.searchParams.delete('lang'); else u.searchParams.set('lang',l); location.href=u.toString(); });
+  ls.addEventListener('change',function(){ var l=ls.value; if(l===lang) return; try{localStorage.setItem('lang',l);}catch(e){} var u=new URL(location.href); if(l==='es') u.searchParams.delete('lang'); else u.searchParams.set('lang',l); location.href=u.toString(); });
 
   function el(tag, cls, text){var e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e;}
   function icon(name){var ns='http://www.w3.org/2000/svg';var s=document.createElementNS(ns,'svg');var u=document.createElementNS(ns,'use');u.setAttribute('href','#i-'+name);s.appendChild(u);return s;}
@@ -5975,9 +5975,9 @@ footer .stance-wrap{display:block}
   var root=document.documentElement, themeIc=document.querySelector('#theme-ic use');
   function isDark(){var t=root.getAttribute('data-theme'); return t?t==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;}
   function syncIcon(){themeIc.setAttribute('href',isDark()?'#i-sun':'#i-moon');}
-  try{var st=localStorage.getItem('kg-theme'); if(st==='dark'||st==='light') root.setAttribute('data-theme',st);}catch(e){}
+  try{var st=localStorage.getItem('theme'); if(st==='dark'||st==='light') root.setAttribute('data-theme',st);}catch(e){}
   syncIcon(); try{window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',syncIcon);}catch(e){}
-  document.getElementById('btn-theme').addEventListener('click',function(){var next=isDark()?'light':'dark'; root.setAttribute('data-theme',next); syncIcon(); try{localStorage.setItem('kg-theme',next);}catch(e){}});
+  document.getElementById('btn-theme').addEventListener('click',function(){var next=isDark()?'light':'dark'; root.setAttribute('data-theme',next); syncIcon(); try{localStorage.setItem('theme',next);}catch(e){}});
 
   // Compartir (incluye el idioma elegido)
   function toast(msg){var t=el('div','toast',msg); t.setAttribute('role','status'); document.body.appendChild(t); setTimeout(function(){t.remove();},3200);}
