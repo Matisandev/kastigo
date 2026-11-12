@@ -190,6 +190,47 @@ section[data-share]{scroll-margin-top:calc(80px + env(safe-area-inset-top,0px))}
 .share-sec svg{width:14px;height:14px}
 .h-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .h-row > h2,.h-row > h3{min-width:0}
+/* Autoridades v2 */
+.people{grid-template-columns:1fr!important}
+.person{display:grid!important;grid-template-columns:220px minmax(0,1.2fr) minmax(0,1fr);gap:18px;align-items:start}
+.person.no-swap{grid-template-columns:220px minmax(0,1fr)}
+.person .who{display:flex;flex-direction:column;gap:6px;min-width:0}
+.person .who .ch{align-self:flex-start}
+.person .side{display:flex;flex-direction:column;gap:10px;min-width:0}
+.person .swap{grid-template-columns:1fr;gap:6px}
+.person .swap .arrow{transform:rotate(90deg);justify-self:start;margin-left:14px;line-height:1}
+.person .sources{grid-column:1/-1;padding-top:0}
+.people-sum .stat.alert{border-color:var(--bad-border);background:var(--bad-dim)}
+.people-sum .stat.alert b{color:var(--bad)}
+.compare th:nth-child(2),.compare td:nth-child(2){background:transparent}
+.compare td.alert{background:var(--bad-dim);box-shadow:inset 0 0 0 1.5px var(--bad-border);border-radius:10px}
+.compare td.alert::before{content:"Alerta";display:block;font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--bad);margin-bottom:4px}
+.compare table{border-collapse:separate;border-spacing:0 6px}
+.compare td{border-bottom:0}
+.compare tbody tr td:first-child{border-left:3px solid var(--line);padding-left:12px}
+.alert-note{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin:4px 0 8px}
+.alert-note i{width:14px;height:14px;border-radius:4px;background:var(--bad-dim);box-shadow:inset 0 0 0 1.5px var(--bad-border);display:inline-block}
+.fy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:18px}
+.fy-col h4{margin:0 0 4px;font-size:16px}
+.fy-col .note{margin:0 0 10px}
+.fy-col.alert{border-color:var(--bad-border)}
+.fy-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.fy-list li{padding:12px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:3px}
+.fy-list b{font-weight:600}
+.fy-list .meta{font-size:12px;color:var(--muted)}
+.fy-list .why{border:0;padding:0;font-size:14px;color:var(--ink)}
+.fy-list .rep{font-size:13px;color:var(--muted)}
+.fy-count{font:600 30px/1 var(--mono);color:var(--ink)}
+.fy-col.alert .fy-count{color:var(--bad)}
+@media (max-width:860px){.person,.person.no-swap{grid-template-columns:1fr!important}.fy{grid-template-columns:1fr}}
+.ch-piden{background:var(--info-dim);color:var(--info)}
+.why-box.piden{background:var(--info-dim);border-color:var(--info)}
+.why-box.piden .k{color:var(--info)}
+.p-group{display:flex;align-items:center;gap:10px;margin:14px 0 2px;font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.p-group:first-child{margin-top:0}
+.p-group i{width:10px;height:10px;border-radius:50%;display:inline-block}
+.p-group .n{color:var(--ink)}
+.p-group::after{content:"";flex:1;height:1px;background:var(--line)}
 /* Gráficos */
 .two{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px}
 .vote{display:grid;grid-template-columns:110px minmax(0,1fr) 70px;gap:10px;align-items:center;font-size:13px;padding:7px 0}
@@ -919,7 +960,8 @@ footer a{font-weight:600}
   "summary": [
    {
     "value": "59",
-    "label": "salidas o cambios de autoridades en el gobierno (al 30 oct)"
+    "label": "salidas o cambios de autoridades en el gobierno (al 30 oct)",
+    "alert": true
    },
    {
     "value": "3",
@@ -984,7 +1026,7 @@ footer a{font-weight:600}
    {
     "name": "Iván Poduje",
     "role": "Ministro de Vivienda",
-    "change": "riesgo",
+    "change": "piden",
     "label": "Piden su salida",
     "date": "protesta convocada para el 27 nov",
     "why": "El Movimiento Nacional de Pobladores convocó una protesta frente al Minvu para exigir su salida del cargo.",
@@ -1081,8 +1123,9 @@ footer a{font-weight:600}
    "rows": [
     {
      "label": "Primer cambio de gabinete",
-     "cur": "19 de mayo, a los 69 días. El más rápido desde 1990.",
-     "prev": "Septiembre de 2022, a los 180 días, dos días después del plebiscito."
+     "cur": "19 de mayo de 2026, a los 69 días. El más rápido desde 1990.",
+     "curAlert": true,
+     "prev": "6 de septiembre de 2022, a los 180 días, dos días después del plebiscito."
     },
     {
      "label": "Quiénes salieron en ese cambio",
@@ -1090,18 +1133,26 @@ footer a{font-weight:600}
      "prev": "Izkia Siches (Interior), Begoña Yarza (Salud), Claudio Huepe (Energía) y Flavio Salazar (Ciencia). Giorgio Jackson pasó de Segpres a Desarrollo Social."
     },
     {
-     "label": "Por qué",
+     "label": "Motivo principal",
      "cur": "Polémicas y mala evaluación de ministras específicas.",
      "prev": "Reordenamiento político tras el triunfo del Rechazo en el plebiscito constitucional."
     },
     {
-     "label": "Ministros que dejaron el gabinete en los primeros 8 meses",
-     "cur": "3: Sedini, Steinert y Duco.",
-     "prev": "5: Jeannette Vega (agosto, por el llamado de una asesora a Héctor Llaitul), Siches, Yarza, Huepe y Salazar."
+     "label": "Ministros que dejaron el gabinete en el primer año",
+     "cur": "3 en los primeros 8 meses. Su primer año se cumple el 11 de marzo de 2027.",
+     "prev": "11 entre marzo de 2022 y marzo de 2023, en tres ajustes y dos renuncias.",
+     "prevAlert": true
+    },
+    {
+     "label": "Otras autoridades que salieron",
+     "cur": "59 salidas o cambios en 7 meses: 8 subsecretarios, 46 seremis y 2 delegados, además de las ministras.",
+     "curAlert": true,
+     "prev": "Sin un registro comparable en las fuentes revisadas."
     },
     {
      "label": "Exautoridades reubicadas",
-     "cur": "Steinert como agregada en Paraguay; Duco, Andrés Jouannet y José Francisco Lagos en el Segundo Piso de La Moneda.",
+     "cur": "Steinert como agregada en Paraguay; Duco, Andrés Jouannet y José Francisco Lagos en el Segundo Piso de La Moneda. Criticado como \"premio de consuelo\".",
+     "curAlert": true,
      "prev": "En 2022, Kast criticó como \"premios de consuelo\" las designaciones de Paula Narváez (ONU) y Beatriz Sánchez (embajadora en México)."
     }
    ],
@@ -1117,8 +1168,94 @@ footer a{font-weight:600}
     {
      "n": "BioBioChile",
      "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/los-premios-de-consuelo-que-kast-critico-a-boric-y-que-hoy-le-reprochan-a-su-gobierno.shtml"
+    },
+    {
+     "n": "Infobae (mar 2023)",
+     "u": "https://www.infobae.com/america/america-latina/2023/03/10/marta-mauras-sera-la-nueva-canciller-de-chile-en-reemplazo-de-antonia-urrejola/"
+    },
+    {
+     "n": "CNN Chile (Ríos)",
+     "u": "https://www.cnnchile.com/pais/marcela-rios-renuncia-ministerio-de-justicia-luis-cordero-vega/"
+    },
+    {
+     "n": "T13 (mar 2023)",
+     "u": "https://www.t13.cl/noticia/politica/presidente-gabriel-boric-cambio-de-gabinete-10-3-2023"
     }
-   ]
+   ],
+   "alertNote": "En rojo: cifras inusuales frente a gobiernos anteriores o que generaron críticas transversales.",
+   "firstYear": {
+    "cur": {
+     "title": "Kast: salidas de ministros",
+     "note": "Primer año en curso (8 de 12 meses).",
+     "count": "3",
+     "items": [
+      {
+       "name": "Mara Sedini",
+       "role": "Vocera (Segegob)",
+       "date": "19 may 2026",
+       "why": "Polémicas comunicacionales y la peor evaluación del gabinete.",
+       "rep": "Claudio Alvarado (biministro)"
+      },
+      {
+       "name": "Trinidad Steinert",
+       "role": "Seguridad Pública",
+       "date": "19 may 2026",
+       "why": "Polémica por el plan de seguridad y la remoción de la jefa de Inteligencia de la PDI.",
+       "rep": "Martín Arrau"
+      },
+      {
+       "name": "Natalia Duco",
+       "role": "Deporte",
+       "date": "13 ago 2026",
+       "why": "Uso de un vehículo fiscal para ir a un asado, denunciado ante la Contraloría.",
+       "rep": "Francisco Riveros"
+      }
+     ]
+    },
+    "prev": {
+     "title": "Boric: salidas de ministros",
+     "note": "Primer año completo (mar 2022 – mar 2023).",
+     "count": "11",
+     "alert": true,
+     "items": [
+      {
+       "name": "Jeannette Vega",
+       "role": "Desarrollo Social",
+       "date": "ago 2022",
+       "why": "Una asesora suya llamó a Héctor Llaitul, líder de la CAM.",
+       "rep": "Giorgio Jackson"
+      },
+      {
+       "name": "Izkia Siches",
+       "role": "Interior",
+       "date": "sep 2022",
+       "why": "Ajuste político tras la derrota del Apruebo en el plebiscito.",
+       "rep": "Carolina Tohá"
+      },
+      {
+       "name": "Begoña Yarza, Claudio Huepe y Flavio Salazar",
+       "role": "Salud, Energía y Ciencia",
+       "date": "sep 2022",
+       "why": "Mismo ajuste posplebiscito.",
+       "rep": "Ximena Aguilera, Diego Pardow y Silvia Díaz"
+      },
+      {
+       "name": "Marcela Ríos",
+       "role": "Justicia",
+       "date": "ene 2023",
+       "why": "Polémica por los indultos presidenciales a condenados por hechos del estallido social.",
+       "rep": "Luis Cordero"
+      },
+      {
+       "name": "Antonia Urrejola, Juan Carlos García, Julieta Brodsky, Alexandra Benado y Silvia Díaz",
+       "role": "Cancillería, Obras Públicas, Culturas, Deporte y Ciencia",
+       "date": "10 mar 2023",
+       "why": "Ajuste antes del segundo año, tras el rechazo de la reforma tributaria en la Cámara.",
+       "rep": "Alberto van Klaveren, Jessica López, Jaime de Aguirre, Jaime Pizarro y Aisén Etcheverry"
+      }
+     ]
+    }
+   }
   }
  }
 }
@@ -1242,30 +1379,49 @@ footer a{font-weight:600}
     var P=D.people; var sec=document.getElementById('h-autoridades').closest('section');
     if(!P||!(P.items||[]).length){sec.hidden=true;return;}
     var sum=document.getElementById('people-sum');
-    (P.summary||[]).forEach(function(x){var c=el('div','stat'); c.appendChild(el('b',null,x.value)); c.appendChild(el('span',null,x.label)); sum.appendChild(c);});
+    (P.summary||[]).forEach(function(x){var c=el('div','stat'+(x.alert?' alert':'')); c.appendChild(el('b',null,x.value)); c.appendChild(el('span',null,x.label)); sum.appendChild(c);});
     if(P.summaryNote){var n=el('p','note',P.summaryNote); n.style.cssText='flex-basis:100%;margin:0';sum.appendChild(n);}
     if(!(P.summary||[]).length) sum.hidden=true;
     var box=document.getElementById('people');
-    var WK={sale:'Por qué se fue',riesgo:'Por qué está en la mira',sigue:'Qué pasó',entra:'Por qué llegó',cambio:'Qué cambió'};
-    P.items.forEach(function(x){
-      var c=el('article','card person'); var top=el('div','person-top');
-      var who=el('div'); who.appendChild(el('h3',null,x.name)); who.appendChild(el('div','role',x.role+(x.date?' · '+x.date:'')));
-      top.appendChild(who); top.appendChild(el('span','ch ch-'+x.change,x.label||x.change)); c.appendChild(top);
-      var w=x.why||x.text; if(w){var wb=el('div','why-box '+x.change); wb.appendChild(el('span','k',WK[x.change]||'Motivo')); wb.appendChild(el('p',null,w)); c.appendChild(wb);}
-      if(x.replacedBy&&x.replacedBy.name){var sw=el('div','swap');
-        var a=el('div'); a.appendChild(el('span','k','Salió')); a.appendChild(el('b',null,x.name)); a.appendChild(el('small',null,x.role));
-        var b=el('div'); b.appendChild(el('span','k','Lo reemplazó')); b.appendChild(el('b',null,x.replacedBy.name)); if(x.replacedBy.from) b.appendChild(el('small',null,x.replacedBy.from));
-        sw.appendChild(a); sw.appendChild(el('span','arrow','→')); sw.appendChild(b); c.appendChild(sw);}
-      if(x.after){var af=el('div','after'); af.appendChild(el('b',null,'Después')); af.appendChild(document.createTextNode(x.after)); c.appendChild(af);}
+    var WK={sale:'Por qué se fue',riesgo:'Por qué está en la mira',piden:'Por qué piden su salida',sigue:'Qué pasó',entra:'Por qué llegó',cambio:'Qué cambió'};
+    var GROUPS=[{k:'sale',t:'Salieron',c:'var(--bad)'},{k:'riesgo',t:'En la mira',c:'var(--warn)'},{k:'piden',t:'Piden su salida',c:'var(--info)'},{k:'entra',t:'Asumieron',c:'var(--ok)'},{k:'cambio',t:'Cambios de cargo',c:'var(--brand)'},{k:'sigue',t:'Se mantienen',c:'var(--brand)'}];
+    var sorted=[]; GROUPS.forEach(function(g){var its=P.items.filter(function(x){return x.change===g.k;}); if(!its.length) return;
+      var h=el('div','p-group'); var dot=el('i'); dot.style.background=g.c; h.appendChild(dot); h.appendChild(document.createTextNode(g.t+' ')); h.appendChild(el('span','n','('+its.length+')')); its.forEach(function(x,i){ if(i===0) x._head=h; sorted.push(x);});});
+    P.items.filter(function(x){return !GROUPS.some(function(g){return g.k===x.change;});}).forEach(function(x){sorted.push(x);});
+    sorted.forEach(function(x){
+      if(x._head) box.appendChild(x._head);
+      var hasSwap=x.replacedBy&&x.replacedBy.name;
+      var c=el('article','card person'+((hasSwap||x.after)?'':' no-swap'));
+      var who=el('div','who'); who.appendChild(el('h3',null,x.name)); who.appendChild(el('div','role',x.role)); if(x.date) who.appendChild(el('div','role',x.date));
+      who.appendChild(el('span','ch ch-'+x.change,x.label||x.change)); c.appendChild(who);
+      var w=x.why||x.text; var wb=el('div','why-box '+x.change); wb.appendChild(el('span','k',WK[x.change]||'Motivo')); wb.appendChild(el('p',null,w||'Motivo no informado.')); c.appendChild(wb);
+      if(hasSwap||x.after){var side=el('div','side');
+        if(hasSwap){var sw=el('div','swap');
+          var a1=el('div'); a1.appendChild(el('span','k','Salió')); a1.appendChild(el('b',null,x.name));
+          var b1=el('div'); b1.appendChild(el('span','k','Lo reemplazó')); b1.appendChild(el('b',null,x.replacedBy.name)); if(x.replacedBy.from) b1.appendChild(el('small',null,x.replacedBy.from));
+          sw.appendChild(a1); sw.appendChild(el('span','arrow','→')); sw.appendChild(b1); side.appendChild(sw);}
+        if(x.after){var af=el('div','after'); af.appendChild(el('b',null,'Después')); af.appendChild(document.createTextNode(x.after)); side.appendChild(af);}
+        c.appendChild(side);}
       if(x.sources&&x.sources.length){var s=el('div','sources'); x.sources.forEach(function(src){var l=el('a','src',src.n); l.href=safeUrl(src.u); l.target='_blank'; l.rel='noopener'; s.appendChild(l);}); c.appendChild(s);}
       box.appendChild(c);
     });
     var C=P.compare, cb=document.getElementById('compare');
     if(!C||!(C.rows||[]).length){cb.hidden=true;} else {
       cb.appendChild(el('div','eyebrow','Contraste'));
-      cb.appendChild(el('h3',null,C.title)); if(C.intro){var ip=el('p','note',C.intro); ip.style.margin='6px 0 12px'; cb.appendChild(ip);}
+      cb.appendChild(el('h3',null,C.title)); if(C.intro){var ip=el('p','note',C.intro); ip.style.margin='6px 0 4px'; cb.appendChild(ip);}
+      if(C.alertNote){var an=el('div','alert-note'); an.appendChild(el('i')); an.appendChild(document.createTextNode(C.alertNote)); cb.appendChild(an);}
       var t=el('table'); var th=el('thead'); var tr=el('tr'); ['',C.cur,C.prev].forEach(function(h){tr.appendChild(el('th',null,h));}); th.appendChild(tr); t.appendChild(th);
-      var tb=el('tbody'); C.rows.forEach(function(r){var row=el('tr'); var l=el('td'); l.appendChild(el('b',null,r.label)); row.appendChild(l); row.appendChild(el('td',null,r.cur)); row.appendChild(el('td',null,r.prev)); tb.appendChild(row);}); t.appendChild(tb); cb.appendChild(t);
+      var tb=el('tbody'); C.rows.forEach(function(r){var row=el('tr'); var l=el('td'); l.appendChild(el('b',null,r.label)); row.appendChild(l); row.appendChild(el('td',r.curAlert?'alert':null,r.cur)); row.appendChild(el('td',r.prevAlert?'alert':null,r.prev)); tb.appendChild(row);}); t.appendChild(tb); cb.appendChild(t);
+      var FY=C.firstYear; if(FY&&(FY.cur||FY.prev)){
+        var h=el('h3',null,'Por qué dejaron el gabinete en el primer año'); h.style.marginTop='22px'; cb.appendChild(h);
+        var g=el('div','fy');
+        [FY.cur,FY.prev].forEach(function(col){ if(!col) return;
+          var d=el('div','card fy-col'+(col.alert?' alert':'')); 
+          var hd=el('div','h-row'); var t1=el('div'); t1.appendChild(el('h4',null,col.title)); t1.appendChild(el('p','note',col.note)); hd.appendChild(t1); hd.appendChild(el('span','fy-count',col.count)); d.appendChild(hd);
+          var ul=el('ul','fy-list'); (col.items||[]).forEach(function(it){var li=el('li'); li.appendChild(el('b',null,it.name)); li.appendChild(el('span','meta',it.role+' · '+it.date)); li.appendChild(el('span','why',it.why)); if(it.rep) li.appendChild(el('span','rep','Reemplazo: '+it.rep)); ul.appendChild(li);});
+          d.appendChild(ul); g.appendChild(d);});
+        cb.appendChild(g);
+      }
       if(C.sources&&C.sources.length){var s3=el('div','sources'); s3.style.marginTop='12px'; C.sources.forEach(function(src){var l=el('a','src',src.n); l.href=safeUrl(src.u); l.target='_blank'; l.rel='noopener'; s3.appendChild(l);}); cb.appendChild(s3);}
     }
   })();
