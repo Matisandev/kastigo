@@ -406,6 +406,12 @@ section.collapsed .card.countdown{padding-block:18px}
 .h-btns{display:flex;gap:6px;flex:none}
 .h-row{row-gap:8px}
 footer .stance-wrap{display:block}
+
+/* Selector de idioma (igual que ProRoller y el portafolio) */
+.lang-select{height:36px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface-card);color:var(--muted);font:600 12px var(--font);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.lang-select:hover,.lang-select:focus-visible{border-color:var(--brand-border);color:var(--brand)}
+.lang-select option{background:var(--navy);color:var(--ink);text-transform:none}
+@media (max-width:480px){.lang-select{height:34px;padding:0 8px;letter-spacing:.04em;font-size:11px;max-width:118px}}
 </style>
 </head>
 <body>
@@ -426,11 +432,11 @@ footer .stance-wrap{display:block}
   <div class="wrap">
     <a class="brand" href="#inicio"><span class="mono-badge">MS</span><span class="brand-k">Kast<b>igo</b></span></a>
     <div class="actions">
-      <div class="lang" role="group" aria-label="Idioma / Language">
-        <button type="button" class="lang-b" data-lang="es" id="lang-es">ES</button>
-        <button type="button" class="lang-b" data-lang="en" id="lang-en">EN</button>
-        <button type="button" class="lang-b" data-lang="pt" id="lang-pt">PT</button>
-      </div>
+      <select class="lang-select" id="lang-select" name="locale" aria-label="Cambiar idioma / Language">
+        <option value="es" lang="es">ES · Español</option>
+        <option value="en" lang="en">EN · English</option>
+        <option value="pt" lang="pt-BR">PT · Português</option>
+      </select>
       <button class="btn" id="btn-share" type="button"><svg><use href="#i-share"/></svg><span class="lbl" data-i18n="share">Compartir</span></button>
       <button class="btn icon" id="btn-theme" type="button" data-i18n-aria="theme"><svg id="theme-ic"><use href="#i-moon"/></svg></button>
     </div>
@@ -5739,8 +5745,8 @@ footer .stance-wrap{display:block}
   document.documentElement.lang = lang==='es'?'es-CL':(lang==='en'?'en':'pt-BR');
   document.querySelectorAll('[data-i18n]').forEach(function(e){var k=e.getAttribute('data-i18n'); if(T[k]!=null) e.textContent=T[k];});
   document.querySelectorAll('[data-i18n-aria]').forEach(function(e){var k=e.getAttribute('data-i18n-aria'); if(T[k]) e.setAttribute('aria-label',T[k]);});
-  LANGS.forEach(function(l){var b=document.getElementById('lang-'+l); b.setAttribute('aria-pressed',String(l===lang));
-    b.addEventListener('click',function(){ if(l===lang) return; try{localStorage.setItem('kg-lang',l);}catch(e){} var u=new URL(location.href); if(l==='es') u.searchParams.delete('lang'); else u.searchParams.set('lang',l); location.href=u.toString(); });});
+  var ls=document.getElementById('lang-select'); ls.value=lang;
+  ls.addEventListener('change',function(){ var l=ls.value; if(l===lang) return; try{localStorage.setItem('kg-lang',l);}catch(e){} var u=new URL(location.href); if(l==='es') u.searchParams.delete('lang'); else u.searchParams.set('lang',l); location.href=u.toString(); });
 
   function el(tag, cls, text){var e=document.createElement(tag); if(cls) e.className=cls; if(text!=null) e.textContent=text; return e;}
   function icon(name){var ns='http://www.w3.org/2000/svg';var s=document.createElementNS(ns,'svg');var u=document.createElementNS(ns,'use');u.setAttribute('href','#i-'+name);s.appendChild(u);return s;}
