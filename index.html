@@ -419,16 +419,47 @@ header.top .wrap{gap:20px}
 .owner{color:var(--muted);font-size:14px;font-weight:500}
 .owner:hover{color:var(--brand);text-decoration:none}
 .slash{color:var(--muted);opacity:.6}
-.top-nav{display:flex;gap:22px;font-size:14px;margin-right:auto;margin-left:12px}
+.top-nav{display:flex;gap:18px;font-size:14px;margin-right:auto;margin-left:8px;white-space:nowrap}
+#btn-share .lbl{white-space:nowrap}
+@media (min-width:1181px){#btn-share .lbl{display:none}#btn-share{width:38px;padding:0;justify-content:center}}
 .top-nav a{color:var(--muted)}
 .top-nav a:hover{color:var(--brand);text-decoration:none}
 .menu-btn{display:none}
 .mobile-nav{position:sticky;top:calc(64px + env(safe-area-inset-top,0px));z-index:4;display:flex;flex-direction:column;gap:14px;padding:18px max(16px,env(safe-area-inset-right,0px)) 20px max(16px,env(safe-area-inset-left,0px));background:var(--surface-header);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:15px}
 .mobile-nav a{color:var(--muted)}
 .mobile-nav[hidden]{display:none!important}
-@media (min-width:1061px){.mobile-nav{display:none!important}}
-@media (max-width:1060px){.top-nav{display:none}.menu-btn{display:inline-flex}.actions{margin-left:auto}}
+@media (min-width:1181px){.mobile-nav{display:none!important}}
+@media (max-width:1180px){.top-nav{display:none}.menu-btn{display:inline-flex}.actions{margin-left:auto}}
 @media (max-width:640px){.owner,.slash{display:none}#btn-share{display:none}}
+
+/* Ranking, casos anteriores y sección Aprende */
+.learn-h{font-size:20px;margin:30px 0 6px}
+.learn-p{margin:0 0 14px;color:var(--muted);max-width:70ch}
+.powers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.power h4{margin:0 0 4px;font-size:17px;color:var(--brand)}
+.pw-row{margin-top:10px}.pw-row b{display:block;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.pw-row p{margin:2px 0 0;font-size:14px}
+.steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;counter-reset:st}
+.steps li{counter-increment:st;padding:16px}
+.steps li::before{content:counter(st);display:grid;place-items:center;width:28px;height:28px;border-radius:9px;background:var(--brand-dim);border:1px solid var(--brand-border);color:var(--brand);font:600 13px var(--mono);margin-bottom:10px}
+.steps li b{display:block}.steps li p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.profiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.prof{display:flex;flex-direction:column;gap:10px;padding:18px}
+.prof-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.prof-hd h4{margin:0;font-size:16px}
+.prof-hd .pill{background:var(--surface-sunken);border:1px solid var(--line);color:var(--muted);font-size:11.5px;white-space:normal;text-align:right}
+.prof-role b{display:block;font-size:14px}.prof-role span{font:500 12px var(--mono);color:var(--muted)}
+.prof-p{margin:0;font-size:13.5px;color:var(--muted)}.prof-p b{color:var(--ink);font-weight:600}
+#prof-src{margin-top:12px}#prof-src .note{margin:0 0 8px}
+.cases{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.case{display:flex;flex-direction:column;gap:8px;background:var(--surface-sunken);border:1px solid var(--line);border-radius:14px;padding:14px 16px;min-width:0}
+.case .when{font:600 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.case h4{margin:0;font-size:16px}
+.case > p{margin:0;font-size:14px}
+.case .out{border-left:3px solid var(--info);padding-left:10px}
+.case .out b{display:block;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--info)}
+.case .out p{margin:2px 0 0;font-size:14px;color:var(--muted)}
+@media (min-width:861px) and (max-width:1060px){.profiles,.steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){.powers,.steps,.profiles,.cases{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -541,6 +572,7 @@ header.top .wrap{gap:20px}
     </div>
     <div class="eco-shock" id="eco-shock"></div>
     <div class="card eco-block table-wrap" id="eco-local"></div>
+    <div class="card eco-block table-wrap" id="eco-rank"></div>
     <div class="card eco-block table-wrap" id="eco-region"></div>
     <div class="card eco-block" id="eco-terms">
       <div class="eyebrow" data-i18n="termsEyebrow">Economía en simple</div>
@@ -559,6 +591,7 @@ header.top .wrap{gap:20px}
     <div class="people-sum" id="people-sum"></div>
     <div class="people" id="people"></div>
     <div class="card eco-block table-wrap" id="mandates"></div>
+    <div class="card eco-block" id="past-cases"></div>
     <div class="card eco-block table-wrap" id="cabinet"></div>
     <div class="card compare table-wrap" id="compare"></div>
   </section>
@@ -582,12 +615,24 @@ header.top .wrap{gap:20px}
     <div class="contrast" id="cong-contrast"></div>
   </section>
 
-  <section id="glosario" data-share aria-labelledby="h-glosario">
+  <section id="aprende" data-share aria-labelledby="h-aprende">
     <div class="sec-head">
-      <div class="eyebrow" data-i18n="glossEyebrow">Para entender</div>
-      <h2 id="h-glosario" data-i18n="glossTitle">Glosario de política en simple</h2>
-      <p data-i18n="glossIntro">Las palabras que más se repiten en las noticias, explicadas sin tecnicismos.</p>
+      <div class="eyebrow" data-i18n="learnEyebrow">Aprende</div>
+      <h2 id="h-aprende" data-i18n="learnTitle">Cómo funciona la política en Chile, explicado en simple</h2>
+      <p data-i18n="learnIntro">Una guía básica para entender esta página y las noticias.</p>
     </div>
+    <h3 class="learn-h" id="powers-h"></h3>
+    <p class="learn-p" id="powers-intro"></p>
+    <div class="powers" id="powers"></div>
+    <div class="card eco-block" id="autonomous"></div>
+    <h3 class="learn-h" id="law-h"></h3>
+    <ol class="steps" id="law-steps"></ol>
+    <h3 class="learn-h" id="cab-h"></h3>
+    <p class="learn-p" id="cab-intro"></p>
+    <div class="profiles" id="profiles"></div>
+    <div id="prof-src"></div>
+    <h3 class="learn-h" data-i18n="glossTitle">Glosario de política en simple</h3>
+    <p class="learn-p" data-i18n="glossIntro">Las palabras que más se repiten en las noticias, explicadas sin tecnicismos.</p>
     <dl class="gloss" id="gloss"></dl>
   </section>
 
@@ -1075,6 +1120,66 @@ header.top .wrap{gap:20px}
   {
    "t": "Premio de consuelo",
    "d": "Expresión para cuando una autoridad que salió de su cargo recibe otro puesto público, como una embajada o una asesoría."
+  },
+  {
+   "t": "Ministro o ministra",
+   "d": "Persona que el Presidente nombra para dirigir un área del Estado, como salud o educación. El Presidente puede reemplazarla cuando quiera."
+  },
+  {
+   "t": "Mandato",
+   "d": "El tiempo en que una autoridad ejerce su cargo. El del Presidente dura 4 años."
+  },
+  {
+   "t": "Cambio de gabinete",
+   "d": "Cuando el Presidente reemplaza a uno o varios ministros."
+  },
+  {
+   "t": "Diputados y senadores",
+   "d": "Los diputados (155) se eligen cada 4 años y los senadores (50) por 8 años. Juntos forman el Congreso."
+  },
+  {
+   "t": "Proyecto de ley",
+   "d": "Una propuesta que todavía se discute en el Congreso. Cuando se aprueba y se publica, pasa a ser ley."
+  },
+  {
+   "t": "Comisión mixta",
+   "d": "Grupo de diputados y senadores que busca un acuerdo cuando las dos cámaras aprobaron textos distintos."
+  },
+  {
+   "t": "Comisión investigadora",
+   "d": "Grupo de diputados que investiga un hecho en que está involucrado el Gobierno y entrega un informe."
+  },
+  {
+   "t": "Formalización",
+   "d": "Cuando la Fiscalía comunica a una persona, ante un juez, que la investiga por un delito. No significa que sea culpable."
+  },
+  {
+   "t": "Sobreseimiento",
+   "d": "Cuando un juez cierra una investigación sin juicio, por ejemplo porque no hay pruebas suficientes."
+  },
+  {
+   "t": "Cohecho",
+   "d": "Ofrecer o recibir dinero u otro beneficio para que un funcionario público haga o deje de hacer algo. Es un delito."
+  },
+  {
+   "t": "Tráfico de influencias",
+   "d": "Usar un cargo o los contactos con autoridades para conseguir un beneficio indebido."
+  },
+  {
+   "t": "Plebiscito",
+   "d": "Votación en que la ciudadanía responde sí o no a una pregunta, como aprobar una Constitución."
+  },
+  {
+   "t": "Coalición",
+   "d": "Alianza de varios partidos para gobernar o competir juntos en elecciones."
+  },
+  {
+   "t": "Independiente",
+   "d": "Persona que no milita en ningún partido, aunque puede apoyar a uno."
+  },
+  {
+   "t": "Paro y marcha",
+   "d": "Paro: dejar de trabajar para presionar por una demanda. Marcha: manifestación que recorre las calles."
   }
  ],
  "outlets": [
@@ -1740,7 +1845,95 @@ header.top .wrap{gap:20px}
     "n": "Pudahuel (sueldo mínimo)",
     "u": "https://www.pudahuel.cl/noticias/2026/10/nuevo-aumento-del-sueldo-minimo-en-chile-revisa-de-cuanto-sera-el-alza-y-desde-cuando-rige/"
    }
-  ]
+  ],
+  "fuelRank": {
+   "title": "Ranking: precio de la bencina en Sudamérica",
+   "note": "Precio de la gasolina por litro, de la más cara a la más barata. En dólares: GlobalPetrolPrices al 2 de noviembre de 2026, publicado por El Universo en dólares por galón y convertido a litro (1 galón = 3,785 litros). En pesos chilenos: misma fuente, actualización del 9 de noviembre, publicada por El Mostrador y Radio Contacto. Esta tabla solo compara el precio en la bomba; no considera sueldos.",
+   "cols": [
+    "País",
+    "US$ por litro",
+    "Pesos chilenos por litro"
+   ],
+   "reading": "Chile tiene la tercera bencina más cara de los 12 países de Sudamérica, después de Uruguay y Perú. Venezuela, Bolivia y Ecuador tienen los precios más bajos porque el Estado fija o subsidia el precio.",
+   "missing": "Sin dato en pesos",
+   "rows": [
+    {
+     "country": "Uruguay",
+     "usd": 2.252,
+     "clp": 2201
+    },
+    {
+     "country": "Perú",
+     "usd": 1.67,
+     "clp": 1671
+    },
+    {
+     "country": "Chile",
+     "usd": 1.552,
+     "clp": 1537,
+     "me": true
+    },
+    {
+     "country": "Argentina",
+     "usd": 1.424,
+     "clp": 1406
+    },
+    {
+     "country": "Colombia",
+     "usd": 1.317,
+     "clp": null
+    },
+    {
+     "country": "Surinam",
+     "usd": 1.287,
+     "clp": null
+    },
+    {
+     "country": "Paraguay",
+     "usd": 1.255,
+     "clp": 1195
+    },
+    {
+     "country": "Brasil",
+     "usd": 1.249,
+     "clp": 1229
+    },
+    {
+     "country": "Guyana",
+     "usd": 1.233,
+     "clp": null
+    },
+    {
+     "country": "Ecuador",
+     "usd": 0.839,
+     "clp": 813
+    },
+    {
+     "country": "Bolivia",
+     "usd": 0.577,
+     "clp": 578
+    },
+    {
+     "country": "Venezuela",
+     "usd": 0.035,
+     "clp": null
+    }
+   ],
+   "sources": [
+    {
+     "n": "El Universo (GlobalPetrolPrices, 2 nov 2026)",
+     "u": "https://www.eluniverso.com/economia/industrias/precios-combustibles-ecuador-noviembre-2026-gasolinas-valores-america-latina-nota/"
+    },
+    {
+     "n": "El Mostrador (11 nov 2026)",
+     "u": "https://www.elmostrador.cl/noticias/pais/2026/11/11/kast-asegura-que-chile-tiene-combustibles-mas-baratos-que-el-resto-de-america-cifras-lo-contradicen/"
+    },
+    {
+     "n": "Radio Contacto (12 nov 2026)",
+     "u": "https://radiocontacto.cl/2026/11/12/chile-registra-el-tercer-precio-de-bencina-mas-alto-de-sudamerica-litro-supera-los-1-536/"
+    }
+   ]
+  }
  },
  "congress": {
   "intro": "Resultados de las votaciones más relevantes y cómo votó cada partido, para comparar el comportamiento del Congreso en el gobierno actual y en el anterior.",
@@ -2235,7 +2428,7 @@ header.top .wrap{gap:20px}
    {
     "role": "Deporte",
     "name": "Francisco Riveros",
-    "party": "Sin dato verificado",
+    "party": "Independiente",
     "state": "in",
     "note": "Ex gerente general del club Palestino.",
     "from": "2026-08-14"
@@ -2320,7 +2513,420 @@ header.top .wrap{gap:20px}
   ]
  },
  "stance": "Kastigo no está vinculado a ningún partido ni sector político y se basa solo en hechos verificables. Las consecuencias de las decisiones de los poderes del Estado son temas que toda persona tiene derecho a conocer en términos simples. En un entorno lleno de información manipulada y conclusiones personales, el objetivo es que cada lector saque sus propias conclusiones con información verificada, comparando los resultados de las decisiones de distintos gobiernos sin tomar partido por ningún bando.",
- "stanceName": "Sobre el nombre: Kastigo se llama así porque su autor no está de acuerdo con las decisiones del gobierno actual. Eso no significa apoyar a otro sector: si este gobierno aplica mejores políticas, leyes o beneficios para la ciudadanía, también se mostrarán aquí con la misma rigurosidad. La postura es neutral frente a los partidos y crítica frente a la gestión del gobierno actual, siempre basada en hechos."
+ "stanceName": "Sobre el nombre: Kastigo se llama así porque su autor no está de acuerdo con las decisiones del gobierno actual. Eso no significa apoyar a otro sector: si este gobierno aplica mejores políticas, leyes o beneficios para la ciudadanía, también se mostrarán aquí con la misma rigurosidad. La postura es neutral frente a los partidos y crítica frente a la gestión del gobierno actual, siempre basada en hechos.",
+ "pastCases": {
+  "title": "Casos que marcaron a los gobiernos anteriores",
+  "intro": "Errores, escándalos y crisis de los cuatro gobiernos anteriores, con su contexto, cómo terminaron según lo publicado y las fuentes. Que una persona haya sido investigada o formalizada no significa que haya sido condenada.",
+  "outLabel": "Cómo terminó",
+  "govs": [
+   {
+    "who": "Gabriel Boric",
+    "period": "2022–2026",
+    "cases": [
+     {
+      "t": "Indultos a condenados del estallido",
+      "when": "Diciembre 2022 – enero 2023",
+      "what": "Al cierre de 2022 el Presidente Boric indultó a un grupo de personas condenadas por delitos cometidos durante el estallido social y al exfrentista Jorge Mateluna. Después se supo que en los antecedentes revisados faltaba información sobre condenas anteriores de algunos indultados.",
+      "outcome": "La ministra de Justicia, Marcela Ríos, y el jefe de gabinete del Presidente, Matías Meza-Lopehandía, dejaron sus cargos el 7 de enero de 2023. Boric reconoció \"desprolijidades\" en el proceso.",
+      "sources": [
+       {
+        "n": "Emol: cronología",
+        "u": "https://www.emol.com/noticias/Nacional/2023/01/07/1083224/cronologia-salida-marcela-rios-justicia.html"
+       },
+       {
+        "n": "The Clinic",
+        "u": "https://www.theclinic.cl/2023/01/07/renuncia-ministra-justicia-marcela-rios/"
+       }
+      ]
+     },
+     {
+      "t": "Caso Convenios (Democracia Viva)",
+      "when": "Junio 2023",
+      "what": "Un medio de Antofagasta reveló que la fundación Democracia Viva, ligada a militantes de Revolución Democrática (partido del gobierno), recibió $426 millones del Ministerio de Vivienda mediante convenios directos, sin concurso. Luego aparecieron convenios parecidos con otras fundaciones en varias regiones.",
+      "outcome": "Renunciaron autoridades de Vivienda, entre ellas el seremi de Antofagasta y la subsecretaria. La Fiscalía abrió investigaciones en varias regiones y la oposición presentó una acusación constitucional contra el ministro Carlos Montes.",
+      "sources": [
+       {
+        "n": "Emol: los hitos",
+        "u": "https://www.emol.com/noticias/Nacional/2023/06/30/1099212/los-hitos-del-caso-convenios.html"
+       },
+       {
+        "n": "The Clinic",
+        "u": "https://www.theclinic.cl/2023/12/13/carlos-montes-al-borde-del-precipicio-como-el-caso-democracia-viva-termino-afectando-el-cierre-de-su-carrera-politica/"
+       }
+      ]
+     },
+     {
+      "t": "Robo de computadores en Desarrollo Social",
+      "when": "Julio 2023",
+      "what": "En plena investigación del caso Convenios, desde el Ministerio de Desarrollo Social (entonces a cargo de Giorgio Jackson) se robaron computadores y una caja fuerte. Se cuestionó que no se cumplieran los protocolos de seguridad esa noche.",
+      "outcome": "Carabineros recuperó los computadores días después. La oposición sospechó una relación con el caso Convenios y el Gobierno lo descartó. La Fiscalía siguió investigando el delito.",
+      "sources": [
+       {
+        "n": "CNN Chile",
+        "u": "https://www.cnnchile.com/pais/robo-ministerio-desarrollo-social-que-paso-carabineros-jackson/"
+       },
+       {
+        "n": "El Dínamo",
+        "u": "https://www.eldinamo.cl/pais/2023/07/20/encuentran-los-computadores-que-fueron-robados-del-ministerio-de-desarrollo-social/"
+       },
+       {
+        "n": "CNN Chile: dos años después",
+        "u": "https://www.cnnchile.com/pais/robo-computadores-caja-fuerte-ministerio-desarrollo-social-esto-se-sabe-casi-dos-anos-delito/"
+       }
+      ]
+     },
+     {
+      "t": "Caso Monsalve",
+      "when": "Octubre 2024",
+      "what": "El subsecretario del Interior, Manuel Monsalve, fue denunciado por violación por una funcionaria de su equipo. Se supo que el Presidente conocía la denuncia antes de que Monsalve dejara el cargo, lo que generó críticas por el manejo del Gobierno.",
+      "outcome": "Monsalve renunció y fue formalizado por la Fiscalía. El caso sigue en la Justicia.",
+      "sources": [
+       {
+        "n": "BioBioChile",
+        "u": "https://www.biobiochile.cl/biobiotv/programas/radiograma-biobiotv/2025/05/26/el-fantasma-del-caso-monsalve-vuelve-a-rondar-la-moneda-tras-declaracion-de-exsubsecretario.shtml"
+       },
+       {
+        "n": "Ex-Ante",
+        "u": "https://www.ex-ante.cl/el-dia-mas-negro-de-boric-desde-que-se-inicio-el-caso-monsalve/"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "who": "Sebastián Piñera",
+    "period": "2018–2022",
+    "cases": [
+     {
+      "t": "Muerte de Camilo Catrillanca",
+      "when": "Noviembre 2018",
+      "what": "Camilo Catrillanca, comunero mapuche de 24 años, murió por un disparo de Carabineros del llamado \"Comando Jungla\" en Ercilla, La Araucanía. La primera versión policial era falsa y un carabinero destruyó la tarjeta de memoria con la grabación del operativo.",
+      "outcome": "El intendente de La Araucanía y el general director de Carabineros, Hermes Soto, dejaron sus cargos. La Justicia condenó a siete exintegrantes del GOPE y la Corte Suprema mantuvo las condenas.",
+      "sources": [
+       {
+        "n": "Poder Judicial",
+        "u": "https://www.pjud.cl/prensa-y-comunicaciones/noticias-del-poder-judicial/55749"
+       },
+       {
+        "n": "Ex-Ante: 11 episodios",
+        "u": "https://www.ex-ante.cl/politica/condenan-a-7-efectivos-del-gope-por-asesinato-de-catrillanca-los-11-episodios-claves-del-caso/"
+       }
+      ]
+     },
+     {
+      "t": "Violaciones a los derechos humanos en el estallido social",
+      "when": "Octubre 2019 – 2020",
+      "what": "Durante las protestas iniciadas en octubre de 2019, el Instituto Nacional de Derechos Humanos (INDH) registró miles de denuncias de violencia de agentes del Estado, entre ellas más de 350 personas con lesiones oculares. El INDH las calificó como las violaciones más graves desde el retorno a la democracia.",
+      "outcome": "Organismos internacionales emitieron informes críticos. La Cámara rechazó una acusación constitucional contra el Presidente Piñera, y el Senado aprobó la acusación contra el exministro del Interior Andrés Chadwick, que quedó inhabilitado por 5 años para cargos públicos.",
+      "sources": [
+       {
+        "n": "CNN Chile: informe INDH",
+        "u": "https://www.cnnchile.com/pais/informe-indh-sostiene-que-se-produjeron-las-mas-graves-violaciones-a-los-dd-hh-desde-1989-tras-el-estallido-social_20191223/"
+       },
+       {
+        "n": "CNN Chile: lesiones oculares",
+        "u": "https://www.cnnchile.com/pais/informe-del-indh-352-personas-han-resultado-con-danos-oculares-desde-inicio-de-las-manifestaciones-sociales_20191207/"
+       }
+      ]
+     },
+     {
+      "t": "Pandora Papers y proyecto Dominga",
+      "when": "Octubre 2021",
+      "what": "La investigación periodística Pandora Papers reveló que en 2010, durante el primer gobierno de Piñera, su familia vendió su participación en el proyecto minero Dominga a un empresario cercano, con un último pago que dependía de que la zona no fuera declarada área protegida.",
+      "outcome": "La Cámara aprobó una acusación constitucional contra Piñera, pero el Senado la rechazó en noviembre de 2021. La Fiscalía pidió cerrar la investigación penal (sobreseimiento).",
+      "sources": [
+       {
+        "n": "Ex-Ante: claves del caso",
+        "u": "https://www.ex-ante.cl/politica/las-claves-del-caso-dominga-por-el-cual-la-fiscalia-pidio-el-sobreseimiento-definitivo/"
+       },
+       {
+        "n": "Ex-Ante: la acusación en el Senado",
+        "u": "https://www.ex-ante.cl/politica/historia-de-un-fracaso-anunciado-como-se-salvo-pinera-de-la-acusacion-en-el-senado/"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "who": "Michelle Bachelet",
+    "period": "2014–2018",
+    "cases": [
+     {
+      "t": "Caso Caval",
+      "when": "Febrero 2015",
+      "what": "La revista Qué Pasa reveló que Caval, empresa de Natalia Compagnon, nuera de la Presidenta, obtuvo un crédito de $6.500 millones del Banco de Chile después de una reunión con Andrónico Luksic en la que participó Sebastián Dávalos, hijo de Bachelet. Con ese dinero compró terrenos en Machalí que luego vendió con una gran ganancia.",
+      "outcome": "Dávalos renunció a su cargo en La Moneda. Compagnon fue formalizada; Dávalos no. El caso afectó la aprobación del gobierno y llevó al primer cambio de gabinete de Bachelet, en mayo de 2015.",
+      "sources": [
+       {
+        "n": "T13: cronología",
+        "u": "https://www.t13.cl/noticia/politica/caval-cronologia-del-caso-formalizara-nuera-bachelet"
+       },
+       {
+        "n": "CNN Chile: un año",
+        "u": "https://www.cnnchile.com/pais/un-ano-del-caso-caval/"
+       },
+       {
+        "n": "CIPER",
+        "u": "https://www.ciperchile.cl/2015/09/23/las-huellas-de-sebastian-davalos-en-otros-negocios-de-caval-petroleo-mineria-y-luminarias-led/"
+       }
+      ]
+     },
+     {
+      "t": "Caso SQM: financiamiento irregular de la política",
+      "when": "2015",
+      "what": "La Fiscalía investigó pagos de la empresa SQM a políticos de casi todos los sectores mediante boletas y facturas por servicios que no se prestaron. La investigación llegó a la precampaña de Bachelet y a su ministro del Interior, Rodrigo Peñailillo.",
+      "outcome": "Peñailillo dejó el Gobierno en el cambio de gabinete de mayo de 2015. Muchas causas no llegaron a juicio porque el Servicio de Impuestos Internos no presentó querellas, requisito para perseguir esos delitos.",
+      "sources": [
+       {
+        "n": "CIPER: los pagos",
+        "u": "https://ciperchile.cl/2015/09/07/platas-negras-de-sqm-el-pulpo-que-puso-sus-tentaculos-en-todos-los-sectores-politicos/"
+       },
+       {
+        "n": "CIPER: imputados sin juicio",
+        "u": "https://www.ciperchile.cl/2021/08/04/platas-politicas-de-sqm-la-evidencia-que-acumulo-la-fiscalia-contra-los-34-imputados-que-zafaron-del-juicio/"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "who": "Sebastián Piñera",
+    "period": "2010–2014",
+    "cases": [
+     {
+      "t": "El censo fallido de 2012",
+      "when": "2012 – 2013",
+      "what": "El Gobierno presentó el censo de 2012 como \"el mejor de la historia\". Después se supo que muchas viviendas no fueron visitadas y que se usaron estimaciones sin informarlo con claridad.",
+      "outcome": "El director del INE, Francisco Labbé, renunció en abril de 2013. Una revisión técnica concluyó que el censo no cumplía estándares mínimos, el Presidente Piñera pidió perdón y en 2017 se hizo un nuevo censo abreviado.",
+      "sources": [
+       {
+        "n": "CNN Chile",
+        "u": "https://www.cnnchile.com/ladecada-noticias/el-mejor-censo-de-la-historia-asi-fue-la-fallida-encuesta-nacional-2012-que-obligo-a-pinera-a-pedir-perdon/"
+       },
+       {
+        "n": "Cooperativa",
+        "u": "https://www.cooperativa.cl/noticias/site/artic/20140923/pags-amp/20140923110646.html"
+       },
+       {
+        "n": "CIPER",
+        "u": "https://www.ciperchile.cl/2013/05/02/renuncia-grupo-de-asesores-de-confianza-del-ex-director-del-ine/"
+       }
+      ]
+     },
+     {
+      "t": "Ley de Pesca y caso Corpesca",
+      "when": "2012 – 2013",
+      "what": "La Ley de Pesca, impulsada por el ministro de Economía Pablo Longueira, entregó a las grandes pesqueras licencias para pescar por 20 años renovables. Investigaciones posteriores revelaron que la pesquera Corpesca hizo pagos a parlamentarios mientras la ley se discutía.",
+      "outcome": "La Fiscalía llevó a juicio a parlamentarios y a la empresa por esos pagos. La ley sigue vigente y desde entonces se discute cambiarla.",
+      "sources": [
+       {
+        "n": "CIPER: leyes de pesca",
+        "u": "https://www.ciperchile.cl/2018/05/08/pescado-rabioso-leyes-de-pesca-y-luchas-de-poder-en-la-derecha-chilena/"
+       },
+       {
+        "n": "CIPER: caso Corpesca",
+        "u": "https://www.ciperchile.cl/?p=142971"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "learn": {
+  "powersTitle": "Los tres poderes del Estado",
+  "powersIntro": "En Chile el poder está dividido en tres partes para que ninguna persona o grupo lo concentre todo. Cada poder controla a los otros.",
+  "labels": {
+   "who": "Quiénes lo forman",
+   "does": "Qué hace",
+   "ex": "Ejemplo"
+  },
+  "powers": [
+   {
+    "name": "Poder Ejecutivo",
+    "who": "El Presidente de la República, sus ministros y los servicios públicos.",
+    "does": "Gobierna y administra el país: seguridad, salud, educación, economía y relaciones con otros países. Propone leyes y las promulga. El Presidente dura 4 años y no puede ser reelegido para el período siguiente.",
+    "ex": "El Ministerio de Salud organiza los hospitales públicos."
+   },
+   {
+    "name": "Poder Legislativo",
+    "who": "El Congreso Nacional: la Cámara de Diputadas y Diputados (155 personas, elegidas por 4 años) y el Senado (50 personas, elegidas por 8 años).",
+    "does": "Hace, cambia y elimina leyes y aprueba el presupuesto del país. La Cámara fiscaliza al Gobierno y puede acusar constitucionalmente a autoridades; el Senado decide esas acusaciones.",
+    "ex": "Votar si se aprueba una reforma de pensiones."
+   },
+   {
+    "name": "Poder Judicial",
+    "who": "Los tribunales de justicia, encabezados por la Corte Suprema.",
+    "does": "Resuelve conflictos y juzga delitos aplicando las leyes. Es independiente: el Gobierno no puede darle órdenes.",
+    "ex": "Un tribunal oral decide si una persona acusada es culpable o inocente."
+   }
+  ],
+  "autoTitle": "Organismos autónomos",
+  "autoIntro": "No dependen de ninguno de los tres poderes, para que puedan controlar con independencia.",
+  "auto": [
+   {
+    "t": "Ministerio Público (Fiscalía)",
+    "d": "Investiga los delitos y acusa a los posibles responsables ante los tribunales."
+   },
+   {
+    "t": "Contraloría General de la República",
+    "d": "Revisa que el Estado use bien el dinero público y respete la ley."
+   },
+   {
+    "t": "Tribunal Constitucional",
+    "d": "Revisa que las leyes respeten la Constitución."
+   },
+   {
+    "t": "Banco Central",
+    "d": "Cuida que los precios no suban demasiado (inflación) y que el sistema financiero sea estable."
+   },
+   {
+    "t": "Servicio Electoral (Servel)",
+    "d": "Organiza las elecciones y controla el dinero de las campañas."
+   }
+  ],
+  "lawTitle": "Cómo nace una ley",
+  "law": [
+   {
+    "t": "Se presenta",
+    "d": "La propone el Presidente (se llama mensaje) o un grupo de diputados o senadores (se llama moción)."
+   },
+   {
+    "t": "Primera cámara",
+    "d": "Se discute primero en la Cámara o en el Senado. Primero se vota la idea de legislar y después cada artículo."
+   },
+   {
+    "t": "Segunda cámara",
+    "d": "La otra cámara la revisa y puede cambiarla."
+   },
+   {
+    "t": "Acuerdo",
+    "d": "Si las dos cámaras aprueban textos distintos, una comisión mixta de diputados y senadores busca un texto común."
+   },
+   {
+    "t": "Firma del Presidente",
+    "d": "El Presidente la promulga (la firma) o la veta (la rechaza o propone cambios). Algunas leyes pasan antes por el Tribunal Constitucional."
+   },
+   {
+    "t": "Publicación",
+    "d": "Se publica en el Diario Oficial y desde ese momento es obligatoria para todos."
+   }
+  ],
+  "cabTitle": "Quién es quién en el gabinete",
+  "cabIntro": "Los ministros en funciones hoy: qué cargo tienen, qué estudiaron, qué hacían antes y cuánto llevan en el cargo. Los días se cuentan hasta hoy.",
+  "cabNote": "Estudios y trayectoria según Chilevisión y El Dínamo (enero de 2026) y BioBioChile (agosto de 2026). Cuando las fuentes no coinciden, se indica.",
+  "cabLabels": {
+   "studies": "Estudios",
+   "career": "Antes",
+   "since": "En el cargo desde",
+   "days": "días",
+   "party": "Partido"
+  },
+  "profiles": {
+   "Claudio Alvarado": {
+    "edu": "Ingeniero comercial, Escuela de Negocios de Valparaíso (hoy Universidad Adolfo Ibáñez).",
+    "career": "Ministro de la Segpres en el segundo gobierno de Piñera; antes, senador y diputado."
+   },
+   "Martín Arrau": {
+    "edu": "Ingeniero civil industrial, Pontificia Universidad Católica (PUC).",
+    "career": "Intendente de Ñuble y convencional constituyente."
+   },
+   "Francisco Pérez Mackenna": {
+    "edu": "Ingeniero comercial, PUC.",
+    "career": "Gerente general de Quiñenco."
+   },
+   "Fernando Barros": {
+    "edu": "Abogado, Universidad de Chile.",
+    "career": "Abogado y asesor de Sebastián Piñera por más de 30 años."
+   },
+   "Jorge Quiroz": {
+    "edu": "Ingeniero comercial, Universidad de Chile; doctorado en Economía, Universidad de Duke (EE.UU.).",
+    "career": "Economista y consultor; asesor económico de la campaña de Kast."
+   },
+   "José García Ruminot": {
+    "edu": "Contador público y auditor, Universidad de La Frontera.",
+    "career": "Senador por La Araucanía desde 2002."
+   },
+   "Daniel Mas": {
+    "edu": "Ingeniero agrónomo, PUC.",
+    "career": "Vicepresidente de la CPC (gremio de las grandes empresas) y presidente de la Cámara Chilena de la Construcción de La Serena (2021-2023)."
+   },
+   "María Jesús Wulf": {
+    "edu": "Socióloga, PUC.",
+    "career": "Subdirectora de Acción Republicana."
+   },
+   "María Paz Arzola": {
+    "edu": "Ingeniera comercial, PUC.",
+    "career": "Coordinadora del Programa Social de Libertad y Desarrollo (centro de estudios)."
+   },
+   "Fernando Rabat": {
+    "edu": "Abogado, Universidad de Los Andes; especialista en Derecho Civil.",
+    "career": "Abogado; integró el equipo jurídico que defendió a Augusto Pinochet."
+   },
+   "Tomás Rau": {
+    "edu": "Ingeniero comercial, Universidad de Chile; doctorado en Economía, Universidad de California (EE.UU.).",
+    "career": "Director del Instituto de Economía de la PUC."
+   },
+   "Louis de Grange": {
+    "edu": "Ingeniero industrial, PUC.",
+    "career": "Expresidente de Metro de Santiago."
+   },
+   "May Chomali": {
+    "edu": "Médica cirujana, Universidad de Chile.",
+    "career": "Directora del Centro Nacional en Sistemas de Información en Salud (CENS)."
+   },
+   "Iván Poduje": {
+    "edu": "Arquitecto urbanista, PUC de Valparaíso.",
+    "career": "Fundador de la consultora Atisba; candidato a alcalde de Viña del Mar en 2024."
+   },
+   "Jaime Campos": {
+    "edu": "Abogado (Chilevisión indica la Universidad de Concepción y El Dínamo, la Universidad de Chile).",
+    "career": "Ministro de Agricultura de Ricardo Lagos y de Justicia de Michelle Bachelet; exdiputado."
+   },
+   "Catalina Parot": {
+    "edu": "Abogada, Pontificia Universidad Católica (las fuentes difieren entre la sede de Santiago y la de Valparaíso).",
+    "career": "Ministra de Bienes Nacionales en el primer gobierno de Piñera y presidenta del CNTV en el segundo."
+   },
+   "Ximena Rincón": {
+    "edu": "Abogada, Universidad de Chile.",
+    "career": "Senadora por el Maule y expresidenta del Senado; exministra del Trabajo y de la Segpres de Bachelet."
+   },
+   "Francisca Toledo": {
+    "edu": "Ingeniera civil industrial, PUC.",
+    "career": "Investigadora de Libertad y Desarrollo; asesora en los dos gobiernos de Piñera."
+   },
+   "Francisco Undurraga": {
+    "edu": "Estudios técnicos de comunicación y publicidad (las fuentes difieren: Instituto AIEP o Escuela de Comunicación Mónica Herrera).",
+    "career": "Diputado desde 2018 y expresidente de Evópoli."
+   },
+   "Judith Marín": {
+    "edu": "Profesora de Castellano (las fuentes difieren sobre la institución).",
+    "career": "Secretaria general del Partido Social Cristiano."
+   },
+   "Francisco Riveros": {
+    "edu": "Abogado.",
+    "career": "Exgerente general del club Palestino; asesor del Gobierno en el Plan Auditoría Total."
+   },
+   "Ximena Lincolao": {
+    "edu": "Estudios de Literatura y Filosofía Española o Pedagogía en Castellano, Universidad de La Serena (las fuentes difieren).",
+    "career": "Sin dato verificado en las fuentes revisadas."
+   }
+  },
+  "profSources": [
+   {
+    "n": "Chilevisión (ene 2026)",
+    "u": "https://www.chilevision.cl/noticias/nacional/donde-estudiaron-los-ministros-de-kast-estas-son-las-profesiones-y-las-universidades-de-su-gabinete/amp/"
+   },
+   {
+    "n": "El Dínamo (ene 2026)",
+    "u": "https://www.eldinamo.cl/politica/2026/01/20/quien-es-quien-en-el-gabinete-de-kast-el-perfil-de-los-25-ministros-que-presento-el-presidente-electo/"
+   },
+   {
+    "n": "BioBioChile (ago 2026)",
+    "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/08/14/francisco-riveros-sera-el-nuevo-ministro-del-deporte-tras-salida-de-natalia-duco.shtml"
+   }
+  ]
+ }
 }</script>
 <script type="application/json" id="data-en">{
  "updated": "2026-11-12T15:15:00-03:00",
@@ -2785,6 +3391,66 @@ header.top .wrap{gap:20px}
   {
    "t": "Consolation prize",
    "d": "An expression for when an official who left their post receives another public job, such as an embassy or an advisory role."
+  },
+  {
+   "t": "Minister",
+   "d": "A person the President appoints to lead an area of government, such as health or education. The President can replace them at any time."
+  },
+  {
+   "t": "Term (mandato)",
+   "d": "The period during which an official holds office. The President's term is 4 years."
+  },
+  {
+   "t": "Cabinet reshuffle",
+   "d": "When the President replaces one or more ministers."
+  },
+  {
+   "t": "Deputies and senators",
+   "d": "Deputies (155) are elected every 4 years and senators (50) for 8 years. Together they make up Congress."
+  },
+  {
+   "t": "Bill",
+   "d": "A proposal still being debated in Congress. Once approved and published, it becomes law."
+  },
+  {
+   "t": "Joint committee",
+   "d": "A group of deputies and senators that seeks agreement when the two chambers passed different texts."
+  },
+  {
+   "t": "Investigative committee",
+   "d": "A group of deputies that looks into a matter involving the Government and issues a report."
+  },
+  {
+   "t": "Formal charges (formalización)",
+   "d": "When prosecutors tell a person, before a judge, that they are being investigated for a crime. It does not mean they are guilty."
+  },
+  {
+   "t": "Dismissal (sobreseimiento)",
+   "d": "When a judge closes an investigation without a trial, for example because there is not enough evidence."
+  },
+  {
+   "t": "Bribery (cohecho)",
+   "d": "Offering or receiving money or another benefit so that a public official does or does not do something. It is a crime."
+  },
+  {
+   "t": "Influence peddling",
+   "d": "Using a post or contacts with officials to obtain an improper benefit."
+  },
+  {
+   "t": "Plebiscite",
+   "d": "A vote in which citizens answer yes or no to a question, such as approving a Constitution."
+  },
+  {
+   "t": "Coalition",
+   "d": "An alliance of several parties to govern or run together in elections."
+  },
+  {
+   "t": "Independent",
+   "d": "A person who is not a member of any party, although they may support one."
+  },
+  {
+   "t": "Strike and march",
+   "d": "Strike: stopping work to press a demand. March: a demonstration that moves through the streets."
   }
  ],
  "outlets": [
@@ -3450,7 +4116,95 @@ header.top .wrap{gap:20px}
     "n": "Pudahuel (minimum wage)",
     "u": "https://www.pudahuel.cl/noticias/2026/10/nuevo-aumento-del-sueldo-minimo-en-chile-revisa-de-cuanto-sera-el-alza-y-desde-cuando-rige/"
    }
-  ]
+  ],
+  "fuelRank": {
+   "title": "Ranking: gasoline prices in South America",
+   "note": "Price of gasoline per liter, from most to least expensive. In dollars: GlobalPetrolPrices as of November 2, 2026, published by El Universo in dollars per gallon and converted to liters (1 gallon = 3.785 liters). In Chilean pesos: same source, November 9 update, published by El Mostrador and Radio Contacto. This table only compares the pump price; it does not consider wages.",
+   "cols": [
+    "Country",
+    "US$ per liter",
+    "Chilean pesos per liter"
+   ],
+   "reading": "Chile has the third most expensive gasoline of the 12 South American countries, after Uruguay and Peru. Venezuela, Bolivia and Ecuador have the lowest prices because the state sets or subsidizes the price.",
+   "missing": "No figure in pesos",
+   "rows": [
+    {
+     "country": "Uruguay",
+     "usd": 2.252,
+     "clp": 2201
+    },
+    {
+     "country": "Peru",
+     "usd": 1.67,
+     "clp": 1671
+    },
+    {
+     "country": "Chile",
+     "usd": 1.552,
+     "clp": 1537,
+     "me": true
+    },
+    {
+     "country": "Argentina",
+     "usd": 1.424,
+     "clp": 1406
+    },
+    {
+     "country": "Colombia",
+     "usd": 1.317,
+     "clp": null
+    },
+    {
+     "country": "Suriname",
+     "usd": 1.287,
+     "clp": null
+    },
+    {
+     "country": "Paraguay",
+     "usd": 1.255,
+     "clp": 1195
+    },
+    {
+     "country": "Brazil",
+     "usd": 1.249,
+     "clp": 1229
+    },
+    {
+     "country": "Guyana",
+     "usd": 1.233,
+     "clp": null
+    },
+    {
+     "country": "Ecuador",
+     "usd": 0.839,
+     "clp": 813
+    },
+    {
+     "country": "Bolivia",
+     "usd": 0.577,
+     "clp": 578
+    },
+    {
+     "country": "Venezuela",
+     "usd": 0.035,
+     "clp": null
+    }
+   ],
+   "sources": [
+    {
+     "n": "El Universo (GlobalPetrolPrices, 2 nov 2026)",
+     "u": "https://www.eluniverso.com/economia/industrias/precios-combustibles-ecuador-noviembre-2026-gasolinas-valores-america-latina-nota/"
+    },
+    {
+     "n": "El Mostrador (11 nov 2026)",
+     "u": "https://www.elmostrador.cl/noticias/pais/2026/11/11/kast-asegura-que-chile-tiene-combustibles-mas-baratos-que-el-resto-de-america-cifras-lo-contradicen/"
+    },
+    {
+     "n": "Radio Contacto (12 nov 2026)",
+     "u": "https://radiocontacto.cl/2026/11/12/chile-registra-el-tercer-precio-de-bencina-mas-alto-de-sudamerica-litro-supera-los-1-536/"
+    }
+   ]
+  }
  },
  "congress": {
   "intro": "Results of the most relevant votes and how each party voted, to compare how Congress behaves under the current government and the previous one.",
@@ -3945,7 +4699,7 @@ header.top .wrap{gap:20px}
    {
     "role": "Sports",
     "name": "Francisco Riveros",
-    "party": "No verified figure",
+    "party": "Independent",
     "state": "in",
     "note": "Former general manager of the Palestino club.",
     "from": "2026-08-14"
@@ -4030,7 +4784,420 @@ header.top .wrap{gap:20px}
   ]
  },
  "stance": "Kastigo is not linked to any party or political sector and is based solely on verifiable facts. The consequences of the decisions made by the branches of government are matters that everyone has the right to understand in simple terms. In an environment full of manipulated information and personal conclusions, the goal is for each reader to draw their own conclusions from verified information, comparing the results of decisions by different governments without taking sides.",
- "stanceName": "About the name: Kastigo is called this because its author disagrees with the current government's decisions. That does not mean supporting another side: if this government applies better policies, laws or benefits for the public, they will also be shown here with the same rigor. The stance is neutral toward political parties and critical of the current government's performance, always based on facts."
+ "stanceName": "About the name: Kastigo is called this because its author disagrees with the current government's decisions. That does not mean supporting another side: if this government applies better policies, laws or benefits for the public, they will also be shown here with the same rigor. The stance is neutral toward political parties and critical of the current government's performance, always based on facts.",
+ "pastCases": {
+  "title": "Cases that marked previous governments",
+  "intro": "Mistakes, scandals and crises of the four previous governments, with context, how they ended according to published reports, and sources. Being investigated or charged does not mean being convicted.",
+  "outLabel": "How it ended",
+  "govs": [
+   {
+    "who": "Gabriel Boric",
+    "period": "2022–2026",
+    "cases": [
+     {
+      "t": "Pardons for people convicted over the 2019 unrest",
+      "when": "December 2022 – January 2023",
+      "what": "At the end of 2022 President Boric pardoned a group of people convicted of crimes committed during the 2019 social unrest, as well as former FPMR member Jorge Mateluna. It later emerged that the records reviewed lacked information on prior convictions of some of those pardoned.",
+      "outcome": "Justice Minister Marcela Ríos and the President's chief of staff, Matías Meza-Lopehandía, left their posts on January 7, 2023. Boric acknowledged \"sloppiness\" in the process.",
+      "sources": [
+       {
+        "n": "Emol: cronología",
+        "u": "https://www.emol.com/noticias/Nacional/2023/01/07/1083224/cronologia-salida-marcela-rios-justicia.html"
+       },
+       {
+        "n": "The Clinic",
+        "u": "https://www.theclinic.cl/2023/01/07/renuncia-ministra-justicia-marcela-rios/"
+       }
+      ]
+     },
+     {
+      "t": "\"Convenios\" case (Democracia Viva)",
+      "when": "June 2023",
+      "what": "A news outlet in Antofagasta revealed that the Democracia Viva foundation, linked to members of Revolución Democrática (a governing party), received 426 million pesos from the Housing Ministry through direct agreements without a tender. Similar agreements with other foundations later surfaced in several regions.",
+      "outcome": "Housing officials resigned, including the Antofagasta regional secretary and the undersecretary. Prosecutors opened investigations in several regions and the opposition filed a constitutional charge against Minister Carlos Montes.",
+      "sources": [
+       {
+        "n": "Emol: los hitos",
+        "u": "https://www.emol.com/noticias/Nacional/2023/06/30/1099212/los-hitos-del-caso-convenios.html"
+       },
+       {
+        "n": "The Clinic",
+        "u": "https://www.theclinic.cl/2023/12/13/carlos-montes-al-borde-del-precipicio-como-el-caso-democracia-viva-termino-afectando-el-cierre-de-su-carrera-politica/"
+       }
+      ]
+     },
+     {
+      "t": "Theft of computers at the Social Development Ministry",
+      "when": "July 2023",
+      "what": "While the \"Convenios\" case was under investigation, computers and a safe were stolen from the Social Development Ministry (then headed by Giorgio Jackson). Questions were raised over security protocols not being followed that night.",
+      "outcome": "Police recovered the computers days later. The opposition suspected a link to the \"Convenios\" case; the Government ruled it out. Prosecutors kept investigating the crime.",
+      "sources": [
+       {
+        "n": "CNN Chile",
+        "u": "https://www.cnnchile.com/pais/robo-ministerio-desarrollo-social-que-paso-carabineros-jackson/"
+       },
+       {
+        "n": "El Dínamo",
+        "u": "https://www.eldinamo.cl/pais/2023/07/20/encuentran-los-computadores-que-fueron-robados-del-ministerio-de-desarrollo-social/"
+       },
+       {
+        "n": "CNN Chile: dos años después",
+        "u": "https://www.cnnchile.com/pais/robo-computadores-caja-fuerte-ministerio-desarrollo-social-esto-se-sabe-casi-dos-anos-delito/"
+       }
+      ]
+     },
+     {
+      "t": "Monsalve case",
+      "when": "October 2024",
+      "what": "Interior Undersecretary Manuel Monsalve was accused of rape by a member of his staff. It emerged that the President knew of the complaint before Monsalve left office, which drew criticism of the Government's handling.",
+      "outcome": "Monsalve resigned and was formally charged by prosecutors. The case is still in the courts.",
+      "sources": [
+       {
+        "n": "BioBioChile",
+        "u": "https://www.biobiochile.cl/biobiotv/programas/radiograma-biobiotv/2025/05/26/el-fantasma-del-caso-monsalve-vuelve-a-rondar-la-moneda-tras-declaracion-de-exsubsecretario.shtml"
+       },
+       {
+        "n": "Ex-Ante",
+        "u": "https://www.ex-ante.cl/el-dia-mas-negro-de-boric-desde-que-se-inicio-el-caso-monsalve/"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "who": "Sebastián Piñera",
+    "period": "2018–2022",
+    "cases": [
+     {
+      "t": "Killing of Camilo Catrillanca",
+      "when": "November 2018",
+      "what": "Camilo Catrillanca, a 24-year-old Mapuche community member, was shot dead by police from the so-called \"Jungle Command\" in Ercilla, La Araucanía. The first police account was false, and an officer destroyed the memory card with footage of the operation.",
+      "outcome": "The regional governor of La Araucanía and police chief Hermes Soto left their posts. The courts convicted seven former members of the GOPE unit and the Supreme Court upheld the sentences.",
+      "sources": [
+       {
+        "n": "Poder Judicial",
+        "u": "https://www.pjud.cl/prensa-y-comunicaciones/noticias-del-poder-judicial/55749"
+       },
+       {
+        "n": "Ex-Ante: 11 episodios",
+        "u": "https://www.ex-ante.cl/politica/condenan-a-7-efectivos-del-gope-por-asesinato-de-catrillanca-los-11-episodios-claves-del-caso/"
+       }
+      ]
+     },
+     {
+      "t": "Human rights violations during the 2019 unrest",
+      "when": "October 2019 – 2020",
+      "what": "During the protests that began in October 2019, the National Human Rights Institute (INDH) recorded thousands of complaints of violence by state agents, including more than 350 people with eye injuries. The INDH called them the most serious violations since the return to democracy.",
+      "outcome": "International bodies issued critical reports. The Chamber rejected a constitutional charge against President Piñera, and the Senate upheld the charge against former Interior Minister Andrés Chadwick, who was barred from public office for 5 years.",
+      "sources": [
+       {
+        "n": "CNN Chile: informe INDH",
+        "u": "https://www.cnnchile.com/pais/informe-indh-sostiene-que-se-produjeron-las-mas-graves-violaciones-a-los-dd-hh-desde-1989-tras-el-estallido-social_20191223/"
+       },
+       {
+        "n": "CNN Chile: lesiones oculares",
+        "u": "https://www.cnnchile.com/pais/informe-del-indh-352-personas-han-resultado-con-danos-oculares-desde-inicio-de-las-manifestaciones-sociales_20191207/"
+       }
+      ]
+     },
+     {
+      "t": "Pandora Papers and the Dominga project",
+      "when": "October 2021",
+      "what": "The Pandora Papers investigation revealed that in 2010, during Piñera's first government, his family sold its stake in the Dominga mining project to a close businessman, with a final payment that depended on the area not being declared protected.",
+      "outcome": "The Chamber approved a constitutional charge against Piñera, but the Senate rejected it in November 2021. Prosecutors asked to close the criminal investigation.",
+      "sources": [
+       {
+        "n": "Ex-Ante: claves del caso",
+        "u": "https://www.ex-ante.cl/politica/las-claves-del-caso-dominga-por-el-cual-la-fiscalia-pidio-el-sobreseimiento-definitivo/"
+       },
+       {
+        "n": "Ex-Ante: la acusación en el Senado",
+        "u": "https://www.ex-ante.cl/politica/historia-de-un-fracaso-anunciado-como-se-salvo-pinera-de-la-acusacion-en-el-senado/"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "who": "Michelle Bachelet",
+    "period": "2014–2018",
+    "cases": [
+     {
+      "t": "Caval case",
+      "when": "February 2015",
+      "what": "Qué Pasa magazine revealed that Caval, a company owned by Natalia Compagnon, the President's daughter-in-law, obtained a 6.5 billion peso loan from Banco de Chile after a meeting with Andrónico Luksic attended by Sebastián Dávalos, Bachelet's son. With that money it bought land in Machalí that it later sold at a large profit.",
+      "outcome": "Dávalos resigned from his post at La Moneda. Compagnon was formally charged; Dávalos was not. The case hit the government's approval ratings and led to Bachelet's first cabinet reshuffle in May 2015.",
+      "sources": [
+       {
+        "n": "T13: cronología",
+        "u": "https://www.t13.cl/noticia/politica/caval-cronologia-del-caso-formalizara-nuera-bachelet"
+       },
+       {
+        "n": "CNN Chile: un año",
+        "u": "https://www.cnnchile.com/pais/un-ano-del-caso-caval/"
+       },
+       {
+        "n": "CIPER",
+        "u": "https://www.ciperchile.cl/2015/09/23/las-huellas-de-sebastian-davalos-en-otros-negocios-de-caval-petroleo-mineria-y-luminarias-led/"
+       }
+      ]
+     },
+     {
+      "t": "SQM case: irregular political financing",
+      "when": "2015",
+      "what": "Prosecutors investigated payments by the company SQM to politicians from almost every camp through invoices for services never provided. The investigation reached Bachelet's pre-campaign and her Interior Minister, Rodrigo Peñailillo.",
+      "outcome": "Peñailillo left the Government in the May 2015 reshuffle. Many cases never reached trial because the tax authority (SII) did not file complaints, a requirement to prosecute those crimes.",
+      "sources": [
+       {
+        "n": "CIPER: los pagos",
+        "u": "https://ciperchile.cl/2015/09/07/platas-negras-de-sqm-el-pulpo-que-puso-sus-tentaculos-en-todos-los-sectores-politicos/"
+       },
+       {
+        "n": "CIPER: imputados sin juicio",
+        "u": "https://www.ciperchile.cl/2021/08/04/platas-politicas-de-sqm-la-evidencia-que-acumulo-la-fiscalia-contra-los-34-imputados-que-zafaron-del-juicio/"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "who": "Sebastián Piñera",
+    "period": "2010–2014",
+    "cases": [
+     {
+      "t": "The failed 2012 census",
+      "when": "2012 – 2013",
+      "what": "The Government presented the 2012 census as \"the best in history\". It later emerged that many homes were not visited and estimates were used without clearly disclosing it.",
+      "outcome": "The head of the INE statistics agency, Francisco Labbé, resigned in April 2013. A technical review found the census did not meet minimum standards, President Piñera apologized, and a new short-form census was carried out in 2017.",
+      "sources": [
+       {
+        "n": "CNN Chile",
+        "u": "https://www.cnnchile.com/ladecada-noticias/el-mejor-censo-de-la-historia-asi-fue-la-fallida-encuesta-nacional-2012-que-obligo-a-pinera-a-pedir-perdon/"
+       },
+       {
+        "n": "Cooperativa",
+        "u": "https://www.cooperativa.cl/noticias/site/artic/20140923/pags-amp/20140923110646.html"
+       },
+       {
+        "n": "CIPER",
+        "u": "https://www.ciperchile.cl/2013/05/02/renuncia-grupo-de-asesores-de-confianza-del-ex-director-del-ine/"
+       }
+      ]
+     },
+     {
+      "t": "Fisheries Law and the Corpesca case",
+      "when": "2012 – 2013",
+      "what": "The Fisheries Law, promoted by Economy Minister Pablo Longueira, gave large fishing companies licenses for 20 renewable years. Later investigations revealed that the fishing company Corpesca made payments to lawmakers while the law was being debated.",
+      "outcome": "Prosecutors took lawmakers and the company to trial over those payments. The law is still in force and changing it has been under discussion ever since.",
+      "sources": [
+       {
+        "n": "CIPER: leyes de pesca",
+        "u": "https://www.ciperchile.cl/2018/05/08/pescado-rabioso-leyes-de-pesca-y-luchas-de-poder-en-la-derecha-chilena/"
+       },
+       {
+        "n": "CIPER: caso Corpesca",
+        "u": "https://www.ciperchile.cl/?p=142971"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "learn": {
+  "powersTitle": "The three branches of government",
+  "powersIntro": "In Chile, power is divided into three parts so that no person or group holds all of it. Each branch checks the others.",
+  "labels": {
+   "who": "Who is in it",
+   "does": "What it does",
+   "ex": "Example"
+  },
+  "powers": [
+   {
+    "name": "Executive branch",
+    "who": "The President of the Republic, the ministers and public agencies.",
+    "does": "Governs and runs the country: security, health, education, the economy and relations with other countries. It proposes laws and enacts them. The President serves 4 years and cannot be re-elected for the next term.",
+    "ex": "The Ministry of Health runs public hospitals."
+   },
+   {
+    "name": "Legislative branch",
+    "who": "The National Congress: the Chamber of Deputies (155 members, elected for 4 years) and the Senate (50 members, elected for 8 years).",
+    "does": "Makes, changes and repeals laws and approves the national budget. The Chamber oversees the Government and can bring constitutional charges against officials; the Senate rules on those charges.",
+    "ex": "Voting on whether to approve a pension reform."
+   },
+   {
+    "name": "Judicial branch",
+    "who": "The courts, headed by the Supreme Court.",
+    "does": "Settles disputes and tries crimes by applying the law. It is independent: the Government cannot give it orders.",
+    "ex": "A trial court decides whether an accused person is guilty or innocent."
+   }
+  ],
+  "autoTitle": "Autonomous bodies",
+  "autoIntro": "They do not depend on any of the three branches, so they can oversee independently.",
+  "auto": [
+   {
+    "t": "Public Prosecutor's Office (Fiscalía)",
+    "d": "Investigates crimes and charges possible offenders before the courts."
+   },
+   {
+    "t": "Comptroller General (Contraloría)",
+    "d": "Checks that the State uses public money properly and follows the law."
+   },
+   {
+    "t": "Constitutional Court",
+    "d": "Checks that laws comply with the Constitution."
+   },
+   {
+    "t": "Central Bank",
+    "d": "Keeps prices from rising too much (inflation) and keeps the financial system stable."
+   },
+   {
+    "t": "Electoral Service (Servel)",
+    "d": "Runs elections and oversees campaign money."
+   }
+  ],
+  "lawTitle": "How a law is made",
+  "law": [
+   {
+    "t": "Introduced",
+    "d": "It is proposed by the President (a \"mensaje\") or by a group of deputies or senators (a \"moción\")."
+   },
+   {
+    "t": "First chamber",
+    "d": "It is debated first in the Chamber or the Senate. First the general idea is voted on, then each article."
+   },
+   {
+    "t": "Second chamber",
+    "d": "The other chamber reviews it and may change it."
+   },
+   {
+    "t": "Agreement",
+    "d": "If the two chambers pass different texts, a joint committee of deputies and senators seeks a common text."
+   },
+   {
+    "t": "President's signature",
+    "d": "The President enacts it (signs it) or vetoes it (rejects it or proposes changes). Some laws first go to the Constitutional Court."
+   },
+   {
+    "t": "Publication",
+    "d": "It is published in the Official Gazette (Diario Oficial) and from then on everyone must follow it."
+   }
+  ],
+  "cabTitle": "Who's who in the cabinet",
+  "cabIntro": "The ministers currently in office: their post, what they studied, what they did before and how long they have served. Days are counted up to today.",
+  "cabNote": "Education and background according to Chilevisión and El Dínamo (January 2026) and BioBioChile (August 2026). Where sources disagree, this is noted.",
+  "cabLabels": {
+   "studies": "Education",
+   "career": "Before",
+   "since": "In office since",
+   "days": "days",
+   "party": "Party"
+  },
+  "profiles": {
+   "Claudio Alvarado": {
+    "edu": "Business engineer (commercial engineering), Valparaíso Business School (now Adolfo Ibáñez University).",
+    "career": "Segpres minister in Piñera's second government; earlier a senator and deputy."
+   },
+   "Martín Arrau": {
+    "edu": "Industrial civil engineer, Pontifical Catholic University (PUC).",
+    "career": "Governor (intendente) of Ñuble and member of the Constitutional Convention."
+   },
+   "Francisco Pérez Mackenna": {
+    "edu": "Business engineer, PUC.",
+    "career": "CEO of Quiñenco."
+   },
+   "Fernando Barros": {
+    "edu": "Lawyer, University of Chile.",
+    "career": "Lawyer and adviser to Sebastián Piñera for more than 30 years."
+   },
+   "Jorge Quiroz": {
+    "edu": "Business engineer, University of Chile; PhD in Economics, Duke University (US).",
+    "career": "Economist and consultant; economic adviser to Kast's campaign."
+   },
+   "José García Ruminot": {
+    "edu": "Public accountant and auditor, University of La Frontera.",
+    "career": "Senator for La Araucanía since 2002."
+   },
+   "Daniel Mas": {
+    "edu": "Agronomist, PUC.",
+    "career": "Vice president of the CPC (the main business association) and head of the Chilean Construction Chamber in La Serena (2021-2023)."
+   },
+   "María Jesús Wulf": {
+    "edu": "Sociologist, PUC.",
+    "career": "Deputy director of Acción Republicana."
+   },
+   "María Paz Arzola": {
+    "edu": "Business engineer, PUC.",
+    "career": "Head of the Social Program at Libertad y Desarrollo (a think tank)."
+   },
+   "Fernando Rabat": {
+    "edu": "Lawyer, University of Los Andes; specialist in civil law.",
+    "career": "Lawyer; was part of the legal team that defended Augusto Pinochet."
+   },
+   "Tomás Rau": {
+    "edu": "Business engineer, University of Chile; PhD in Economics, University of California (US).",
+    "career": "Director of the PUC Institute of Economics."
+   },
+   "Louis de Grange": {
+    "edu": "Industrial engineer, PUC.",
+    "career": "Former chairman of the Santiago Metro."
+   },
+   "May Chomali": {
+    "edu": "Medical doctor, University of Chile.",
+    "career": "Director of the National Center for Health Information Systems (CENS)."
+   },
+   "Iván Poduje": {
+    "edu": "Architect and urban planner, Pontifical Catholic University of Valparaíso.",
+    "career": "Founder of the consultancy Atisba; candidate for mayor of Viña del Mar in 2024."
+   },
+   "Jaime Campos": {
+    "edu": "Lawyer (Chilevisión says University of Concepción; El Dínamo, University of Chile).",
+    "career": "Agriculture minister under Ricardo Lagos and Justice minister under Michelle Bachelet; former deputy."
+   },
+   "Catalina Parot": {
+    "edu": "Lawyer, Pontifical Catholic University (sources differ between the Santiago and Valparaíso universities).",
+    "career": "National Assets minister in Piñera's first government and head of the TV regulator (CNTV) in his second."
+   },
+   "Ximena Rincón": {
+    "edu": "Lawyer, University of Chile.",
+    "career": "Senator for Maule and former Senate president; former Labor and Segpres minister under Bachelet."
+   },
+   "Francisca Toledo": {
+    "edu": "Industrial civil engineer, PUC.",
+    "career": "Researcher at Libertad y Desarrollo; adviser in both Piñera governments."
+   },
+   "Francisco Undurraga": {
+    "edu": "Technical studies in communication and advertising (sources differ: AIEP Institute or Mónica Herrera School of Communication).",
+    "career": "Deputy since 2018 and former president of Evópoli."
+   },
+   "Judith Marín": {
+    "edu": "Spanish-language teacher (sources differ on the institution).",
+    "career": "Secretary general of the Social Christian Party."
+   },
+   "Francisco Riveros": {
+    "edu": "Lawyer.",
+    "career": "Former CEO of the Palestino football club; government adviser on the Total Audit Plan."
+   },
+   "Ximena Lincolao": {
+    "edu": "Studies in Spanish Literature and Philosophy or Spanish teaching, University of La Serena (sources differ).",
+    "career": "No verified information in the sources reviewed."
+   }
+  },
+  "profSources": [
+   {
+    "n": "Chilevisión (ene 2026)",
+    "u": "https://www.chilevision.cl/noticias/nacional/donde-estudiaron-los-ministros-de-kast-estas-son-las-profesiones-y-las-universidades-de-su-gabinete/amp/"
+   },
+   {
+    "n": "El Dínamo (ene 2026)",
+    "u": "https://www.eldinamo.cl/politica/2026/01/20/quien-es-quien-en-el-gabinete-de-kast-el-perfil-de-los-25-ministros-que-presento-el-presidente-electo/"
+   },
+   {
+    "n": "BioBioChile (ago 2026)",
+    "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/08/14/francisco-riveros-sera-el-nuevo-ministro-del-deporte-tras-salida-de-natalia-duco.shtml"
+   }
+  ]
+ }
 }</script>
 <script type="application/json" id="data-pt">{
  "updated": "2026-11-12T15:15:00-03:00",
@@ -4495,6 +5662,66 @@ header.top .wrap{gap:20px}
   {
    "t": "Prêmio de consolação",
    "d": "Expressão usada quando uma autoridade que saiu do cargo recebe outro posto público, como uma embaixada ou uma assessoria."
+  },
+  {
+   "t": "Ministro ou ministra",
+   "d": "Pessoa que o Presidente nomeia para dirigir uma área do Estado, como saúde ou educação. O Presidente pode substituí-la quando quiser."
+  },
+  {
+   "t": "Mandato",
+   "d": "O tempo em que uma autoridade exerce o cargo. O do Presidente dura 4 anos."
+  },
+  {
+   "t": "Mudança de gabinete",
+   "d": "Quando o Presidente substitui um ou mais ministros."
+  },
+  {
+   "t": "Deputados e senadores",
+   "d": "Os deputados (155) são eleitos a cada 4 anos e os senadores (50) por 8 anos. Juntos formam o Congresso."
+  },
+  {
+   "t": "Projeto de lei",
+   "d": "Uma proposta ainda em discussão no Congresso. Quando aprovada e publicada, vira lei."
+  },
+  {
+   "t": "Comissão mista",
+   "d": "Grupo de deputados e senadores que busca um acordo quando as duas câmaras aprovaram textos diferentes."
+  },
+  {
+   "t": "Comissão de investigação",
+   "d": "Grupo de deputados que investiga um fato envolvendo o Governo e entrega um relatório."
+  },
+  {
+   "t": "Formalização",
+   "d": "Quando o Ministério Público comunica a uma pessoa, perante um juiz, que a investiga por um crime. Não significa que seja culpada."
+  },
+  {
+   "t": "Arquivamento (sobreseimiento)",
+   "d": "Quando um juiz encerra uma investigação sem julgamento, por exemplo por falta de provas."
+  },
+  {
+   "t": "Suborno (cohecho)",
+   "d": "Oferecer ou receber dinheiro ou outro benefício para que um funcionário público faça ou deixe de fazer algo. É crime."
+  },
+  {
+   "t": "Tráfico de influência",
+   "d": "Usar um cargo ou contatos com autoridades para obter um benefício indevido."
+  },
+  {
+   "t": "Plebiscito",
+   "d": "Votação em que os cidadãos respondem sim ou não a uma pergunta, como aprovar uma Constituição."
+  },
+  {
+   "t": "Coalizão",
+   "d": "Aliança de vários partidos para governar ou disputar eleições juntos."
+  },
+  {
+   "t": "Independente",
+   "d": "Pessoa que não é filiada a nenhum partido, embora possa apoiar um."
+  },
+  {
+   "t": "Greve e marcha",
+   "d": "Greve: parar de trabalhar para pressionar por uma reivindicação. Marcha: manifestação que percorre as ruas."
   }
  ],
  "outlets": [
@@ -5160,7 +6387,95 @@ header.top .wrap{gap:20px}
     "n": "Pudahuel (salário mínimo)",
     "u": "https://www.pudahuel.cl/noticias/2026/10/nuevo-aumento-del-sueldo-minimo-en-chile-revisa-de-cuanto-sera-el-alza-y-desde-cuando-rige/"
    }
-  ]
+  ],
+  "fuelRank": {
+   "title": "Ranking: preço da gasolina na América do Sul",
+   "note": "Preço da gasolina por litro, da mais cara à mais barata. Em dólares: GlobalPetrolPrices em 2 de novembro de 2026, publicado pelo El Universo em dólares por galão e convertido para litro (1 galão = 3,785 litros). Em pesos chilenos: mesma fonte, atualização de 9 de novembro, publicada por El Mostrador e Radio Contacto. Esta tabela só compara o preço na bomba; não considera salários.",
+   "cols": [
+    "País",
+    "US$ por litro",
+    "Pesos chilenos por litro"
+   ],
+   "reading": "O Chile tem a terceira gasolina mais cara dos 12 países da América do Sul, depois do Uruguai e do Peru. Venezuela, Bolívia e Equador têm os preços mais baixos porque o Estado fixa ou subsidia o preço.",
+   "missing": "Sem dado em pesos",
+   "rows": [
+    {
+     "country": "Uruguay",
+     "usd": 2.252,
+     "clp": 2201
+    },
+    {
+     "country": "Peru",
+     "usd": 1.67,
+     "clp": 1671
+    },
+    {
+     "country": "Chile",
+     "usd": 1.552,
+     "clp": 1537,
+     "me": true
+    },
+    {
+     "country": "Argentina",
+     "usd": 1.424,
+     "clp": 1406
+    },
+    {
+     "country": "Colombia",
+     "usd": 1.317,
+     "clp": null
+    },
+    {
+     "country": "Suriname",
+     "usd": 1.287,
+     "clp": null
+    },
+    {
+     "country": "Paraguay",
+     "usd": 1.255,
+     "clp": 1195
+    },
+    {
+     "country": "Brasil",
+     "usd": 1.249,
+     "clp": 1229
+    },
+    {
+     "country": "Guyana",
+     "usd": 1.233,
+     "clp": null
+    },
+    {
+     "country": "Ecuador",
+     "usd": 0.839,
+     "clp": 813
+    },
+    {
+     "country": "Bolivia",
+     "usd": 0.577,
+     "clp": 578
+    },
+    {
+     "country": "Venezuela",
+     "usd": 0.035,
+     "clp": null
+    }
+   ],
+   "sources": [
+    {
+     "n": "El Universo (GlobalPetrolPrices, 2 nov 2026)",
+     "u": "https://www.eluniverso.com/economia/industrias/precios-combustibles-ecuador-noviembre-2026-gasolinas-valores-america-latina-nota/"
+    },
+    {
+     "n": "El Mostrador (11 nov 2026)",
+     "u": "https://www.elmostrador.cl/noticias/pais/2026/11/11/kast-asegura-que-chile-tiene-combustibles-mas-baratos-que-el-resto-de-america-cifras-lo-contradicen/"
+    },
+    {
+     "n": "Radio Contacto (12 nov 2026)",
+     "u": "https://radiocontacto.cl/2026/11/12/chile-registra-el-tercer-precio-de-bencina-mas-alto-de-sudamerica-litro-supera-los-1-536/"
+    }
+   ]
+  }
  },
  "congress": {
   "intro": "Resultados das votações mais relevantes e como votou cada partido, para comparar o comportamento do Congresso no governo atual e no anterior.",
@@ -5655,7 +6970,7 @@ header.top .wrap{gap:20px}
    {
     "role": "Esporte",
     "name": "Francisco Riveros",
-    "party": "Sem dado verificado",
+    "party": "Independente",
     "state": "in",
     "note": "Ex-gerente geral do clube Palestino.",
     "from": "2026-08-14"
@@ -5740,7 +7055,420 @@ header.top .wrap{gap:20px}
   ]
  },
  "stance": "O Kastigo não está vinculado a nenhum partido nem setor político e se baseia apenas em fatos verificáveis. As consequências das decisões dos poderes do Estado são temas que toda pessoa tem o direito de conhecer em termos simples. Em um ambiente cheio de informação manipulada e conclusões pessoais, o objetivo é que cada leitor tire suas próprias conclusões com informação verificada, comparando os resultados das decisões de diferentes governos sem tomar partido de nenhum lado.",
- "stanceName": "Sobre o nome: o Kastigo se chama assim porque seu autor não concorda com as decisões do governo atual. Isso não significa apoiar outro lado: se este governo aplicar melhores políticas, leis ou benefícios para a população, eles também serão mostrados aqui com o mesmo rigor. A postura é neutra em relação aos partidos e crítica em relação à gestão do governo atual, sempre baseada em fatos."
+ "stanceName": "Sobre o nome: o Kastigo se chama assim porque seu autor não concorda com as decisões do governo atual. Isso não significa apoiar outro lado: se este governo aplicar melhores políticas, leis ou benefícios para a população, eles também serão mostrados aqui com o mesmo rigor. A postura é neutra em relação aos partidos e crítica em relação à gestão do governo atual, sempre baseada em fatos.",
+ "pastCases": {
+  "title": "Casos que marcaram os governos anteriores",
+  "intro": "Erros, escândalos e crises dos quatro governos anteriores, com contexto, como terminaram segundo o que foi publicado e as fontes. Ser investigado ou formalizado não significa ter sido condenado.",
+  "outLabel": "Como terminou",
+  "govs": [
+   {
+    "who": "Gabriel Boric",
+    "period": "2022–2026",
+    "cases": [
+     {
+      "t": "Indultos a condenados do estallido social",
+      "when": "Dezembro 2022 – janeiro 2023",
+      "what": "No fim de 2022 o Presidente Boric indultou um grupo de pessoas condenadas por crimes cometidos durante o estallido social e o ex-integrante da FPMR Jorge Mateluna. Depois se soube que nos antecedentes revisados faltavam informações sobre condenações anteriores de alguns indultados.",
+      "outcome": "A ministra da Justiça, Marcela Ríos, e o chefe de gabinete do Presidente, Matías Meza-Lopehandía, deixaram seus cargos em 7 de janeiro de 2023. Boric reconheceu \"falta de cuidado\" no processo.",
+      "sources": [
+       {
+        "n": "Emol: cronología",
+        "u": "https://www.emol.com/noticias/Nacional/2023/01/07/1083224/cronologia-salida-marcela-rios-justicia.html"
+       },
+       {
+        "n": "The Clinic",
+        "u": "https://www.theclinic.cl/2023/01/07/renuncia-ministra-justicia-marcela-rios/"
+       }
+      ]
+     },
+     {
+      "t": "Caso Convênios (Democracia Viva)",
+      "when": "Junho 2023",
+      "what": "Um veículo de Antofagasta revelou que a fundação Democracia Viva, ligada a militantes da Revolución Democrática (partido do governo), recebeu 426 milhões de pesos do Ministério da Habitação por convênios diretos, sem concurso. Depois surgiram convênios parecidos com outras fundações em várias regiões.",
+      "outcome": "Autoridades da Habitação renunciaram, entre elas o seremi de Antofagasta e a subsecretária. O Ministério Público abriu investigações em várias regiões e a oposição apresentou uma acusação constitucional contra o ministro Carlos Montes.",
+      "sources": [
+       {
+        "n": "Emol: los hitos",
+        "u": "https://www.emol.com/noticias/Nacional/2023/06/30/1099212/los-hitos-del-caso-convenios.html"
+       },
+       {
+        "n": "The Clinic",
+        "u": "https://www.theclinic.cl/2023/12/13/carlos-montes-al-borde-del-precipicio-como-el-caso-democracia-viva-termino-afectando-el-cierre-de-su-carrera-politica/"
+       }
+      ]
+     },
+     {
+      "t": "Roubo de computadores no Desenvolvimento Social",
+      "when": "Julho 2023",
+      "what": "Em plena investigação do caso Convênios, computadores e um cofre foram roubados do Ministério do Desenvolvimento Social (então chefiado por Giorgio Jackson). Questionou-se o descumprimento dos protocolos de segurança naquela noite.",
+      "outcome": "Os Carabineros recuperaram os computadores dias depois. A oposição suspeitou de relação com o caso Convênios e o Governo descartou. O Ministério Público continuou investigando o crime.",
+      "sources": [
+       {
+        "n": "CNN Chile",
+        "u": "https://www.cnnchile.com/pais/robo-ministerio-desarrollo-social-que-paso-carabineros-jackson/"
+       },
+       {
+        "n": "El Dínamo",
+        "u": "https://www.eldinamo.cl/pais/2023/07/20/encuentran-los-computadores-que-fueron-robados-del-ministerio-de-desarrollo-social/"
+       },
+       {
+        "n": "CNN Chile: dos años después",
+        "u": "https://www.cnnchile.com/pais/robo-computadores-caja-fuerte-ministerio-desarrollo-social-esto-se-sabe-casi-dos-anos-delito/"
+       }
+      ]
+     },
+     {
+      "t": "Caso Monsalve",
+      "when": "Outubro 2024",
+      "what": "O subsecretário do Interior, Manuel Monsalve, foi denunciado por estupro por uma funcionária de sua equipe. Soube-se que o Presidente conhecia a denúncia antes de Monsalve deixar o cargo, o que gerou críticas à condução do Governo.",
+      "outcome": "Monsalve renunciou e foi formalizado pelo Ministério Público. O caso segue na Justiça.",
+      "sources": [
+       {
+        "n": "BioBioChile",
+        "u": "https://www.biobiochile.cl/biobiotv/programas/radiograma-biobiotv/2025/05/26/el-fantasma-del-caso-monsalve-vuelve-a-rondar-la-moneda-tras-declaracion-de-exsubsecretario.shtml"
+       },
+       {
+        "n": "Ex-Ante",
+        "u": "https://www.ex-ante.cl/el-dia-mas-negro-de-boric-desde-que-se-inicio-el-caso-monsalve/"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "who": "Sebastián Piñera",
+    "period": "2018–2022",
+    "cases": [
+     {
+      "t": "Morte de Camilo Catrillanca",
+      "when": "Novembro 2018",
+      "what": "Camilo Catrillanca, comunero mapuche de 24 anos, morreu baleado por Carabineros do chamado \"Comando Jungla\" em Ercilla, na Araucanía. A primeira versão policial era falsa e um carabineiro destruiu o cartão de memória com a gravação da operação.",
+      "outcome": "O intendente da Araucanía e o general diretor dos Carabineros, Hermes Soto, deixaram seus cargos. A Justiça condenou sete ex-integrantes do GOPE e a Suprema Corte manteve as condenações.",
+      "sources": [
+       {
+        "n": "Poder Judicial",
+        "u": "https://www.pjud.cl/prensa-y-comunicaciones/noticias-del-poder-judicial/55749"
+       },
+       {
+        "n": "Ex-Ante: 11 episodios",
+        "u": "https://www.ex-ante.cl/politica/condenan-a-7-efectivos-del-gope-por-asesinato-de-catrillanca-los-11-episodios-claves-del-caso/"
+       }
+      ]
+     },
+     {
+      "t": "Violações de direitos humanos no estallido social",
+      "when": "Outubro 2019 – 2020",
+      "what": "Durante os protestos iniciados em outubro de 2019, o Instituto Nacional de Direitos Humanos (INDH) registrou milhares de denúncias de violência de agentes do Estado, entre elas mais de 350 pessoas com lesões oculares. O INDH as qualificou como as violações mais graves desde a volta da democracia.",
+      "outcome": "Organismos internacionais emitiram relatórios críticos. A Câmara rejeitou uma acusação constitucional contra o Presidente Piñera, e o Senado aprovou a acusação contra o ex-ministro do Interior Andrés Chadwick, inabilitado por 5 anos para cargos públicos.",
+      "sources": [
+       {
+        "n": "CNN Chile: informe INDH",
+        "u": "https://www.cnnchile.com/pais/informe-indh-sostiene-que-se-produjeron-las-mas-graves-violaciones-a-los-dd-hh-desde-1989-tras-el-estallido-social_20191223/"
+       },
+       {
+        "n": "CNN Chile: lesiones oculares",
+        "u": "https://www.cnnchile.com/pais/informe-del-indh-352-personas-han-resultado-con-danos-oculares-desde-inicio-de-las-manifestaciones-sociales_20191207/"
+       }
+      ]
+     },
+     {
+      "t": "Pandora Papers e o projeto Dominga",
+      "when": "Outubro 2021",
+      "what": "A investigação jornalística Pandora Papers revelou que em 2010, durante o primeiro governo Piñera, sua família vendeu a participação no projeto de mineração Dominga a um empresário próximo, com um último pagamento que dependia de a área não ser declarada protegida.",
+      "outcome": "A Câmara aprovou uma acusação constitucional contra Piñera, mas o Senado a rejeitou em novembro de 2021. O Ministério Público pediu o arquivamento da investigação penal.",
+      "sources": [
+       {
+        "n": "Ex-Ante: claves del caso",
+        "u": "https://www.ex-ante.cl/politica/las-claves-del-caso-dominga-por-el-cual-la-fiscalia-pidio-el-sobreseimiento-definitivo/"
+       },
+       {
+        "n": "Ex-Ante: la acusación en el Senado",
+        "u": "https://www.ex-ante.cl/politica/historia-de-un-fracaso-anunciado-como-se-salvo-pinera-de-la-acusacion-en-el-senado/"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "who": "Michelle Bachelet",
+    "period": "2014–2018",
+    "cases": [
+     {
+      "t": "Caso Caval",
+      "when": "Fevereiro 2015",
+      "what": "A revista Qué Pasa revelou que a Caval, empresa de Natalia Compagnon, nora da Presidenta, obteve um crédito de 6,5 bilhões de pesos do Banco de Chile após uma reunião com Andrónico Luksic da qual participou Sebastián Dávalos, filho de Bachelet. Com esse dinheiro comprou terrenos em Machalí que depois vendeu com grande lucro.",
+      "outcome": "Dávalos renunciou ao cargo em La Moneda. Compagnon foi formalizada; Dávalos não. O caso afetou a aprovação do governo e levou à primeira mudança de gabinete de Bachelet, em maio de 2015.",
+      "sources": [
+       {
+        "n": "T13: cronología",
+        "u": "https://www.t13.cl/noticia/politica/caval-cronologia-del-caso-formalizara-nuera-bachelet"
+       },
+       {
+        "n": "CNN Chile: un año",
+        "u": "https://www.cnnchile.com/pais/un-ano-del-caso-caval/"
+       },
+       {
+        "n": "CIPER",
+        "u": "https://www.ciperchile.cl/2015/09/23/las-huellas-de-sebastian-davalos-en-otros-negocios-de-caval-petroleo-mineria-y-luminarias-led/"
+       }
+      ]
+     },
+     {
+      "t": "Caso SQM: financiamento irregular da política",
+      "when": "2015",
+      "what": "O Ministério Público investigou pagamentos da empresa SQM a políticos de quase todos os setores por meio de notas fiscais por serviços não prestados. A investigação chegou à pré-campanha de Bachelet e ao seu ministro do Interior, Rodrigo Peñailillo.",
+      "outcome": "Peñailillo deixou o Governo na mudança de gabinete de maio de 2015. Muitas causas não chegaram a julgamento porque o Serviço de Impostos Internos não apresentou queixas, requisito para processar esses crimes.",
+      "sources": [
+       {
+        "n": "CIPER: los pagos",
+        "u": "https://ciperchile.cl/2015/09/07/platas-negras-de-sqm-el-pulpo-que-puso-sus-tentaculos-en-todos-los-sectores-politicos/"
+       },
+       {
+        "n": "CIPER: imputados sin juicio",
+        "u": "https://www.ciperchile.cl/2021/08/04/platas-politicas-de-sqm-la-evidencia-que-acumulo-la-fiscalia-contra-los-34-imputados-que-zafaron-del-juicio/"
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "who": "Sebastián Piñera",
+    "period": "2010–2014",
+    "cases": [
+     {
+      "t": "O censo fracassado de 2012",
+      "when": "2012 – 2013",
+      "what": "O Governo apresentou o censo de 2012 como \"o melhor da história\". Depois se soube que muitas moradias não foram visitadas e que foram usadas estimativas sem informar com clareza.",
+      "outcome": "O diretor do INE, Francisco Labbé, renunciou em abril de 2013. Uma revisão técnica concluiu que o censo não cumpria padrões mínimos, o Presidente Piñera pediu desculpas e em 2017 foi feito um novo censo abreviado.",
+      "sources": [
+       {
+        "n": "CNN Chile",
+        "u": "https://www.cnnchile.com/ladecada-noticias/el-mejor-censo-de-la-historia-asi-fue-la-fallida-encuesta-nacional-2012-que-obligo-a-pinera-a-pedir-perdon/"
+       },
+       {
+        "n": "Cooperativa",
+        "u": "https://www.cooperativa.cl/noticias/site/artic/20140923/pags-amp/20140923110646.html"
+       },
+       {
+        "n": "CIPER",
+        "u": "https://www.ciperchile.cl/2013/05/02/renuncia-grupo-de-asesores-de-confianza-del-ex-director-del-ine/"
+       }
+      ]
+     },
+     {
+      "t": "Lei de Pesca e caso Corpesca",
+      "when": "2012 – 2013",
+      "what": "A Lei de Pesca, impulsionada pelo ministro da Economia Pablo Longueira, deu às grandes pesqueiras licenças de pesca por 20 anos renováveis. Investigações posteriores revelaram que a pesqueira Corpesca fez pagamentos a parlamentares enquanto a lei era discutida.",
+      "outcome": "O Ministério Público levou parlamentares e a empresa a julgamento por esses pagamentos. A lei segue em vigor e desde então se discute mudá-la.",
+      "sources": [
+       {
+        "n": "CIPER: leyes de pesca",
+        "u": "https://www.ciperchile.cl/2018/05/08/pescado-rabioso-leyes-de-pesca-y-luchas-de-poder-en-la-derecha-chilena/"
+       },
+       {
+        "n": "CIPER: caso Corpesca",
+        "u": "https://www.ciperchile.cl/?p=142971"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "learn": {
+  "powersTitle": "Os três poderes do Estado",
+  "powersIntro": "No Chile, o poder é dividido em três partes para que nenhuma pessoa ou grupo concentre tudo. Cada poder controla os outros.",
+  "labels": {
+   "who": "Quem faz parte",
+   "does": "O que faz",
+   "ex": "Exemplo"
+  },
+  "powers": [
+   {
+    "name": "Poder Executivo",
+    "who": "O Presidente da República, seus ministros e os serviços públicos.",
+    "does": "Governa e administra o país: segurança, saúde, educação, economia e relações com outros países. Propõe leis e as promulga. O Presidente tem mandato de 4 anos e não pode ser reeleito para o período seguinte.",
+    "ex": "O Ministério da Saúde organiza os hospitais públicos."
+   },
+   {
+    "name": "Poder Legislativo",
+    "who": "O Congresso Nacional: a Câmara dos Deputados (155 pessoas, eleitas por 4 anos) e o Senado (50 pessoas, eleitas por 8 anos).",
+    "does": "Faz, muda e revoga leis e aprova o orçamento do país. A Câmara fiscaliza o Governo e pode apresentar acusações constitucionais contra autoridades; o Senado decide essas acusações.",
+    "ex": "Votar se uma reforma da previdência é aprovada."
+   },
+   {
+    "name": "Poder Judiciário",
+    "who": "Os tribunais, encabeçados pela Suprema Corte.",
+    "does": "Resolve conflitos e julga crimes aplicando as leis. É independente: o Governo não pode lhe dar ordens.",
+    "ex": "Um tribunal oral decide se uma pessoa acusada é culpada ou inocente."
+   }
+  ],
+  "autoTitle": "Órgãos autônomos",
+  "autoIntro": "Não dependem de nenhum dos três poderes, para poderem fiscalizar com independência.",
+  "auto": [
+   {
+    "t": "Ministério Público (Fiscalía)",
+    "d": "Investiga os crimes e acusa os possíveis responsáveis perante os tribunais."
+   },
+   {
+    "t": "Controladoria-Geral da República (Contraloría)",
+    "d": "Verifica se o Estado usa bem o dinheiro público e respeita a lei."
+   },
+   {
+    "t": "Tribunal Constitucional",
+    "d": "Verifica se as leis respeitam a Constituição."
+   },
+   {
+    "t": "Banco Central",
+    "d": "Evita que os preços subam demais (inflação) e mantém o sistema financeiro estável."
+   },
+   {
+    "t": "Serviço Eleitoral (Servel)",
+    "d": "Organiza as eleições e controla o dinheiro das campanhas."
+   }
+  ],
+  "lawTitle": "Como nasce uma lei",
+  "law": [
+   {
+    "t": "Apresentação",
+    "d": "É proposta pelo Presidente (chamada \"mensaje\") ou por um grupo de deputados ou senadores (chamada \"moción\")."
+   },
+   {
+    "t": "Primeira câmara",
+    "d": "É discutida primeiro na Câmara ou no Senado. Primeiro se vota a ideia de legislar e depois cada artigo."
+   },
+   {
+    "t": "Segunda câmara",
+    "d": "A outra câmara a revisa e pode alterá-la."
+   },
+   {
+    "t": "Acordo",
+    "d": "Se as duas câmaras aprovam textos diferentes, uma comissão mista de deputados e senadores busca um texto comum."
+   },
+   {
+    "t": "Assinatura do Presidente",
+    "d": "O Presidente a promulga (assina) ou a veta (rejeita ou propõe mudanças). Algumas leis passam antes pelo Tribunal Constitucional."
+   },
+   {
+    "t": "Publicação",
+    "d": "É publicada no Diário Oficial e a partir daí é obrigatória para todos."
+   }
+  ],
+  "cabTitle": "Quem é quem no gabinete",
+  "cabIntro": "Os ministros em exercício hoje: o cargo, o que estudaram, o que faziam antes e há quanto tempo estão no cargo. Os dias são contados até hoje.",
+  "cabNote": "Formação e trajetória segundo Chilevisión e El Dínamo (janeiro de 2026) e BioBioChile (agosto de 2026). Quando as fontes não coincidem, isso é indicado.",
+  "cabLabels": {
+   "studies": "Formação",
+   "career": "Antes",
+   "since": "No cargo desde",
+   "days": "dias",
+   "party": "Partido"
+  },
+  "profiles": {
+   "Claudio Alvarado": {
+    "edu": "Engenheiro comercial, Escola de Negócios de Valparaíso (hoje Universidade Adolfo Ibáñez).",
+    "career": "Ministro da Segpres no segundo governo Piñera; antes, senador e deputado."
+   },
+   "Martín Arrau": {
+    "edu": "Engenheiro civil industrial, Pontifícia Universidade Católica (PUC).",
+    "career": "Intendente de Ñuble e membro da Convenção Constitucional."
+   },
+   "Francisco Pérez Mackenna": {
+    "edu": "Engenheiro comercial, PUC.",
+    "career": "Diretor-geral da Quiñenco."
+   },
+   "Fernando Barros": {
+    "edu": "Advogado, Universidade do Chile.",
+    "career": "Advogado e assessor de Sebastián Piñera por mais de 30 anos."
+   },
+   "Jorge Quiroz": {
+    "edu": "Engenheiro comercial, Universidade do Chile; doutorado em Economia, Universidade Duke (EUA).",
+    "career": "Economista e consultor; assessor econômico da campanha de Kast."
+   },
+   "José García Ruminot": {
+    "edu": "Contador e auditor, Universidade de La Frontera.",
+    "career": "Senador pela Araucanía desde 2002."
+   },
+   "Daniel Mas": {
+    "edu": "Engenheiro agrônomo, PUC.",
+    "career": "Vice-presidente da CPC (associação das grandes empresas) e presidente da Câmara Chilena da Construção de La Serena (2021-2023)."
+   },
+   "María Jesús Wulf": {
+    "edu": "Socióloga, PUC.",
+    "career": "Subdiretora da Acción Republicana."
+   },
+   "María Paz Arzola": {
+    "edu": "Engenheira comercial, PUC.",
+    "career": "Coordenadora do Programa Social do Libertad y Desarrollo (centro de estudos)."
+   },
+   "Fernando Rabat": {
+    "edu": "Advogado, Universidade de Los Andes; especialista em Direito Civil.",
+    "career": "Advogado; integrou a equipe jurídica que defendeu Augusto Pinochet."
+   },
+   "Tomás Rau": {
+    "edu": "Engenheiro comercial, Universidade do Chile; doutorado em Economia, Universidade da Califórnia (EUA).",
+    "career": "Diretor do Instituto de Economia da PUC."
+   },
+   "Louis de Grange": {
+    "edu": "Engenheiro industrial, PUC.",
+    "career": "Ex-presidente do Metrô de Santiago."
+   },
+   "May Chomali": {
+    "edu": "Médica, Universidade do Chile.",
+    "career": "Diretora do Centro Nacional de Sistemas de Informação em Saúde (CENS)."
+   },
+   "Iván Poduje": {
+    "edu": "Arquiteto urbanista, PUC de Valparaíso.",
+    "career": "Fundador da consultoria Atisba; candidato a prefeito de Viña del Mar em 2024."
+   },
+   "Jaime Campos": {
+    "edu": "Advogado (Chilevisión indica a Universidade de Concepción e El Dínamo, a Universidade do Chile).",
+    "career": "Ministro da Agricultura de Ricardo Lagos e da Justiça de Michelle Bachelet; ex-deputado."
+   },
+   "Catalina Parot": {
+    "edu": "Advogada, Pontifícia Universidade Católica (as fontes divergem entre a de Santiago e a de Valparaíso).",
+    "career": "Ministra de Bens Nacionais no primeiro governo Piñera e presidente do CNTV no segundo."
+   },
+   "Ximena Rincón": {
+    "edu": "Advogada, Universidade do Chile.",
+    "career": "Senadora pelo Maule e ex-presidente do Senado; ex-ministra do Trabalho e da Segpres de Bachelet."
+   },
+   "Francisca Toledo": {
+    "edu": "Engenheira civil industrial, PUC.",
+    "career": "Pesquisadora do Libertad y Desarrollo; assessora nos dois governos Piñera."
+   },
+   "Francisco Undurraga": {
+    "edu": "Estudos técnicos de comunicação e publicidade (as fontes divergem: Instituto AIEP ou Escola de Comunicação Mónica Herrera).",
+    "career": "Deputado desde 2018 e ex-presidente do Evópoli."
+   },
+   "Judith Marín": {
+    "edu": "Professora de Língua Espanhola (as fontes divergem sobre a instituição).",
+    "career": "Secretária-geral do Partido Social Cristão."
+   },
+   "Francisco Riveros": {
+    "edu": "Advogado.",
+    "career": "Ex-diretor-geral do clube Palestino; assessor do Governo no Plano Auditoria Total."
+   },
+   "Ximena Lincolao": {
+    "edu": "Estudos de Literatura e Filosofia Espanhola ou Licenciatura em Espanhol, Universidade de La Serena (as fontes divergem).",
+    "career": "Sem dado verificado nas fontes consultadas."
+   }
+  },
+  "profSources": [
+   {
+    "n": "Chilevisión (ene 2026)",
+    "u": "https://www.chilevision.cl/noticias/nacional/donde-estudiaron-los-ministros-de-kast-estas-son-las-profesiones-y-las-universidades-de-su-gabinete/amp/"
+   },
+   {
+    "n": "El Dínamo (ene 2026)",
+    "u": "https://www.eldinamo.cl/politica/2026/01/20/quien-es-quien-en-el-gabinete-de-kast-el-perfil-de-los-25-ministros-que-presento-el-presidente-electo/"
+   },
+   {
+    "n": "BioBioChile (ago 2026)",
+    "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/08/14/francisco-riveros-sera-el-nuevo-ministro-del-deporte-tras-salida-de-natalia-duco.shtml"
+   }
+  ]
+ }
 }</script>
 <script>
 (function(){
@@ -5748,15 +7476,15 @@ header.top .wrap{gap:20px}
   var LANGS = ['es','en','pt'];
   var LOC = {es:'es-CL', en:'en-US', pt:'pt-BR'};
   var UI = {
-    es:{share:'Compartir',theme:'Cambiar entre modo claro y oscuro',eyebrow:'Chile · Resumen político diario basado en hechos',bajada:'Lo que hace el gobierno de José Antonio Kast, explicado en simple y comparado con los gobiernos anteriores.',today:'Hoy',edition:'Edición',updatedAt:'Actualizado',every2h:'Se actualiza cada 2 horas, desde las 9:00',editorialLab:'Cómo leer Kastigo.',termEyebrow:'Mandato presidencial',termTitle:'Cuánto falta para que termine el gobierno de Kast',termText:'El período presidencial dura 4 años. Comenzó el 11 de marzo de 2026 y termina con el traspaso de mando del 11 de marzo de 2030.',days:'Días',hours:'Horas',mins:'Min',secs:'Seg',elapsed:'transcurrido',newsEyebrow:'Noticias',newsTitle:'Lo que pasó y por qué importa',newsIntro:'Cada noticia tiene el hecho, el contexto para entenderlo y por qué importa, con enlaces a sus fuentes.',all:'Todas',context:'Contexto',whyMatters:'Por qué importa: ',mobEyebrow:'Calles y movilizaciones',mobTitle:'Movilizaciones, paros y marchas',mobIntro:'Lo que está pasando ahora y lo que viene. Si te mueves por el centro o por carretera, revisa cortes de tránsito y estaciones de Metro cerradas.',now:'En curso / reciente',next:'Convocada',trafEyebrow:'Tránsito y transporte',trafTitle:'Cortes de rutas, calles y Metro',lvCorte:'Corte total',lvParcial:'Corte parcial',lvCongestion:'Congestión',lvNormal:'Normalizado',noCuts:'Sin cortes de rutas o calles informados al momento de esta actualización.',metro:'Metro de Santiago',ecoEyebrow:'Economía',ecoTitle:'Bencinas, sueldo mínimo y costo de vida',dataShow:'Qué muestran los datos',thCountry:'País',thWage:'Sueldo mínimo (US$/mes)',thFuel:'Gasolina (US$/litro)',thLiters:'Litros por sueldo',thNote:'Nota',termsEyebrow:'Economía en simple',termsTitle:'Conceptos para entender estas cifras',authEyebrow:'Autoridades',authTitle:'Movimientos de ministros, parlamentarios y autoridades',authIntro:'Quién salió y por qué, quién lo reemplazó y quién está en la mira. Comparado con los gobiernos anteriores.',gSale:'Salieron',gRiesgo:'En la mira',gPiden:'Piden su salida',gEntra:'Asumieron',gCambio:'Cambios de cargo',gSigue:'Se mantienen',wSale:'Por qué se fue',wRiesgo:'Por qué está en la mira',wPiden:'Por qué piden su salida',wSigue:'Qué pasó',wEntra:'Por qué llegó',wCambio:'Qué cambió',motive:'Motivo',noMotive:'Motivo no informado.',left:'Salió',replacedBy:'Lo reemplazó',after:'Después',cabEyebrow:'Gabinete',thRole:'Cargo',thName:'Nombre',thParty:'Partido',thFrom:'Desde',thTo:'Hasta',thDays:'Días en el cargo',thState:'Estado',stIn:'En el cargo',stOut:'Salió',stMoved:'Cambió de cargo',partiesNow:'Partidos en el gabinete actual (ministros en ejercicio)',contrast:'Contraste',firstYear:'Por qué dejaron el gabinete en el primer año',replacement:'Reemplazo: ',congEyebrow:'Congreso',congTitle:'Leyes, votaciones y quién votó qué',pendingTitle:'En discusión ahora',lawsTitle:'Tablero de leyes',thLaw:'Ley o proyecto',thStatus:'Estado',thSimple:'En simple',thDate:'Fecha',govKast:'Gobierno de Kast (2026–2030)',govBoric:'Gobierno de Boric (2022–2026), para comparar',questioned:'Por qué es cuestionado',sought:'Qué buscaba',yes:'A favor',no:'En contra',abs:'Abstención',compareTitle:'Comparación: Kast y Boric en el Congreso',glossEyebrow:'Para entender',glossTitle:'Glosario de política en simple',glossIntro:'Las palabras que más se repiten en las noticias, explicadas sin tecnicismos.',srcEyebrow:'Fuentes',srcTitle:'De dónde sale esta información',srcText:'Kastigo no publica opiniones. Los hechos, cifras y votaciones se toman de fuentes oficiales (Congreso, Diario Oficial, INE, CNE) y de medios nacionales e independientes, y cada uno enlaza a su fuente original. Los datos se resumen sin alterarlos. Cuando un dato aparece en un solo medio o no pudo verificarse, se indica.',srcLang:'Las versiones en inglés y portugués son traducciones del texto en español.',corrText:'¿Encontraste un error? Toda corrección con fuente se revisa y se publica.',corrLink:'Reportar un error',mirrorText:'Si la página no carga, puedes leerla en su dirección de respaldo:',madeBy:'Herramienta creada por',lastUpd:'Última actualización: ',copied:'Enlace copiado.',link:'Enlace: ',shareSec:'Compartir la sección ',nav:{noticias:'Noticias',movilizaciones:'Calles',cortes:'Tránsito',cifras:'Economía',autoridades:'Autoridades',leyes:'Congreso'},navLabel:'Secciones',menuOpen:'Abrir menú',menuClose:'Cerrar menú',hide:'Ocultar',show:'Mostrar',hideSec:'Ocultar la sección ',showSec:'Mostrar la sección ',mandEyebrow:'Cuatro gobiernos',
+    es:{share:'Compartir',theme:'Cambiar entre modo claro y oscuro',eyebrow:'Chile · Resumen político diario basado en hechos',bajada:'Lo que hace el gobierno de José Antonio Kast, explicado en simple y comparado con los gobiernos anteriores.',today:'Hoy',edition:'Edición',updatedAt:'Actualizado',every2h:'Se actualiza cada 2 horas, desde las 9:00',editorialLab:'Cómo leer Kastigo.',termEyebrow:'Mandato presidencial',termTitle:'Cuánto falta para que termine el gobierno de Kast',termText:'El período presidencial dura 4 años. Comenzó el 11 de marzo de 2026 y termina con el traspaso de mando del 11 de marzo de 2030.',days:'Días',hours:'Horas',mins:'Min',secs:'Seg',elapsed:'transcurrido',newsEyebrow:'Noticias',newsTitle:'Lo que pasó y por qué importa',newsIntro:'Cada noticia tiene el hecho, el contexto para entenderlo y por qué importa, con enlaces a sus fuentes.',all:'Todas',context:'Contexto',whyMatters:'Por qué importa: ',mobEyebrow:'Calles y movilizaciones',mobTitle:'Movilizaciones, paros y marchas',mobIntro:'Lo que está pasando ahora y lo que viene. Si te mueves por el centro o por carretera, revisa cortes de tránsito y estaciones de Metro cerradas.',now:'En curso / reciente',next:'Convocada',trafEyebrow:'Tránsito y transporte',trafTitle:'Cortes de rutas, calles y Metro',lvCorte:'Corte total',lvParcial:'Corte parcial',lvCongestion:'Congestión',lvNormal:'Normalizado',noCuts:'Sin cortes de rutas o calles informados al momento de esta actualización.',metro:'Metro de Santiago',ecoEyebrow:'Economía',ecoTitle:'Bencinas, sueldo mínimo y costo de vida',dataShow:'Qué muestran los datos',thCountry:'País',thWage:'Sueldo mínimo (US$/mes)',thFuel:'Gasolina (US$/litro)',thLiters:'Litros por sueldo',thNote:'Nota',termsEyebrow:'Economía en simple',termsTitle:'Conceptos para entender estas cifras',authEyebrow:'Autoridades',authTitle:'Movimientos de ministros, parlamentarios y autoridades',authIntro:'Quién salió y por qué, quién lo reemplazó y quién está en la mira. Comparado con los gobiernos anteriores.',gSale:'Salieron',gRiesgo:'En la mira',gPiden:'Piden su salida',gEntra:'Asumieron',gCambio:'Cambios de cargo',gSigue:'Se mantienen',wSale:'Por qué se fue',wRiesgo:'Por qué está en la mira',wPiden:'Por qué piden su salida',wSigue:'Qué pasó',wEntra:'Por qué llegó',wCambio:'Qué cambió',motive:'Motivo',noMotive:'Motivo no informado.',left:'Salió',replacedBy:'Lo reemplazó',after:'Después',cabEyebrow:'Gabinete',thRole:'Cargo',thName:'Nombre',thParty:'Partido',thFrom:'Desde',thTo:'Hasta',thDays:'Días en el cargo',thState:'Estado',stIn:'En el cargo',stOut:'Salió',stMoved:'Cambió de cargo',partiesNow:'Partidos en el gabinete actual (ministros en ejercicio)',contrast:'Contraste',firstYear:'Por qué dejaron el gabinete en el primer año',replacement:'Reemplazo: ',congEyebrow:'Congreso',congTitle:'Leyes, votaciones y quién votó qué',pendingTitle:'En discusión ahora',lawsTitle:'Tablero de leyes',thLaw:'Ley o proyecto',thStatus:'Estado',thSimple:'En simple',thDate:'Fecha',govKast:'Gobierno de Kast (2026–2030)',govBoric:'Gobierno de Boric (2022–2026), para comparar',questioned:'Por qué es cuestionado',sought:'Qué buscaba',yes:'A favor',no:'En contra',abs:'Abstención',compareTitle:'Comparación: Kast y Boric en el Congreso',glossEyebrow:'Para entender',glossTitle:'Glosario de política en simple',glossIntro:'Las palabras que más se repiten en las noticias, explicadas sin tecnicismos.',srcEyebrow:'Fuentes',srcTitle:'De dónde sale esta información',srcText:'Kastigo no publica opiniones. Los hechos, cifras y votaciones se toman de fuentes oficiales (Congreso, Diario Oficial, INE, CNE) y de medios nacionales e independientes, y cada uno enlaza a su fuente original. Los datos se resumen sin alterarlos. Cuando un dato aparece en un solo medio o no pudo verificarse, se indica.',srcLang:'Las versiones en inglés y portugués son traducciones del texto en español.',corrText:'¿Encontraste un error? Toda corrección con fuente se revisa y se publica.',corrLink:'Reportar un error',mirrorText:'Si la página no carga, puedes leerla en su dirección de respaldo:',madeBy:'Herramienta creada por',lastUpd:'Última actualización: ',copied:'Enlace copiado.',link:'Enlace: ',shareSec:'Compartir la sección ',learnEyebrow:'Aprende',learnTitle:'Cómo funciona la política en Chile, explicado en simple',learnIntro:'Una guía básica para entender esta página y las noticias: los poderes del Estado, cómo se hace una ley, quiénes forman el gabinete y qué significan las palabras que más se usan.',nav:{noticias:'Noticias',movilizaciones:'Calles',cortes:'Tránsito',cifras:'Economía',autoridades:'Autoridades',leyes:'Congreso',aprende:'Aprende'},navLabel:'Secciones',menuOpen:'Abrir menú',menuClose:'Cerrar menú',hide:'Ocultar',show:'Mostrar',hideSec:'Ocultar la sección ',showSec:'Mostrar la sección ',mandEyebrow:'Cuatro gobiernos',
       cats:{economia:'Economía',congreso:'Congreso',gobierno:'Gobierno',calle:'Calles',ley:'Leyes',justicia:'Justicia'},
-      secs:{mandato:'Tiempo del mandato',noticias:'Noticias',movilizaciones:'Movilizaciones',cortes:'Cortes de rutas y Metro',cifras:'Bencinas, sueldo y costo de vida',autoridades:'Movimientos de autoridades',leyes:'Congreso y votaciones',glosario:'Glosario',fuentes:'Fuentes'}},
-    en:{share:'Share',theme:'Switch between light and dark mode',eyebrow:'Chile · Fact-based daily political summary',bajada:"What José Antonio Kast's government is doing, explained simply and compared with previous governments.",today:'Today',edition:'Edition',updatedAt:'Updated',every2h:'Updated every 2 hours, from 9:00 (Chile time)',editorialLab:'How to read Kastigo.',termEyebrow:'Presidential term',termTitle:"How long until Kast's government ends",termText:'The presidential term lasts 4 years. It began on March 11, 2026 and ends with the handover on March 11, 2030.',days:'Days',hours:'Hours',mins:'Min',secs:'Sec',elapsed:'elapsed',newsEyebrow:'News',newsTitle:'What happened and why it matters',newsIntro:'Each story has the facts, the context to understand them and why it matters, with links to its sources.',all:'All',context:'Context',whyMatters:'Why it matters: ',mobEyebrow:'Streets and mobilizations',mobTitle:'Mobilizations, strikes and marches',mobIntro:"What is happening now and what's coming. If you're traveling downtown or by highway, check road closures and closed Metro stations.",now:'Ongoing / recent',next:'Called',trafEyebrow:'Traffic and transportation',trafTitle:'Road, street and Metro closures',lvCorte:'Full closure',lvParcial:'Partial closure',lvCongestion:'Congestion',lvNormal:'Back to normal',noCuts:'No road or street closures reported at the time of this update.',metro:'Santiago Metro',ecoEyebrow:'Economy',ecoTitle:'Fuel, minimum wage and cost of living',dataShow:'What the data shows',thCountry:'Country',thWage:'Minimum wage (US$/month)',thFuel:'Gasoline (US$/liter)',thLiters:'Liters per wage',thNote:'Note',termsEyebrow:'Economics made simple',termsTitle:'Concepts to understand these figures',authEyebrow:'Officials',authTitle:'Moves of ministers, lawmakers and officials',authIntro:'Who left and why, who replaced them and who is under scrutiny. Compared with previous governments.',gSale:'Left',gRiesgo:'Under scrutiny',gPiden:'Calls to resign',gEntra:'Took office',gCambio:'Changed post',gSigue:'Staying',wSale:'Why they left',wRiesgo:'Why under scrutiny',wPiden:'Why resignation is demanded',wSigue:'What happened',wEntra:'Why they arrived',wCambio:'What changed',motive:'Reason',noMotive:'Reason not reported.',left:'Left',replacedBy:'Replaced by',after:'Afterwards',cabEyebrow:'Cabinet',thRole:'Post',thName:'Name',thParty:'Party',thFrom:'From',thTo:'Until',thDays:'Days in office',thState:'Status',stIn:'In office',stOut:'Left',stMoved:'Changed post',partiesNow:'Parties in the current cabinet (serving ministers)',contrast:'Contrast',firstYear:'Why ministers left the cabinet in the first year',replacement:'Replacement: ',congEyebrow:'Congress',congTitle:'Laws, votes and who voted for what',pendingTitle:'Under discussion now',lawsTitle:'Law tracker',thLaw:'Law or bill',thStatus:'Status',thSimple:'In simple terms',thDate:'Date',govKast:'Kast government (2026–2030)',govBoric:'Boric government (2022–2026), for comparison',questioned:'Why it is questioned',sought:'What it sought',yes:'In favor',no:'Against',abs:'Abstention',compareTitle:'Comparison: Kast and Boric in Congress',glossEyebrow:'To understand',glossTitle:'Plain-language politics glossary',glossIntro:'The words that appear most in the news, explained without jargon.',srcEyebrow:'Sources',srcTitle:'Where this information comes from',srcText:'Kastigo does not publish opinions. Facts, figures and votes are taken from official sources (Congress, Official Gazette, INE, CNE) and from national and independent media, and each one links to its original source. Data is summarized without alteration. When a fact appears in only one outlet or could not be verified, it is noted.',srcLang:'The English and Portuguese versions are translations of the Spanish text. Amounts in $ are Chilean pesos unless marked US$.',corrText:'Found an error? Every correction backed by a source is reviewed and published.',corrLink:'Report an error',mirrorText:'If the page does not load, you can read it at its backup address:',madeBy:'Tool created by',lastUpd:'Last updated: ',copied:'Link copied.',link:'Link: ',shareSec:'Share the section ',nav:{noticias:'News',movilizaciones:'Streets',cortes:'Traffic',cifras:'Economy',autoridades:'Officials',leyes:'Congress'},navLabel:'Sections',menuOpen:'Open menu',menuClose:'Close menu',hide:'Hide',show:'Show',hideSec:'Hide the section ',showSec:'Show the section ',mandEyebrow:'Four governments',
+      secNames:{mandato:'Tiempo del mandato',noticias:'Noticias',movilizaciones:'Movilizaciones',cortes:'Cortes de rutas y Metro',cifras:'Bencinas, sueldo y costo de vida',autoridades:'Movimientos de autoridades',leyes:'Congreso y votaciones',aprende:'Aprende: política en simple',fuentes:'Fuentes'}},
+    en:{share:'Share',theme:'Switch between light and dark mode',eyebrow:'Chile · Fact-based daily political summary',bajada:"What José Antonio Kast's government is doing, explained simply and compared with previous governments.",today:'Today',edition:'Edition',updatedAt:'Updated',every2h:'Updated every 2 hours, from 9:00 (Chile time)',editorialLab:'How to read Kastigo.',termEyebrow:'Presidential term',termTitle:"How long until Kast's government ends",termText:'The presidential term lasts 4 years. It began on March 11, 2026 and ends with the handover on March 11, 2030.',days:'Days',hours:'Hours',mins:'Min',secs:'Sec',elapsed:'elapsed',newsEyebrow:'News',newsTitle:'What happened and why it matters',newsIntro:'Each story has the facts, the context to understand them and why it matters, with links to its sources.',all:'All',context:'Context',whyMatters:'Why it matters: ',mobEyebrow:'Streets and mobilizations',mobTitle:'Mobilizations, strikes and marches',mobIntro:"What is happening now and what's coming. If you're traveling downtown or by highway, check road closures and closed Metro stations.",now:'Ongoing / recent',next:'Called',trafEyebrow:'Traffic and transportation',trafTitle:'Road, street and Metro closures',lvCorte:'Full closure',lvParcial:'Partial closure',lvCongestion:'Congestion',lvNormal:'Back to normal',noCuts:'No road or street closures reported at the time of this update.',metro:'Santiago Metro',ecoEyebrow:'Economy',ecoTitle:'Fuel, minimum wage and cost of living',dataShow:'What the data shows',thCountry:'Country',thWage:'Minimum wage (US$/month)',thFuel:'Gasoline (US$/liter)',thLiters:'Liters per wage',thNote:'Note',termsEyebrow:'Economics made simple',termsTitle:'Concepts to understand these figures',authEyebrow:'Officials',authTitle:'Moves of ministers, lawmakers and officials',authIntro:'Who left and why, who replaced them and who is under scrutiny. Compared with previous governments.',gSale:'Left',gRiesgo:'Under scrutiny',gPiden:'Calls to resign',gEntra:'Took office',gCambio:'Changed post',gSigue:'Staying',wSale:'Why they left',wRiesgo:'Why under scrutiny',wPiden:'Why resignation is demanded',wSigue:'What happened',wEntra:'Why they arrived',wCambio:'What changed',motive:'Reason',noMotive:'Reason not reported.',left:'Left',replacedBy:'Replaced by',after:'Afterwards',cabEyebrow:'Cabinet',thRole:'Post',thName:'Name',thParty:'Party',thFrom:'From',thTo:'Until',thDays:'Days in office',thState:'Status',stIn:'In office',stOut:'Left',stMoved:'Changed post',partiesNow:'Parties in the current cabinet (serving ministers)',contrast:'Contrast',firstYear:'Why ministers left the cabinet in the first year',replacement:'Replacement: ',congEyebrow:'Congress',congTitle:'Laws, votes and who voted for what',pendingTitle:'Under discussion now',lawsTitle:'Law tracker',thLaw:'Law or bill',thStatus:'Status',thSimple:'In simple terms',thDate:'Date',govKast:'Kast government (2026–2030)',govBoric:'Boric government (2022–2026), for comparison',questioned:'Why it is questioned',sought:'What it sought',yes:'In favor',no:'Against',abs:'Abstention',compareTitle:'Comparison: Kast and Boric in Congress',glossEyebrow:'To understand',glossTitle:'Plain-language politics glossary',glossIntro:'The words that appear most in the news, explained without jargon.',srcEyebrow:'Sources',srcTitle:'Where this information comes from',srcText:'Kastigo does not publish opinions. Facts, figures and votes are taken from official sources (Congress, Official Gazette, INE, CNE) and from national and independent media, and each one links to its original source. Data is summarized without alteration. When a fact appears in only one outlet or could not be verified, it is noted.',srcLang:'The English and Portuguese versions are translations of the Spanish text. Amounts in $ are Chilean pesos unless marked US$.',corrText:'Found an error? Every correction backed by a source is reviewed and published.',corrLink:'Report an error',mirrorText:'If the page does not load, you can read it at its backup address:',madeBy:'Tool created by',lastUpd:'Last updated: ',copied:'Link copied.',link:'Link: ',shareSec:'Share the section ',learnEyebrow:'Learn',learnTitle:'How politics works in Chile, explained simply',learnIntro:'A basic guide to understand this page and the news: the branches of government, how a law is made, who is in the cabinet and what the most common words mean.',nav:{noticias:'News',movilizaciones:'Streets',cortes:'Traffic',cifras:'Economy',autoridades:'Officials',leyes:'Congress',aprende:'Learn'},navLabel:'Sections',menuOpen:'Open menu',menuClose:'Close menu',hide:'Hide',show:'Show',hideSec:'Hide the section ',showSec:'Show the section ',mandEyebrow:'Four governments',
       cats:{economia:'Economy',congreso:'Congress',gobierno:'Government',calle:'Streets',ley:'Laws',justicia:'Justice'},
-      secs:{mandato:'Presidential term',noticias:'News',movilizaciones:'Mobilizations',cortes:'Road and Metro closures',cifras:'Fuel, wages and cost of living',autoridades:'Moves of officials',leyes:'Congress and votes',glosario:'Glossary',fuentes:'Sources'}},
-    pt:{share:'Compartilhar',theme:'Alternar entre modo claro e escuro',eyebrow:'Chile · Resumo político diário baseado em fatos',bajada:'O que faz o governo de José Antonio Kast, explicado de forma simples e comparado com os governos anteriores.',today:'Hoje',edition:'Edição',updatedAt:'Atualizado',every2h:'Atualizado a cada 2 horas, a partir das 9:00 (horário do Chile)',editorialLab:'Como ler o Kastigo.',termEyebrow:'Mandato presidencial',termTitle:'Quanto falta para terminar o governo de Kast',termText:'O mandato presidencial dura 4 anos. Começou em 11 de março de 2026 e termina com a transmissão do cargo em 11 de março de 2030.',days:'Dias',hours:'Horas',mins:'Min',secs:'Seg',elapsed:'decorrido',newsEyebrow:'Notícias',newsTitle:'O que aconteceu e por que importa',newsIntro:'Cada notícia traz o fato, o contexto para entendê-lo e por que importa, com links para as fontes.',all:'Todas',context:'Contexto',whyMatters:'Por que importa: ',mobEyebrow:'Ruas e mobilizações',mobTitle:'Mobilizações, greves e marchas',mobIntro:'O que está acontecendo agora e o que vem por aí. Se você vai ao centro ou pegar a estrada, confira bloqueios e estações de metrô fechadas.',now:'Em andamento / recente',next:'Convocada',trafEyebrow:'Trânsito e transporte',trafTitle:'Bloqueios de rodovias, ruas e metrô',lvCorte:'Bloqueio total',lvParcial:'Bloqueio parcial',lvCongestion:'Congestionamento',lvNormal:'Normalizado',noCuts:'Sem bloqueios de rodovias ou ruas informados no momento desta atualização.',metro:'Metrô de Santiago',ecoEyebrow:'Economia',ecoTitle:'Combustíveis, salário mínimo e custo de vida',dataShow:'O que os dados mostram',thCountry:'País',thWage:'Salário mínimo (US$/mês)',thFuel:'Gasolina (US$/litro)',thLiters:'Litros por salário',thNote:'Nota',termsEyebrow:'Economia simples',termsTitle:'Conceitos para entender estes números',authEyebrow:'Autoridades',authTitle:'Movimentações de ministros, parlamentares e autoridades',authIntro:'Quem saiu e por quê, quem o substituiu e quem está na mira. Comparado com os governos anteriores.',gSale:'Saíram',gRiesgo:'Na mira',gPiden:'Pedem sua saída',gEntra:'Assumiram',gCambio:'Mudanças de cargo',gSigue:'Permanecem',wSale:'Por que saiu',wRiesgo:'Por que está na mira',wPiden:'Por que pedem sua saída',wSigue:'O que aconteceu',wEntra:'Por que chegou',wCambio:'O que mudou',motive:'Motivo',noMotive:'Motivo não informado.',left:'Saiu',replacedBy:'Substituído por',after:'Depois',cabEyebrow:'Gabinete',thRole:'Cargo',thName:'Nome',thParty:'Partido',thFrom:'Desde',thTo:'Até',thDays:'Dias no cargo',thState:'Situação',stIn:'No cargo',stOut:'Saiu',stMoved:'Mudou de cargo',partiesNow:'Partidos no gabinete atual (ministros em exercício)',contrast:'Contraste',firstYear:'Por que deixaram o gabinete no primeiro ano',replacement:'Substituto: ',congEyebrow:'Congresso',congTitle:'Leis, votações e quem votou em quê',pendingTitle:'Em discussão agora',lawsTitle:'Painel de leis',thLaw:'Lei ou projeto',thStatus:'Situação',thSimple:'Em termos simples',thDate:'Data',govKast:'Governo Kast (2026–2030)',govBoric:'Governo Boric (2022–2026), para comparar',questioned:'Por que é questionado',sought:'O que buscava',yes:'A favor',no:'Contra',abs:'Abstenção',compareTitle:'Comparação: Kast e Boric no Congresso',glossEyebrow:'Para entender',glossTitle:'Glossário de política em linguagem simples',glossIntro:'As palavras que mais aparecem nas notícias, explicadas sem termos técnicos.',srcEyebrow:'Fontes',srcTitle:'De onde vem esta informação',srcText:'O Kastigo não publica opiniões. Fatos, números e votações vêm de fontes oficiais (Congresso, Diário Oficial, INE, CNE) e de meios nacionais e independentes, e cada um tem link para sua fonte original. Os dados são resumidos sem alterações. Quando um dado aparece em um só meio ou não pôde ser verificado, isso é indicado.',srcLang:'As versões em inglês e português são traduções do texto em espanhol. Valores em $ são pesos chilenos, exceto quando indicado US$.',corrText:'Encontrou um erro? Toda correção com fonte é revisada e publicada.',corrLink:'Reportar um erro',mirrorText:'Se a página não carregar, você pode lê-la no endereço alternativo:',madeBy:'Ferramenta criada por',lastUpd:'Última atualização: ',copied:'Link copiado.',link:'Link: ',shareSec:'Compartilhar a seção ',nav:{noticias:'Notícias',movilizaciones:'Ruas',cortes:'Trânsito',cifras:'Economia',autoridades:'Autoridades',leyes:'Congresso'},navLabel:'Seções',menuOpen:'Abrir menu',menuClose:'Fechar menu',hide:'Ocultar',show:'Mostrar',hideSec:'Ocultar a seção ',showSec:'Mostrar a seção ',mandEyebrow:'Quatro governos',
+      secNames:{mandato:'Presidential term',noticias:'News',movilizaciones:'Mobilizations',cortes:'Road and Metro closures',cifras:'Fuel, wages and cost of living',autoridades:'Moves of officials',leyes:'Congress and votes',aprende:'Learn: politics made simple',fuentes:'Sources'}},
+    pt:{share:'Compartilhar',theme:'Alternar entre modo claro e escuro',eyebrow:'Chile · Resumo político diário baseado em fatos',bajada:'O que faz o governo de José Antonio Kast, explicado de forma simples e comparado com os governos anteriores.',today:'Hoje',edition:'Edição',updatedAt:'Atualizado',every2h:'Atualizado a cada 2 horas, a partir das 9:00 (horário do Chile)',editorialLab:'Como ler o Kastigo.',termEyebrow:'Mandato presidencial',termTitle:'Quanto falta para terminar o governo de Kast',termText:'O mandato presidencial dura 4 anos. Começou em 11 de março de 2026 e termina com a transmissão do cargo em 11 de março de 2030.',days:'Dias',hours:'Horas',mins:'Min',secs:'Seg',elapsed:'decorrido',newsEyebrow:'Notícias',newsTitle:'O que aconteceu e por que importa',newsIntro:'Cada notícia traz o fato, o contexto para entendê-lo e por que importa, com links para as fontes.',all:'Todas',context:'Contexto',whyMatters:'Por que importa: ',mobEyebrow:'Ruas e mobilizações',mobTitle:'Mobilizações, greves e marchas',mobIntro:'O que está acontecendo agora e o que vem por aí. Se você vai ao centro ou pegar a estrada, confira bloqueios e estações de metrô fechadas.',now:'Em andamento / recente',next:'Convocada',trafEyebrow:'Trânsito e transporte',trafTitle:'Bloqueios de rodovias, ruas e metrô',lvCorte:'Bloqueio total',lvParcial:'Bloqueio parcial',lvCongestion:'Congestionamento',lvNormal:'Normalizado',noCuts:'Sem bloqueios de rodovias ou ruas informados no momento desta atualização.',metro:'Metrô de Santiago',ecoEyebrow:'Economia',ecoTitle:'Combustíveis, salário mínimo e custo de vida',dataShow:'O que os dados mostram',thCountry:'País',thWage:'Salário mínimo (US$/mês)',thFuel:'Gasolina (US$/litro)',thLiters:'Litros por salário',thNote:'Nota',termsEyebrow:'Economia simples',termsTitle:'Conceitos para entender estes números',authEyebrow:'Autoridades',authTitle:'Movimentações de ministros, parlamentares e autoridades',authIntro:'Quem saiu e por quê, quem o substituiu e quem está na mira. Comparado com os governos anteriores.',gSale:'Saíram',gRiesgo:'Na mira',gPiden:'Pedem sua saída',gEntra:'Assumiram',gCambio:'Mudanças de cargo',gSigue:'Permanecem',wSale:'Por que saiu',wRiesgo:'Por que está na mira',wPiden:'Por que pedem sua saída',wSigue:'O que aconteceu',wEntra:'Por que chegou',wCambio:'O que mudou',motive:'Motivo',noMotive:'Motivo não informado.',left:'Saiu',replacedBy:'Substituído por',after:'Depois',cabEyebrow:'Gabinete',thRole:'Cargo',thName:'Nome',thParty:'Partido',thFrom:'Desde',thTo:'Até',thDays:'Dias no cargo',thState:'Situação',stIn:'No cargo',stOut:'Saiu',stMoved:'Mudou de cargo',partiesNow:'Partidos no gabinete atual (ministros em exercício)',contrast:'Contraste',firstYear:'Por que deixaram o gabinete no primeiro ano',replacement:'Substituto: ',congEyebrow:'Congresso',congTitle:'Leis, votações e quem votou em quê',pendingTitle:'Em discussão agora',lawsTitle:'Painel de leis',thLaw:'Lei ou projeto',thStatus:'Situação',thSimple:'Em termos simples',thDate:'Data',govKast:'Governo Kast (2026–2030)',govBoric:'Governo Boric (2022–2026), para comparar',questioned:'Por que é questionado',sought:'O que buscava',yes:'A favor',no:'Contra',abs:'Abstenção',compareTitle:'Comparação: Kast e Boric no Congresso',glossEyebrow:'Para entender',glossTitle:'Glossário de política em linguagem simples',glossIntro:'As palavras que mais aparecem nas notícias, explicadas sem termos técnicos.',srcEyebrow:'Fontes',srcTitle:'De onde vem esta informação',srcText:'O Kastigo não publica opiniões. Fatos, números e votações vêm de fontes oficiais (Congresso, Diário Oficial, INE, CNE) e de meios nacionais e independentes, e cada um tem link para sua fonte original. Os dados são resumidos sem alterações. Quando um dado aparece em um só meio ou não pôde ser verificado, isso é indicado.',srcLang:'As versões em inglês e português são traduções do texto em espanhol. Valores em $ são pesos chilenos, exceto quando indicado US$.',corrText:'Encontrou um erro? Toda correção com fonte é revisada e publicada.',corrLink:'Reportar um erro',mirrorText:'Se a página não carregar, você pode lê-la no endereço alternativo:',madeBy:'Ferramenta criada por',lastUpd:'Última atualização: ',copied:'Link copiado.',link:'Link: ',shareSec:'Compartilhar a seção ',learnEyebrow:'Aprenda',learnTitle:'Como funciona a política no Chile, explicado de forma simples',learnIntro:'Um guia básico para entender esta página e as notícias: os poderes do Estado, como se faz uma lei, quem forma o gabinete e o que significam as palavras mais usadas.',nav:{noticias:'Notícias',movilizaciones:'Ruas',cortes:'Trânsito',cifras:'Economia',autoridades:'Autoridades',leyes:'Congresso',aprende:'Aprenda'},navLabel:'Seções',menuOpen:'Abrir menu',menuClose:'Fechar menu',hide:'Ocultar',show:'Mostrar',hideSec:'Ocultar a seção ',showSec:'Mostrar a seção ',mandEyebrow:'Quatro governos',
       cats:{economia:'Economia',congreso:'Congresso',gobierno:'Governo',calle:'Ruas',ley:'Leis',justicia:'Justiça'},
-      secs:{mandato:'Tempo de mandato',noticias:'Notícias',movilizaciones:'Mobilizações',cortes:'Bloqueios e metrô',cifras:'Combustíveis, salário e custo de vida',autoridades:'Movimentações de autoridades',leyes:'Congresso e votações',glosario:'Glossário',fuentes:'Fontes'}}
+      secNames:{mandato:'Tempo de mandato',noticias:'Notícias',movilizaciones:'Mobilizações',cortes:'Bloqueios e metrô',cifras:'Combustíveis, salário e custo de vida',autoridades:'Movimentações de autoridades',leyes:'Congresso e votações',aprende:'Aprenda: política de forma simples',fuentes:'Fontes'}}
   };
 
   // Idioma: ?lang= > preferencia guardada > idioma del navegador
@@ -5985,6 +7713,56 @@ header.top .wrap{gap:20px}
   });
 
 
+
+  // Ranking de combustibles en Sudamérica
+  block(function(){
+    var F=(D.economy||{}).fuelRank, c=document.getElementById('eco-rank');
+    if(!F||!(F.rows||[]).length){c.hidden=true;return;}
+    c.appendChild(el('h3',null,F.title)); c.appendChild(el('p','note',F.note));
+    var rows=F.rows.slice().sort(function(a,b){return b.usd-a.usd;}), max=rows[0].usd;
+    var t=el('table','tbl'), th=el('thead'), tr=el('tr'); F.cols.forEach(function(h,i){tr.appendChild(el('th',i?'num':null,h));}); th.appendChild(tr); t.appendChild(th);
+    var tb=el('tbody'); rows.forEach(function(r,i){var row=el('tr',r.me?'me':null);
+      var c0=el('td'); c0.appendChild(el('span','rank',String(i+1))); c0.appendChild(document.createTextNode(r.country)); row.appendChild(c0);
+      var c1=el('td','num'), lb=el('div','lbar'), bar=el('span'); lb.style.justifyContent='flex-end'; bar.style.width=Math.max(3,Math.round(r.usd/max*90))+'px'; lb.appendChild(bar); lb.appendChild(document.createTextNode('US$'+fmt(r.usd,r.usd<0.1?3:2))); c1.appendChild(lb); row.appendChild(c1);
+      var c2=el('td','num',r.clp!=null?'$'+fmt(r.clp):'—'); if(r.clp==null) c2.title=F.missing||''; row.appendChild(c2);
+      tb.appendChild(row);});
+    t.appendChild(tb); c.appendChild(t);
+    if(F.reading){var rd=el('div','reading facts'); rd.appendChild(el('b',null,T.dataShow)); rd.appendChild(el('p',null,F.reading)); c.appendChild(rd);}
+    var fs=sources(F.sources); fs.style.marginTop='12px'; c.appendChild(fs);
+  });
+
+  // Casos de gobiernos anteriores
+  block(function(){
+    var P=D.pastCases, c=document.getElementById('past-cases');
+    if(!P||!(P.govs||[]).length){c.hidden=true;return;}
+    c.appendChild(el('h3',null,P.title)); var n=el('p','note',P.intro); n.style.margin='6px 0 4px'; c.appendChild(n);
+    P.govs.forEach(function(g){c.appendChild(el('div','gov-h',g.who+' · '+g.period)); var grid=el('div','cases');
+      (g.cases||[]).forEach(function(k){var a=el('article','case'); a.appendChild(el('span','when',k.when)); a.appendChild(el('h4',null,k.t)); a.appendChild(el('p',null,k.what));
+        var o=el('div','out'); o.appendChild(el('b',null,P.outLabel)); o.appendChild(el('p',null,k.outcome)); a.appendChild(o); a.appendChild(sources(k.sources)); grid.appendChild(a);});
+      c.appendChild(grid);});
+  });
+
+  // Aprende: poderes del Estado, cómo nace una ley y gabinete
+  block(function(){
+    var Lr=D.learn; if(!Lr) return;
+    document.getElementById('powers-h').textContent=Lr.powersTitle; document.getElementById('powers-intro').textContent=Lr.powersIntro;
+    var pw=document.getElementById('powers'); (Lr.powers||[]).forEach(function(p){var c=el('div','card power'); c.appendChild(el('h4',null,p.name));
+      [['who',p.who],['does',p.does],['ex',p.ex]].forEach(function(x){var d=el('div','pw-row'); d.appendChild(el('b',null,Lr.labels[x[0]])); d.appendChild(el('p',null,x[1])); c.appendChild(d);}); pw.appendChild(c);});
+    var au=document.getElementById('autonomous'); au.appendChild(el('h3',null,Lr.autoTitle)); au.appendChild(el('p','note',Lr.autoIntro));
+    var ag=el('div','terms'); (Lr.auto||[]).forEach(function(a){var t=el('div','term'); t.appendChild(el('b',null,a.t)); t.appendChild(el('span',null,a.d)); ag.appendChild(t);}); au.appendChild(ag);
+    document.getElementById('law-h').textContent=Lr.lawTitle;
+    var ls=document.getElementById('law-steps'); (Lr.law||[]).forEach(function(st){var li=el('li','card'); li.appendChild(el('b',null,st.t)); li.appendChild(el('p',null,st.d)); ls.appendChild(li);});
+    document.getElementById('cab-h').textContent=Lr.cabTitle; document.getElementById('cab-intro').textContent=Lr.cabIntro;
+    var by={}, order=[]; ((D.cabinet||{}).rows||[]).forEach(function(r){if(r.state!=='in') return; if(!by[r.name]){by[r.name]={party:r.party,roles:[]}; order.push(r.name);} by[r.name].roles.push(r);});
+    var pf=document.getElementById('profiles'), now=Date.now(), CL=Lr.cabLabels;
+    order.forEach(function(nm){var m=by[nm], info=(Lr.profiles||{})[nm]||{}, c=el('article','card prof');
+      var hd=el('div','prof-hd'); hd.appendChild(el('h4',null,nm)); hd.appendChild(el('span','pill',m.party)); c.appendChild(hd);
+      m.roles.forEach(function(r){var d=el('div','prof-role'); d.appendChild(el('b',null,r.role)); var days=Math.max(0,Math.floor((now-new Date(r.from+'T12:00:00Z').getTime())/864e5)); d.appendChild(el('span',null,CL.since+' '+dmy(r.from)+' · '+fmt(days)+' '+CL.days)); c.appendChild(d);});
+      if(info.edu){var e=el('p','prof-p'); e.appendChild(el('b',null,CL.studies+': ')); e.appendChild(document.createTextNode(info.edu)); c.appendChild(e);}
+      if(info.career){var k=el('p','prof-p'); k.appendChild(el('b',null,CL.career+': ')); k.appendChild(document.createTextNode(info.career)); c.appendChild(k);}
+      pf.appendChild(c);});
+    var ps=document.getElementById('prof-src'); ps.appendChild(el('p','note',Lr.cabNote)); ps.appendChild(sources(Lr.profSources));
+  });
   // Navegación del encabezado (igual que ProRoller)
   (function(){
     var top=document.getElementById('top-nav'), mob=document.getElementById('mobile-nav'), btn=document.getElementById('btn-menu');
@@ -6021,13 +7799,13 @@ header.top .wrap{gap:20px}
   document.querySelectorAll('section[data-share]').forEach(function(sec){
     var h=sec.querySelector('h2'); if(!h) return;
     var row=el('div','h-row'); h.parentNode.insertBefore(row,h); row.appendChild(h);
-    var b=el('button','share-sec'); b.type='button'; b.id='share-'+sec.id; b.setAttribute('aria-label',T.shareSec+(T.secs[sec.id]||sec.id));
+    var b=el('button','share-sec'); b.type='button'; b.id='share-'+sec.id; b.setAttribute('aria-label',T.shareSec+(T.secNames[sec.id]||sec.id));
     b.appendChild(icon('share')); b.appendChild(document.createTextNode(T.share));
-    b.addEventListener('click',function(){share(urlFor(sec.id),(T.secs[sec.id]||'')+' · Kastigo');});
+    b.addEventListener('click',function(){share(urlFor(sec.id),(T.secNames[sec.id]||'')+' · Kastigo');});
     var grp=el('div','h-btns'); row.appendChild(grp); grp.appendChild(b);
     var tg=el('button','share-sec toggle-sec'); tg.type='button'; tg.id='toggle-'+sec.id; tg.setAttribute('aria-expanded','true');
     function hideables(){var out=[], node=row; while(node && node!==sec){var p=node.parentNode; Array.prototype.forEach.call(p.children,function(c){ if(c!==node && !c.classList.contains('eyebrow') && !c.classList.contains('h-row') && c.tagName!=='SVG') out.push(c);}); node=p;} return out;}
-    function setOpen(open){ hideables().forEach(function(c){c.classList.toggle('kg-hidden',!open);}); sec.classList.toggle('collapsed',!open); tg.setAttribute('aria-expanded',String(open)); tg.textContent=(open?'− ':'+ ')+(open?T.hide:T.show); tg.setAttribute('aria-label',(open?T.hideSec:T.showSec)+(T.secs[sec.id]||sec.id)); try{ if(open) localStorage.removeItem('kg-c-'+sec.id); else localStorage.setItem('kg-c-'+sec.id,'1'); }catch(e){} }
+    function setOpen(open){ hideables().forEach(function(c){c.classList.toggle('kg-hidden',!open);}); sec.classList.toggle('collapsed',!open); tg.setAttribute('aria-expanded',String(open)); tg.textContent=(open?'− ':'+ ')+(open?T.hide:T.show); tg.setAttribute('aria-label',(open?T.hideSec:T.showSec)+(T.secNames[sec.id]||sec.id)); try{ if(open) localStorage.removeItem('kg-c-'+sec.id); else localStorage.setItem('kg-c-'+sec.id,'1'); }catch(e){} }
     tg.addEventListener('click',function(){ setOpen(tg.getAttribute('aria-expanded')!=='true'); });
     grp.appendChild(tg);
     var startClosed=false; try{startClosed=localStorage.getItem('kg-c-'+sec.id)==='1';}catch(e){}
