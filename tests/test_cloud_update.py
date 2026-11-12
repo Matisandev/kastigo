@@ -9,6 +9,15 @@ URL=c.blocks(BASE)[1]['data']['news'][0]['sources'][0]['u']
 class Validation(unittest.TestCase):
  def proposal(self,path='/lede',value='Resumen verificado.'):
   return {'changes':[{'path':path,'es':value,'en':value,'pt':value,'sources':[URL]}]}
+ def test_safe_error_quota(self):
+  message=c.safe_http_error('https://api.openai.com/v1/responses',429,b'{"error":{"code":"insufficient_quota","message":"SECRET"}}')
+  self.assertIn('cuota',message);self.assertNotIn('SECRET',message)
+ def test_safe_error_rate(self):
+  self.assertIn('temporal',c.safe_http_error('https://api.openai.com/v1/responses',429,b'{"error":{"code":"rate_limit_exceeded"}}'))
+ def test_unknown_error_never_echoes(self):
+  self.assertNotIn('SECRET',c.safe_http_error('https://api.openai.com/v1/responses',429,b'{"error":{"code":"SECRET","message":"SECRET"}}'))
+ def test_github_404_unchanged(self):
+  self.assertEqual(c.safe_http_error(c.API,404,b''),'Solicitud rechazada: HTTP 404')
  def test_shell_unchanged(self):
   new=c.candidate(BASE,self.proposal(),{URL},'2026-11-12T09:00:00-03:00')
   self.assertEqual(c.blocks(BASE)[0],c.blocks(new)[0])
