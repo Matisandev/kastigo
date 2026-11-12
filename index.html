@@ -150,7 +150,7 @@ td .muted{color:var(--muted)}
 .people-sum{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
 .people-sum .stat{flex:1 1 140px}
 .people-sum .stat b{color:var(--ink)}
-.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
 .people > .person:last-child:nth-child(odd){grid-column:1/-1}
 .person{display:flex;flex-direction:column;gap:8px;min-width:0}
 .person-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
@@ -162,6 +162,27 @@ td .muted{color:var(--muted)}
 .ch-riesgo{background:var(--warn-dim);color:var(--warn)}
 .ch-cambio{background:var(--info-dim);color:var(--info)}
 .ch-sigue{background:var(--brand-dim);color:var(--brand)}
+.why-box{border-radius:12px;padding:12px 14px;background:var(--bad-dim);border:1px solid var(--bad-border)}
+.why-box.riesgo{background:var(--warn-dim);border-color:var(--warn)}
+.why-box.sigue,.why-box.entra,.why-box.cambio{background:var(--brand-dim);border-color:var(--brand-border)}
+.why-box .k{display:block;font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--bad);margin-bottom:4px}
+.why-box.riesgo .k{color:var(--warn)}
+.why-box.sigue .k,.why-box.entra .k,.why-box.cambio .k{color:var(--brand)}
+.why-box p{margin:0;color:var(--ink);font-size:15px;font-weight:500}
+.swap{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:10px;align-items:center}
+.swap > div{background:var(--surface-sunken);border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
+.swap .k{display:block;font:600 10px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.swap b{display:block;font-size:14px}
+.swap small{display:block;color:var(--muted);font-size:12px}
+.swap .arrow{color:var(--muted);font:600 18px var(--mono)}
+.after{font-size:14px;color:var(--ink)}
+.after b{font:600 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+.compare{margin-top:20px}
+.compare h3{font-size:20px}
+.compare table{min-width:640px}
+.compare td{font-size:14px}
+.compare th:nth-child(2),.compare td:nth-child(2){background:var(--brand-dim)}
+@media (max-width:520px){.swap{grid-template-columns:1fr}.swap .arrow{transform:rotate(90deg);justify-self:center}}
 /* Gráficos */
 .two{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px}
 .vote{display:grid;grid-template-columns:110px minmax(0,1fr) 70px;gap:10px;align-items:center;font-size:13px;padding:7px 0}
@@ -349,6 +370,7 @@ footer a{font-weight:600}
     </div>
     <div class="people-sum" id="people-sum"></div>
     <div class="people" id="people"></div>
+    <div class="card compare table-wrap" id="compare"></div>
   </section>
   <section aria-labelledby="h-leyes">
     <div class="sec-head">
@@ -908,20 +930,124 @@ footer a{font-weight:600}
   "summaryNote": "Registro de El Periodista, actualizado al 30 de octubre de 2026.",
   "items": [
    {
+    "name": "Trinidad Steinert",
+    "role": "Exministra de Seguridad Pública",
+    "change": "sale",
+    "label": "Salió · nuevo cargo",
+    "date": "salió el 19 may 2026, a los 69 días",
+    "why": "La polémica por su presentación del plan de seguridad, que llevó a la oposición a anunciar una interpelación, y por la remoción de la jefa de Inteligencia de la PDI.",
+    "replacedBy": {
+     "name": "Martín Arrau",
+     "from": "venía del Ministerio de Obras Públicas"
+    },
+    "after": "El 10 de noviembre el Gobierno la designó agregada de seguridad en la Embajada de Chile en Paraguay; asume en diciembre. En el oficialismo y la oposición se habló de un \"premio de consuelo\".",
+    "sources": [
+     {
+      "n": "BioBioChile",
+      "u": "https://biobiochile.cl/noticias/nacional/chile/2026/11/10/a-meses-de-dejar-el-gobierno-trinidad-steinert-vuelve-a-un-cargo-publico-como-agregada-en-paraguay.shtml"
+     },
+     {
+      "n": "T13",
+      "u": "https://www.t13.cl/noticia/politica/a-seis-meses-su-salida-exministra-steinert-asumira-agregada-seguridad-paraguay-10-11-2026"
+     },
+     {
+      "n": "El Mostrador",
+      "u": "https://www.elmostrador.cl/noticias/pais/2026/05/19/primer-cambio-de-gabinete-de-kast-salen-steinert-y-sedini-se-crean-biministros-y-arrau-a-seguridad/"
+     }
+    ]
+   },
+   {
     "name": "Fernando Rabat",
     "role": "Ministro de Justicia",
     "change": "riesgo",
     "label": "En la mira",
     "date": "nov 2026",
-    "text": "Firmó los decretos de rebaja de condena que generaron la crisis. El Presidente lo mantiene en el cargo, pero la oposición prepara una acusación constitucional en su contra.",
+    "why": "Firmó los decretos de 56 rebajas de condena, varias a condenados por delitos sexuales contra menores. El Presidente reconoció el error, pero lo mantiene; la oposición prepara una acusación constitucional.",
     "sources": [
+     {
+      "n": "BioBioChile",
+      "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-apuesta-por-derogar-ley-de-rebajas-de-condena-solucion-a-crisis-de-rabat-o-un-nuevo-error.shtml"
+     },
      {
       "n": "El Dínamo",
       "u": "https://www.eldinamo.cl/politica/2026/11/11/gobierno-desecha-idea-de-cambio-de-gabinete-en-cumbre-de-cerro-castillo/"
+     }
+    ]
+   },
+   {
+    "name": "Iván Poduje",
+    "role": "Ministro de Vivienda",
+    "change": "riesgo",
+    "label": "Piden su salida",
+    "date": "protesta convocada para el 27 nov",
+    "why": "El Movimiento Nacional de Pobladores convocó una protesta frente al Minvu para exigir su salida del cargo.",
+    "sources": [
+     {
+      "n": "Canal 9 BioBío",
+      "u": "https://www.canal9.cl/episodios/2026/11/10/agrupaciones-de-trabajadores-y-estudiantes-anuncian-movilizaciones-contra-gobierno-desde-el-miercoles"
+     }
+    ]
+   },
+   {
+    "name": "Natalia Duco",
+    "role": "Exministra del Deporte",
+    "change": "sale",
+    "label": "Renunció",
+    "date": "13 ago 2026",
+    "why": "Una denuncia ante la Contraloría por usar un vehículo fiscal para ir a un asado. Ella dijo que era una reunión de trabajo, pero un video publicado por La Tercera contradijo esa versión. También renunció el subsecretario Andrés Otero.",
+    "replacedBy": {
+     "name": "Francisco Riveros",
+     "from": "ex gerente general del club Palestino"
+    },
+    "after": "Según BioBioChile, fue incorporada como asesora al Segundo Piso de La Moneda.",
+    "sources": [
+     {
+      "n": "Cooperativa",
+      "u": "https://www.cooperativa.cl/noticias/pais/gobierno/gabinete/la-moneda-informo-que-natalia-duco-dejo-de-ser-ministra-del-deporte/2026-08-13/221632.html"
      },
      {
       "n": "BioBioChile",
-      "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/04/cuenta-con-todo-el-respaldo-gobierno-cierra-filas-con-rabat-y-descarta-cambio-de-gabinete.shtml"
+      "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/08/14/francisco-riveros-sera-el-nuevo-ministro-del-deporte-tras-salida-de-natalia-duco.shtml"
+     },
+     {
+      "n": "BioBioChile (nov)",
+      "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/los-premios-de-consuelo-que-kast-critico-a-boric-y-que-hoy-le-reprochan-a-su-gobierno.shtml"
+     }
+    ]
+   },
+   {
+    "name": "Mara Sedini",
+    "role": "Exministra vocera de Gobierno (Segegob)",
+    "change": "sale",
+    "label": "Salió",
+    "date": "19 may 2026, a los 69 días",
+    "why": "Desgaste por varias polémicas comunicacionales, como su dicho sobre un \"Estado en quiebra\". Según T13, era la ministra peor evaluada del gabinete (24% en Cadem).",
+    "replacedBy": {
+     "name": "Claudio Alvarado",
+     "from": "ministro del Interior; quedó como biministro"
+    },
+    "sources": [
+     {
+      "n": "T13",
+      "u": "https://www.t13.cl/noticia/politica/presidente-kast-comunica-salida-ministras-trinidad-steinert-mara-sedini-19-5-2026"
+     },
+     {
+      "n": "T13 (polémicas)",
+      "u": "https://www.t13.cl/noticia/politica/estado-quiebra-las-polemicas-dos-meses-mara-sedini-como-vocera-gobierno-19-5-2026"
+     }
+    ]
+   },
+   {
+    "name": "Julio Anativia",
+    "role": "Exdelegado presidencial del Biobío",
+    "change": "sale",
+    "label": "Salió",
+    "date": "30 oct 2026",
+    "why": "Una denuncia por violencia intrafamiliar, que él niega.",
+    "sources": [
+     {
+      "n": "El Periodista",
+      "u": "https://www.elperiodista.cl/2026/11/gobierno-de-kast-acumula-59-salidas-y-cambios-de-autoridades/"
      }
     ]
    },
@@ -931,61 +1057,62 @@ footer a{font-weight:600}
     "change": "sigue",
     "label": "Se mantiene",
     "date": "10 nov 2026",
-    "text": "En la reunión de Cerro Castillo con los partidos oficialistas, el Presidente descartó un cambio de gabinete en el corto plazo.",
+    "why": "En la cumbre de Cerro Castillo con los partidos oficialistas, el Presidente descartó un cambio de gabinete en el corto plazo.",
     "sources": [
      {
       "n": "El Dínamo",
       "u": "https://www.eldinamo.cl/politica/2026/11/11/gobierno-desecha-idea-de-cambio-de-gabinete-en-cumbre-de-cerro-castillo/"
-     },
-     {
-      "n": "Publimetro",
-      "u": "https://www.publimetro.cl/noticias/2026/11/12/kast-descarta-cambio-de-gabinete-y-sella-pacto-de-hermetismo-con-el-oficialismo/"
-     }
-    ]
-   },
-   {
-    "name": "Iván Poduje",
-    "role": "Ministro de Vivienda",
-    "change": "riesgo",
-    "label": "Piden su salida",
-    "date": "27 nov (convocatoria)",
-    "text": "El Movimiento Nacional de Pobladores convocó una protesta frente al Minvu para pedir su salida del cargo.",
-    "sources": [
-     {
-      "n": "Canal 9 BioBío",
-      "u": "https://www.canal9.cl/episodios/2026/11/10/agrupaciones-de-trabajadores-y-estudiantes-anuncian-movilizaciones-contra-gobierno-desde-el-miercoles"
-     }
-    ]
-   },
-   {
-    "name": "Luis Silva",
-    "role": "Subsecretario de Justicia",
-    "change": "sale",
-    "label": "Salió",
-    "date": "30 oct 2026",
-    "text": "Dejó el cargo a fines de octubre, en medio de la crisis por las rebajas de condena.",
-    "sources": [
-     {
-      "n": "El Periodista",
-      "u": "https://www.elperiodista.cl/2026/11/gobierno-de-kast-acumula-59-salidas-y-cambios-de-autoridades/"
-     }
-    ]
-   },
-   {
-    "name": "Julio Anativia",
-    "role": "Delegado presidencial del Biobío",
-    "change": "sale",
-    "label": "Salió",
-    "date": "30 oct 2026",
-    "text": "Dejó el cargo tras una denuncia por violencia intrafamiliar, que él niega.",
-    "sources": [
-     {
-      "n": "El Periodista",
-      "u": "https://www.elperiodista.cl/2026/11/gobierno-de-kast-acumula-59-salidas-y-cambios-de-autoridades/"
      }
     ]
    }
-  ]
+  ],
+  "compare": {
+   "title": "Comparación con el gobierno anterior",
+   "intro": "Cómo se compara la rotación de autoridades de Kast con la del gobierno de Gabriel Boric en el mismo período de su mandato.",
+   "cur": "Kast (2026)",
+   "prev": "Boric (2022)",
+   "rows": [
+    {
+     "label": "Primer cambio de gabinete",
+     "cur": "19 de mayo, a los 69 días. El más rápido desde 1990.",
+     "prev": "Septiembre de 2022, a los 180 días, dos días después del plebiscito."
+    },
+    {
+     "label": "Quiénes salieron en ese cambio",
+     "cur": "Mara Sedini (Vocera) y Trinidad Steinert (Seguridad). Se crearon dos biministros.",
+     "prev": "Izkia Siches (Interior), Begoña Yarza (Salud), Claudio Huepe (Energía) y Flavio Salazar (Ciencia). Giorgio Jackson pasó de Segpres a Desarrollo Social."
+    },
+    {
+     "label": "Por qué",
+     "cur": "Polémicas y mala evaluación de ministras específicas.",
+     "prev": "Reordenamiento político tras el triunfo del Rechazo en el plebiscito constitucional."
+    },
+    {
+     "label": "Ministros que dejaron el gabinete en los primeros 8 meses",
+     "cur": "3: Sedini, Steinert y Duco.",
+     "prev": "5: Jeannette Vega (agosto, por el llamado de una asesora a Héctor Llaitul), Siches, Yarza, Huepe y Salazar."
+    },
+    {
+     "label": "Exautoridades reubicadas",
+     "cur": "Steinert como agregada en Paraguay; Duco, Andrés Jouannet y José Francisco Lagos en el Segundo Piso de La Moneda.",
+     "prev": "En 2022, Kast criticó como \"premios de consuelo\" las designaciones de Paula Narváez (ONU) y Beatriz Sánchez (embajadora en México)."
+    }
+   ],
+   "sources": [
+    {
+     "n": "Emol",
+     "u": "https://www.emol.com/noticias/Nacional/2026/05/19/1200481/cambio-gabinete-rapidez-presidentes-historia.html"
+    },
+    {
+     "n": "La Tercera",
+     "u": "https://www.latercera.com/politica/noticia/tercer-cambio-de-gabinete-desde-que-llego-a-la-moneda-cuales-fueron-los-anteriores-ajustes-ministeriales-de-boric/F46RESJNIBH5VMBPHZBT5PCZYE/"
+    },
+    {
+     "n": "BioBioChile",
+     "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/los-premios-de-consuelo-que-kast-critico-a-boric-y-que-hoy-le-reprochan-a-su-gobierno.shtml"
+    }
+   ]
+  }
  }
 }
 </script>
@@ -1112,14 +1239,28 @@ footer a{font-weight:600}
     if(P.summaryNote){var n=el('p','note',P.summaryNote); n.style.cssText='flex-basis:100%;margin:0';sum.appendChild(n);}
     if(!(P.summary||[]).length) sum.hidden=true;
     var box=document.getElementById('people');
+    var WK={sale:'Por qué se fue',riesgo:'Por qué está en la mira',sigue:'Qué pasó',entra:'Por qué llegó',cambio:'Qué cambió'};
     P.items.forEach(function(x){
       var c=el('article','card person'); var top=el('div','person-top');
       var who=el('div'); who.appendChild(el('h3',null,x.name)); who.appendChild(el('div','role',x.role+(x.date?' · '+x.date:'')));
       top.appendChild(who); top.appendChild(el('span','ch ch-'+x.change,x.label||x.change)); c.appendChild(top);
-      if(x.text) c.appendChild(el('p',null,x.text));
+      var w=x.why||x.text; if(w){var wb=el('div','why-box '+x.change); wb.appendChild(el('span','k',WK[x.change]||'Motivo')); wb.appendChild(el('p',null,w)); c.appendChild(wb);}
+      if(x.replacedBy&&x.replacedBy.name){var sw=el('div','swap');
+        var a=el('div'); a.appendChild(el('span','k','Salió')); a.appendChild(el('b',null,x.name)); a.appendChild(el('small',null,x.role));
+        var b=el('div'); b.appendChild(el('span','k','Lo reemplazó')); b.appendChild(el('b',null,x.replacedBy.name)); if(x.replacedBy.from) b.appendChild(el('small',null,x.replacedBy.from));
+        sw.appendChild(a); sw.appendChild(el('span','arrow','→')); sw.appendChild(b); c.appendChild(sw);}
+      if(x.after){var af=el('div','after'); af.appendChild(el('b',null,'Después')); af.appendChild(document.createTextNode(x.after)); c.appendChild(af);}
       if(x.sources&&x.sources.length){var s=el('div','sources'); x.sources.forEach(function(src){var l=el('a','src',src.n); l.href=safeUrl(src.u); l.target='_blank'; l.rel='noopener'; s.appendChild(l);}); c.appendChild(s);}
       box.appendChild(c);
     });
+    var C=P.compare, cb=document.getElementById('compare');
+    if(!C||!(C.rows||[]).length){cb.hidden=true;} else {
+      cb.appendChild(el('div','eyebrow','Contraste'));
+      cb.appendChild(el('h3',null,C.title)); if(C.intro){var ip=el('p','note',C.intro); ip.style.margin='6px 0 12px'; cb.appendChild(ip);}
+      var t=el('table'); var th=el('thead'); var tr=el('tr'); ['',C.cur,C.prev].forEach(function(h){tr.appendChild(el('th',null,h));}); th.appendChild(tr); t.appendChild(th);
+      var tb=el('tbody'); C.rows.forEach(function(r){var row=el('tr'); var l=el('td'); l.appendChild(el('b',null,r.label)); row.appendChild(l); row.appendChild(el('td',null,r.cur)); row.appendChild(el('td',null,r.prev)); tb.appendChild(row);}); t.appendChild(tb); cb.appendChild(t);
+      if(C.sources&&C.sources.length){var s3=el('div','sources'); s3.style.marginTop='12px'; C.sources.forEach(function(src){var l=el('a','src',src.n); l.href=safeUrl(src.u); l.target='_blank'; l.rel='noopener'; s3.appendChild(l);}); cb.appendChild(s3);}
+    }
   })();
 
   // Glosario
