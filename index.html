@@ -146,6 +146,22 @@ td .muted{color:var(--muted)}
 .metro-card p{margin:0;color:var(--muted);font-size:14px}
 .metro-card ul{margin:0;padding-left:18px;color:var(--ink);font-size:14px}
 .traffic-empty{color:var(--muted);margin:0}
+/* Autoridades */
+.people-sum{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.people-sum .stat{flex:1 1 140px}
+.people-sum .stat b{color:var(--ink)}
+.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.people > .person:last-child:nth-child(odd){grid-column:1/-1}
+.person{display:flex;flex-direction:column;gap:8px;min-width:0}
+.person-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.person .role{font-size:13px;color:var(--muted)}
+.person p{margin:0;color:var(--muted);font-size:14px}
+.ch{white-space:nowrap;padding:3px 10px;border-radius:99px;font:600 11px var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.ch-sale{background:var(--bad-dim);color:var(--bad)}
+.ch-entra{background:var(--ok-dim);color:var(--ok)}
+.ch-riesgo{background:var(--warn-dim);color:var(--warn)}
+.ch-cambio{background:var(--info-dim);color:var(--info)}
+.ch-sigue{background:var(--brand-dim);color:var(--brand)}
 /* Gráficos */
 .two{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px}
 .vote{display:grid;grid-template-columns:110px minmax(0,1fr) 70px;gap:10px;align-items:center;font-size:13px;padding:7px 0}
@@ -200,7 +216,7 @@ footer{border-top:1px solid var(--line);padding-block:28px}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13.6px}
 footer a{font-weight:600}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);border:1px solid var(--brand-border);color:var(--ink);padding:10px 16px;border-radius:12px;font-size:14px;z-index:20;max-width:calc(100% - 32px)}
-@media (max-width:860px){.essentials{grid-template-columns:1fr}.countdown,.two,.news,.gloss,.mob-head,.agenda,.traffic-grid{grid-template-columns:1fr}}
+@media (max-width:860px){.essentials{grid-template-columns:1fr}.countdown,.two,.news,.gloss,.mob-head,.agenda,.traffic-grid,.people{grid-template-columns:1fr}}
 @media (max-width:520px){.btn .lbl{display:none}.btn{padding:0 11px}.cd-grid{gap:6px}.cd-cell{padding:12px 4px}.vote{grid-template-columns:84px minmax(0,1fr) 60px}.mob{padding:20px 16px;border-radius:20px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -245,30 +261,6 @@ footer a{font-weight:600}
     <div class="essentials" id="essentials"></div>
   </section>
 
-  <section aria-labelledby="h-agenda" class="mob">
-    <div class="mob-head">
-      <div>
-        <div class="eyebrow mob-eyebrow"><span class="live-dot" aria-hidden="true"></span>Calles y movilizaciones</div>
-        <h2 id="h-agenda">Movilizaciones, paros y marchas</h2>
-        <p>Lo que está pasando ahora y lo que viene. Si te mueves por el centro o por carretera, revisa cortes de tránsito y estaciones de Metro cerradas.</p>
-      </div>
-      <div class="mob-stats" id="mob-stats"></div>
-    </div>
-    <ul class="agenda" id="agenda"></ul>
-  </section>
-
-  <section aria-labelledby="h-transito">
-    <div class="sec-head">
-      <div class="eyebrow">Tránsito y transporte</div>
-      <h2 id="h-transito">Cortes de rutas, calles y Metro</h2>
-      <p id="traffic-note"></p>
-    </div>
-    <div class="traffic-grid">
-      <div class="card" id="traffic-list"></div>
-      <div class="card metro-card" id="metro-card"></div>
-    </div>
-  </section>
-
   <section aria-labelledby="h-mandato">
     <div class="card countdown">
       <div>
@@ -297,17 +289,27 @@ footer a{font-weight:600}
     <div class="news" id="news"></div>
   </section>
 
-  <section aria-labelledby="h-leyes">
-    <div class="sec-head">
-      <div class="eyebrow">Congreso</div>
-      <h2 id="h-leyes">Tablero de leyes y proyectos</h2>
-      <p>Qué se aprobó, qué se rechazó y qué quedó en pausa.</p>
+  <section aria-labelledby="h-agenda" class="mob">
+    <div class="mob-head">
+      <div>
+        <div class="eyebrow mob-eyebrow"><span class="live-dot" aria-hidden="true"></span>Calles y movilizaciones</div>
+        <h2 id="h-agenda">Movilizaciones, paros y marchas</h2>
+        <p>Lo que está pasando ahora y lo que viene. Si te mueves por el centro o por carretera, revisa cortes de tránsito y estaciones de Metro cerradas.</p>
+      </div>
+      <div class="mob-stats" id="mob-stats"></div>
     </div>
-    <div class="card table-wrap">
-      <table>
-        <thead><tr><th>Ley o proyecto</th><th>Estado</th><th>En simple</th><th>Fecha</th></tr></thead>
-        <tbody id="laws"></tbody>
-      </table>
+    <ul class="agenda" id="agenda"></ul>
+  </section>
+
+  <section aria-labelledby="h-transito">
+    <div class="sec-head">
+      <div class="eyebrow">Tránsito y transporte</div>
+      <h2 id="h-transito">Cortes de rutas, calles y Metro</h2>
+      <p id="traffic-note"></p>
+    </div>
+    <div class="traffic-grid">
+      <div class="card" id="traffic-list"></div>
+      <div class="card metro-card" id="metro-card"></div>
     </div>
   </section>
 
@@ -339,6 +341,29 @@ footer a{font-weight:600}
     </div>
   </section>
 
+  <section aria-labelledby="h-autoridades">
+    <div class="sec-head">
+      <div class="eyebrow">Autoridades</div>
+      <h2 id="h-autoridades">Movimientos de ministros, parlamentarios y autoridades</h2>
+      <p>Quién entra, quién sale y quién está en la mira: ministros, subsecretarios, diputados, senadores y otras autoridades.</p>
+    </div>
+    <div class="people-sum" id="people-sum"></div>
+    <div class="people" id="people"></div>
+  </section>
+  <section aria-labelledby="h-leyes">
+    <div class="sec-head">
+      <div class="eyebrow">Congreso</div>
+      <h2 id="h-leyes">Tablero de leyes y proyectos</h2>
+      <p>Qué se aprobó, qué se rechazó y qué quedó en pausa.</p>
+    </div>
+    <div class="card table-wrap">
+      <table>
+        <thead><tr><th>Ley o proyecto</th><th>Estado</th><th>En simple</th><th>Fecha</th></tr></thead>
+        <tbody id="laws"></tbody>
+      </table>
+    </div>
+  </section>
+
   <section aria-labelledby="h-glosario">
     <div class="sec-head">
       <div class="eyebrow">Para entender</div>
@@ -351,10 +376,11 @@ footer a{font-weight:600}
     <div class="card">
       <div class="eyebrow">Fuentes</div>
       <h2 id="h-fuentes" style="font-size:22px">De dónde sale esta información</h2>
-      <p class="note">Se contrastan medios de alcance nacional con medios independientes y regionales. Cada noticia enlaza a sus fuentes originales para que puedas leer el detalle y sacar tus propias conclusiones. Cuando un dato aparece en un solo medio, se indica.</p>
+      <p class="note">La información de esta página no se modifica ni se interpreta: es un resumen de lo publicado por distintos medios. Se contrastan medios de alcance nacional con medios independientes y regionales, y cada noticia enlaza a sus fuentes originales para que puedas leer el detalle completo y sacar tus propias conclusiones. Cuando un dato aparece en un solo medio, se indica.</p>
       <div class="outlets" id="outlets"></div>
     </div>
   </section>
+
 </main>
 
 <footer>
@@ -859,6 +885,107 @@ footer a{font-weight:600}
     }
    ]
   }
+ },
+ "people": {
+  "summary": [
+   {
+    "value": "59",
+    "label": "salidas o cambios de autoridades en el gobierno (al 30 oct)"
+   },
+   {
+    "value": "3",
+    "label": "ministras han dejado el gabinete"
+   },
+   {
+    "value": "8",
+    "label": "subsecretarios reemplazados"
+   },
+   {
+    "value": "46",
+    "label": "seremis reemplazados"
+   }
+  ],
+  "summaryNote": "Registro de El Periodista, actualizado al 30 de octubre de 2026.",
+  "items": [
+   {
+    "name": "Fernando Rabat",
+    "role": "Ministro de Justicia",
+    "change": "riesgo",
+    "label": "En la mira",
+    "date": "nov 2026",
+    "text": "Firmó los decretos de rebaja de condena que generaron la crisis. El Presidente lo mantiene en el cargo, pero la oposición prepara una acusación constitucional en su contra.",
+    "sources": [
+     {
+      "n": "El Dínamo",
+      "u": "https://www.eldinamo.cl/politica/2026/11/11/gobierno-desecha-idea-de-cambio-de-gabinete-en-cumbre-de-cerro-castillo/"
+     },
+     {
+      "n": "BioBioChile",
+      "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/04/cuenta-con-todo-el-respaldo-gobierno-cierra-filas-con-rabat-y-descarta-cambio-de-gabinete.shtml"
+     }
+    ]
+   },
+   {
+    "name": "Gabinete del Presidente Kast",
+    "role": "Todos los ministerios",
+    "change": "sigue",
+    "label": "Se mantiene",
+    "date": "10 nov 2026",
+    "text": "En la reunión de Cerro Castillo con los partidos oficialistas, el Presidente descartó un cambio de gabinete en el corto plazo.",
+    "sources": [
+     {
+      "n": "El Dínamo",
+      "u": "https://www.eldinamo.cl/politica/2026/11/11/gobierno-desecha-idea-de-cambio-de-gabinete-en-cumbre-de-cerro-castillo/"
+     },
+     {
+      "n": "Publimetro",
+      "u": "https://www.publimetro.cl/noticias/2026/11/12/kast-descarta-cambio-de-gabinete-y-sella-pacto-de-hermetismo-con-el-oficialismo/"
+     }
+    ]
+   },
+   {
+    "name": "Iván Poduje",
+    "role": "Ministro de Vivienda",
+    "change": "riesgo",
+    "label": "Piden su salida",
+    "date": "27 nov (convocatoria)",
+    "text": "El Movimiento Nacional de Pobladores convocó una protesta frente al Minvu para pedir su salida del cargo.",
+    "sources": [
+     {
+      "n": "Canal 9 BioBío",
+      "u": "https://www.canal9.cl/episodios/2026/11/10/agrupaciones-de-trabajadores-y-estudiantes-anuncian-movilizaciones-contra-gobierno-desde-el-miercoles"
+     }
+    ]
+   },
+   {
+    "name": "Luis Silva",
+    "role": "Subsecretario de Justicia",
+    "change": "sale",
+    "label": "Salió",
+    "date": "30 oct 2026",
+    "text": "Dejó el cargo a fines de octubre, en medio de la crisis por las rebajas de condena.",
+    "sources": [
+     {
+      "n": "El Periodista",
+      "u": "https://www.elperiodista.cl/2026/11/gobierno-de-kast-acumula-59-salidas-y-cambios-de-autoridades/"
+     }
+    ]
+   },
+   {
+    "name": "Julio Anativia",
+    "role": "Delegado presidencial del Biobío",
+    "change": "sale",
+    "label": "Salió",
+    "date": "30 oct 2026",
+    "text": "Dejó el cargo tras una denuncia por violencia intrafamiliar, que él niega.",
+    "sources": [
+     {
+      "n": "El Periodista",
+      "u": "https://www.elperiodista.cl/2026/11/gobierno-de-kast-acumula-59-salidas-y-cambios-de-autoridades/"
+     }
+    ]
+   }
+  ]
  }
 }
 </script>
@@ -974,6 +1101,25 @@ footer a{font-weight:600}
     if(M.text) mc.appendChild(el('p',null,M.text));
     if(M.stations&&M.stations.length){var ul=el('ul'); M.stations.forEach(function(x){ul.appendChild(el('li',null,x));}); mc.appendChild(ul);}
     if(M.sources&&M.sources.length){var s2=el('div','sources'); M.sources.forEach(function(src){var l=el('a','src',src.n); l.href=safeUrl(src.u); l.target='_blank'; l.rel='noopener'; s2.appendChild(l);}); mc.appendChild(s2);}
+  })();
+
+  // Autoridades
+  (function(){
+    var P=D.people; var sec=document.getElementById('h-autoridades').closest('section');
+    if(!P||!(P.items||[]).length){sec.hidden=true;return;}
+    var sum=document.getElementById('people-sum');
+    (P.summary||[]).forEach(function(x){var c=el('div','stat'); c.appendChild(el('b',null,x.value)); c.appendChild(el('span',null,x.label)); sum.appendChild(c);});
+    if(P.summaryNote){var n=el('p','note',P.summaryNote); n.style.cssText='flex-basis:100%;margin:0';sum.appendChild(n);}
+    if(!(P.summary||[]).length) sum.hidden=true;
+    var box=document.getElementById('people');
+    P.items.forEach(function(x){
+      var c=el('article','card person'); var top=el('div','person-top');
+      var who=el('div'); who.appendChild(el('h3',null,x.name)); who.appendChild(el('div','role',x.role+(x.date?' · '+x.date:'')));
+      top.appendChild(who); top.appendChild(el('span','ch ch-'+x.change,x.label||x.change)); c.appendChild(top);
+      if(x.text) c.appendChild(el('p',null,x.text));
+      if(x.sources&&x.sources.length){var s=el('div','sources'); x.sources.forEach(function(src){var l=el('a','src',src.n); l.href=safeUrl(src.u); l.target='_blank'; l.rel='noopener'; s.appendChild(l);}); c.appendChild(s);}
+      box.appendChild(c);
+    });
   })();
 
   // Glosario
