@@ -12,6 +12,7 @@ for(const width of [390,1440])for(const lang of ['es','en','pt']){
  let ids=await page.locator('.share-target').evaluateAll(xs=>xs.map(x=>x.id));assert.equal(new Set(ids).size,ids.length,'Duplicate target IDs');
  let news=await page.locator('#news article').evaluateAll(xs=>xs.map(x=>x.id));assert(news.length>0);if(canonical)assert.deepEqual(news,canonical);else canonical=news;
  assert.equal(await page.locator('#news .item-share button').count(),news.length);
+ await page.locator('#btn-share').dispatchEvent('click');const header=await page.evaluate(()=>window.sent.pop());assert.deepEqual(Object.keys(header),['url']);assert.equal(header.url,'https://matisandev.cl/kastigo?lang='+lang);
  await page.locator('#news .item-share button').first().click();let sent=await page.evaluate(()=>window.sent[0]);let url=new URL(sent.url);assert.equal(url.origin,'https://matisandev.cl');assert.equal(url.searchParams.get('lang'),lang);assert.equal(url.hash,'#'+news[0]);assert(url.searchParams.get('edition'));
  await page.evaluate(()=>{localStorage.setItem('kg-filter','calle');localStorage.setItem('kg-c-noticias','1')});
  await page.goto(base+url.search+url.hash);await page.waitForTimeout(300);assert(await page.locator('#'+news[0]).isVisible());assert.equal(await page.locator('#toggle-noticias').getAttribute('aria-expanded'),'true');assert.equal(await page.evaluate(()=>document.activeElement.id),news[0]);
