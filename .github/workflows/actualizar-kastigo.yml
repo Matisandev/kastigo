@@ -18,7 +18,7 @@ concurrency:
 jobs:
   actualizar:
     if: github.repository == 'Matisandev/kastigo' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 35
     steps:
       - uses: actions/checkout@v4
