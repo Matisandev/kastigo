@@ -183,6 +183,13 @@ td .muted{color:var(--muted)}
 .compare td{font-size:14px}
 .compare th:nth-child(2),.compare td:nth-child(2){background:var(--brand-dim)}
 @media (max-width:520px){.swap{grid-template-columns:1fr}.swap .arrow{transform:rotate(90deg);justify-self:center}}
+/* Compartir sección */
+section[data-share]{scroll-margin-top:calc(80px + env(safe-area-inset-top,0px))}
+.share-sec{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface-card);color:var(--muted);font:600 12px var(--font);cursor:pointer;white-space:nowrap;vertical-align:middle}
+.share-sec:hover{color:var(--brand);border-color:var(--brand-border)}
+.share-sec svg{width:14px;height:14px}
+.h-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.h-row > h2,.h-row > h3{min-width:0}
 /* Gráficos */
 .two{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px}
 .vote{display:grid;grid-template-columns:110px minmax(0,1fr) 70px;gap:10px;align-items:center;font-size:13px;padding:7px 0}
@@ -282,7 +289,7 @@ footer a{font-weight:600}
     <div class="essentials" id="essentials"></div>
   </section>
 
-  <section aria-labelledby="h-mandato">
+  <section id="mandato" data-share aria-labelledby="h-mandato">
     <div class="card countdown">
       <div>
         <div class="eyebrow">Mandato presidencial</div>
@@ -300,7 +307,7 @@ footer a{font-weight:600}
     </div>
   </section>
 
-  <section aria-labelledby="h-noticias">
+  <section id="noticias" data-share aria-labelledby="h-noticias">
     <div class="sec-head">
       <div class="eyebrow">Noticias</div>
       <h2 id="h-noticias">Lo más relevante de los últimos días</h2>
@@ -310,7 +317,7 @@ footer a{font-weight:600}
     <div class="news" id="news"></div>
   </section>
 
-  <section aria-labelledby="h-agenda" class="mob">
+  <section id="movilizaciones" data-share aria-labelledby="h-agenda" class="mob">
     <div class="mob-head">
       <div>
         <div class="eyebrow mob-eyebrow"><span class="live-dot" aria-hidden="true"></span>Calles y movilizaciones</div>
@@ -322,7 +329,7 @@ footer a{font-weight:600}
     <ul class="agenda" id="agenda"></ul>
   </section>
 
-  <section aria-labelledby="h-transito">
+  <section id="cortes" data-share aria-labelledby="h-transito">
     <div class="sec-head">
       <div class="eyebrow">Tránsito y transporte</div>
       <h2 id="h-transito">Cortes de rutas, calles y Metro</h2>
@@ -334,7 +341,7 @@ footer a{font-weight:600}
     </div>
   </section>
 
-  <section aria-labelledby="h-graficos">
+  <section id="cifras" data-share aria-labelledby="h-graficos">
     <div class="sec-head">
       <div class="eyebrow">En cifras</div>
       <h2 id="h-graficos">Los números detrás de las noticias</h2>
@@ -362,7 +369,7 @@ footer a{font-weight:600}
     </div>
   </section>
 
-  <section aria-labelledby="h-autoridades">
+  <section id="autoridades" data-share aria-labelledby="h-autoridades">
     <div class="sec-head">
       <div class="eyebrow">Autoridades</div>
       <h2 id="h-autoridades">Movimientos de ministros, parlamentarios y autoridades</h2>
@@ -372,7 +379,7 @@ footer a{font-weight:600}
     <div class="people" id="people"></div>
     <div class="card compare table-wrap" id="compare"></div>
   </section>
-  <section aria-labelledby="h-leyes">
+  <section id="leyes" data-share aria-labelledby="h-leyes">
     <div class="sec-head">
       <div class="eyebrow">Congreso</div>
       <h2 id="h-leyes">Tablero de leyes y proyectos</h2>
@@ -386,7 +393,7 @@ footer a{font-weight:600}
     </div>
   </section>
 
-  <section aria-labelledby="h-glosario">
+  <section id="glosario" data-share aria-labelledby="h-glosario">
     <div class="sec-head">
       <div class="eyebrow">Para entender</div>
       <h2 id="h-glosario">Glosario rápido</h2>
@@ -394,7 +401,7 @@ footer a{font-weight:600}
     <dl class="gloss" id="gloss"></dl>
   </section>
 
-  <section aria-labelledby="h-fuentes">
+  <section id="fuentes" data-share aria-labelledby="h-fuentes">
     <div class="card">
       <div class="eyebrow">Fuentes</div>
       <h2 id="h-fuentes" style="font-size:22px">De dónde sale esta información</h2>
@@ -1303,6 +1310,31 @@ footer a{font-weight:600}
 
   // Toast
   function toast(msg){var t=el('div','toast',msg); t.setAttribute('role','status'); document.body.appendChild(t); setTimeout(function(){t.remove();},3200);}
+
+  // Botones para compartir cada sección
+  (function(){
+    var BASE='https://matisandev.cl/actualizacion-politica';
+    var NAMES={mandato:'Tiempo del mandato',noticias:'Noticias',movilizaciones:'Movilizaciones',cortes:'Cortes de rutas y Metro',cifras:'Cifras',autoridades:'Movimientos de autoridades',leyes:'Tablero de leyes',glosario:'Glosario',fuentes:'Fuentes'};
+    document.querySelectorAll('section[data-share]').forEach(function(sec){
+      var h=sec.querySelector('h2'); if(!h) return;
+      var row=el('div','h-row'); h.parentNode.insertBefore(row,h); row.appendChild(h);
+      var b=el('button','share-sec'); b.type='button'; b.id='share-'+sec.id;
+      b.setAttribute('aria-label','Compartir la sección '+(NAMES[sec.id]||sec.id));
+      b.appendChild(icon('share').cloneNode(true)); b.querySelector('use').setAttribute('href','#i-share');
+      b.appendChild(document.createTextNode('Compartir'));
+      b.addEventListener('click',function(){
+        var url=BASE+'#'+sec.id, title=(NAMES[sec.id]||'')+' · Actualización Política de Chile';
+        if(navigator.share){navigator.share({title:title,url:url}).catch(function(){copy(url);});} else copy(url);
+      });
+      row.appendChild(b);
+    });
+    function copy(url){
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(url).then(function(){toast('Enlace a esta sección copiado.');},function(){toast('Enlace: '+url);});}
+      else toast('Enlace: '+url);
+    }
+    // Al abrir un enlace a una sección, ir a ella cuando el contenido ya cargó
+    if(location.hash){var t=document.getElementById(location.hash.slice(1)); if(t) setTimeout(function(){t.scrollIntoView({block:'start'});},80);}
+  })();
 
   // Compartir
   document.getElementById('btn-share').addEventListener('click',function(){
