@@ -16,6 +16,26 @@ def summary(message):
     if os.getenv('GITHUB_STEP_SUMMARY'):
         with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f: f.write(message+'\n\n')
 
+def safe_http_error(url, status, body):
+    if not url.startswith('https://api.openai.com/'):
+        return 'Solicitud rechazada: HTTP '+str(status)
+    labels={
+        'insufficient_quota':'Saldo o cuota de API insuficiente: revisar Billing y Limits de OpenAI.',
+        'credit_balance_exhausted':'Saldo de API agotado: revisar Billing de OpenAI.',
+        'organization_spend_limit_exceeded':'Límite de gasto de organización alcanzado.',
+        'project_spend_limit_exceeded':'Límite de gasto del proyecto alcanzado.',
+        'organization_usage_limit_exceeded':'Cuota de uso de organización alcanzada.',
+        'rate_limit_exceeded':'Límite temporal de solicitudes o tokens alcanzado.',
+        'slow_down':'Límite temporal por aumento de solicitudes.',
+    }
+    try:
+        error=json.loads(body).get('error',{})
+        code=error.get('code')
+        label=labels.get(code) or labels.get(error.get('type'))
+    except (ValueError,TypeError,AttributeError): label=None
+    # Only fixed local strings are logged, never the API message or response body.
+    return 'OpenAI HTTP '+str(status)+': '+(label or 'Solicitud rechazada; revisar acceso, saldo y límites de API.')
+
 def request(url, token=None, method='GET', data=None):
     headers={'Accept':'application/json','User-Agent':'Kastigo-daily'}
     if token: headers['Authorization']='Bearer '+token
@@ -25,7 +45,7 @@ def request(url, token=None, method='GET', data=None):
         with urllib.request.urlopen(req,timeout=600) as r: return r.read()
     except urllib.error.HTTPError as e:
         # Never echo response bodies, headers, prompts or secrets.
-        raise RuntimeError('Solicitud rechazada: HTTP '+str(e.code)) from None
+        raise RuntimeError(safe_http_error(url,e.code,e.read(65536))) from None
     except Exception: raise RuntimeError('Fallo de conexión; no se publica') from None
 
 def gh(route,method='GET',data=None):
