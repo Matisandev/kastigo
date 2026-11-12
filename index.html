@@ -124,6 +124,28 @@ td .muted{color:var(--muted)}
 .s-rechazada{background:var(--bad-dim);color:var(--bad)}
 .s-retirado{background:var(--warn-dim);color:var(--warn)}
 .s-tramite{background:var(--info-dim);color:var(--info)}
+/* Cortes de tránsito */
+.traffic-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:16px;align-items:start}
+.region{display:flex;flex-direction:column;gap:0}
+.region + .region{margin-top:18px}
+.region h3{font:600 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.cut{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.region .cut:last-child{border-bottom:0}
+.cut b{font-weight:600}
+.cut p{grid-column:1/-1;margin:0;color:var(--muted);font-size:14px}
+.lv{align-self:start;white-space:nowrap;padding:3px 10px;border-radius:99px;font:600 11px var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.lv-corte{background:var(--bad-dim);color:var(--bad)}
+.lv-parcial{background:var(--warn-dim);color:var(--warn)}
+.lv-congestion{background:var(--info-dim);color:var(--info)}
+.lv-normal{background:var(--ok-dim);color:var(--ok)}
+.metro-card{display:flex;flex-direction:column;gap:12px}
+.metro-badge{display:inline-flex;align-items:center;gap:10px;font-weight:600}
+.metro-badge i{width:12px;height:12px;border-radius:50%;background:var(--ok)}
+.metro-badge.alterado i{background:var(--bad)}
+.metro-badge.sin-info i{background:var(--muted)}
+.metro-card p{margin:0;color:var(--muted);font-size:14px}
+.metro-card ul{margin:0;padding-left:18px;color:var(--ink);font-size:14px}
+.traffic-empty{color:var(--muted);margin:0}
 /* Gráficos */
 .two{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px}
 .vote{display:grid;grid-template-columns:110px minmax(0,1fr) 70px;gap:10px;align-items:center;font-size:13px;padding:7px 0}
@@ -178,7 +200,7 @@ footer{border-top:1px solid var(--line);padding-block:28px}
 footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13.6px}
 footer a{font-weight:600}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--navy);border:1px solid var(--brand-border);color:var(--ink);padding:10px 16px;border-radius:12px;font-size:14px;z-index:20;max-width:calc(100% - 32px)}
-@media (max-width:860px){.essentials{grid-template-columns:1fr}.countdown,.two,.news,.gloss,.mob-head,.agenda{grid-template-columns:1fr}}
+@media (max-width:860px){.essentials{grid-template-columns:1fr}.countdown,.two,.news,.gloss,.mob-head,.agenda,.traffic-grid{grid-template-columns:1fr}}
 @media (max-width:520px){.btn .lbl{display:none}.btn{padding:0 11px}.cd-grid{gap:6px}.cd-cell{padding:12px 4px}.vote{grid-template-columns:84px minmax(0,1fr) 60px}.mob{padding:20px 16px;border-radius:20px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -192,6 +214,7 @@ footer a{font-weight:600}
   <symbol id="i-calle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v3a1 1 0 0 0 1 1h3l6 4V6L7 10H4a1 1 0 0 0-1 1z"/><path d="M17 9a4 4 0 0 1 0 6"/><path d="M19.5 6.5a8 8 0 0 1 0 11"/></symbol>
   <symbol id="i-ley" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></symbol>
   <symbol id="i-justicia" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M7 21h10"/><path d="M5 7h14"/><path d="M5 7l-3 7a3 3 0 0 0 6 0z"/><path d="M19 7l-3 7a3 3 0 0 0 6 0z"/></symbol>
+  <symbol id="i-ruta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3L4 21"/><path d="M16 3l4 18"/><path d="M12 4v3M12 11v3M12 18v2"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
   <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
@@ -232,6 +255,18 @@ footer a{font-weight:600}
       <div class="mob-stats" id="mob-stats"></div>
     </div>
     <ul class="agenda" id="agenda"></ul>
+  </section>
+
+  <section aria-labelledby="h-transito">
+    <div class="sec-head">
+      <div class="eyebrow">Tránsito y transporte</div>
+      <h2 id="h-transito">Cortes de rutas, calles y Metro</h2>
+      <p id="traffic-note"></p>
+    </div>
+    <div class="traffic-grid">
+      <div class="card" id="traffic-list"></div>
+      <div class="card metro-card" id="metro-card"></div>
+    </div>
   </section>
 
   <section aria-labelledby="h-mandato">
@@ -331,101 +366,500 @@ footer a{font-weight:600}
 
 <script type="application/json" id="data">
 {
-  "updated": "2026-11-12T11:45:00-03:00",
-  "lede": "Semana tensa para el Gobierno: paro de camioneros por el precio del diésel, congelamiento de combustibles hasta febrero, derrotas en el Presupuesto 2027 y la polémica por rebajas de condena que apunta al ministro de Justicia.",
-  "essentials": [
-    {"cat":"economia","title":"Combustibles congelados","text":"El Gobierno congela precios de bencina y diésel hasta el 3 de febrero de 2027 y busca anular el alza de esta semana."},
-    {"cat":"congreso","title":"Revés en el Presupuesto","text":"La Cámara rechazó las partidas de Educación (empate 72-72) e Interior del Presupuesto 2027."},
-    {"cat":"calle","title":"Movilizaciones en curso","text":"Paro nacional de camioneros desde el 10 de noviembre y jornada de protesta de la CUT el 18 de noviembre."}
-  ],
-  "news": [
-    {"cat":"economia","date":"11 nov 2026","title":"Gobierno congela el precio de los combustibles hasta febrero",
-     "text":"El biministro Claudio Alvarado anunció que el precio de las bencinas y del diésel quedará congelado hasta el 3 de febrero de 2027. Además, el Gobierno enviará un proyecto para anular el alza prevista para esta semana ($42 por litro en diésel y $39 en gasolinas) y extender hasta diciembre de 2027 la devolución del impuesto específico a transportistas.",
-     "why":"Afecta directamente lo que pagas al cargar combustible y el costo de transportar alimentos y productos.",
-     "sources":[{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-anuncia-congelamiento-de-precios-de-combustibles-hasta-febrero-de-2027.shtml"}]},
-    {"cat":"calle","date":"10–12 nov 2026","title":"Paro de camioneros: bloqueos y falta de combustible en regiones",
-     "text":"Desde el martes 10 de noviembre, pequeños y medianos camioneros mantienen un paro nacional. Hubo bloqueos parciales en autopistas, más de 600 transportistas movilizados en Arica y Parinacota y Tarapacá, y falta de bencina y diésel en Temuco y Padre Las Casas. Piden congelar precios, eliminar por un tiempo el impuesto específico y revisar peajes.",
-     "why":"Un paro largo puede provocar desabastecimiento de combustible y alzas en productos básicos, sobre todo en regiones.",
-     "sources":[{"n":"Infobae","u":"https://www.infobae.com/movant/2026/11/12/el-costo-del-diesel-en-chile-empuja-un-paro-de-camioneros-con-efectos-en-el-suministro-regional/"},{"n":"BioBioChile (análisis)","u":"https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/camioneros-presionan-kast-negocia-y-los-chilenos-pagan-el-costo-oculto-de-la-crisis.shtml"},{"n":"Publimetro","u":"https://www.publimetro.cl/noticias/2026/11/11/gobierno-retira-proyecto-para-topar-alzas-de-combustibles-mientras-kast-fija-postura-ante-paro-de-camioneros/"}]},
-    {"cat":"congreso","date":"12 nov 2026","title":"La Cámara rechaza el presupuesto de Educación por empate",
-     "text":"La propuesta del Gobierno para la partida de Educación del Presupuesto 2027 empató 72 a 72, por lo que fue rechazada. Se suma al rechazo de la partida de Interior del martes. Ese mismo día se aprobaron Justicia, Defensa, Obras Públicas y Agricultura.",
-     "why":"El presupuesto define cuánto dinero tendrán colegios, universidades y servicios públicos en 2027. Las partidas rechazadas deben resolverse en el resto del trámite.",
-     "sources":[{"n":"El Mostrador","u":"https://www.elmostrador.cl/noticias/pais/2026/11/12/nuevo-reves-para-kast-camara-rechaza-presupuesto-de-educacion-y-suma-otra-derrota-para-el-gobierno"},{"n":"Infobae","u":"https://www.infobae.com/america/agencias/2026/11/11/congreso-chileno-desafia-recortes-presupuestarios-de-kast-con-rechazo-a-partida-educativa/"}]},
-    {"cat":"justicia","date":"6–11 nov 2026","title":"Crisis por rebajas de condena: el Gobierno apoya derogar la ley",
-     "text":"Tras la polémica por 56 rebajas de condena otorgadas a personas condenadas por delitos graves, varios de ellos sexuales contra menores, el Gobierno respaldó derogar la Ley 19.856 y suspendió las rebajas el 9 de noviembre. Los decretos fueron firmados por el ministro de Justicia, Fernando Rabat. El Presidente reconoció el error pero lo mantiene en el cargo, y la oposición prepara una acusación constitucional en su contra.",
-     "why":"Define si seguirán existiendo rebajas de pena por buena conducta y puede costarle el cargo a un ministro.",
-     "sources":[{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-apuesta-por-derogar-ley-de-rebajas-de-condena-solucion-a-crisis-de-rabat-o-un-nuevo-error.shtml"},{"n":"T13 / Ex-Ante","u":"https://www.t13.cl/noticia/ex-ante/politica/los-detalles-del-polemico-proyecto-rebaja-penas-kast-busca-salir-crisis-12-11-2026"}]},
-    {"cat":"gobierno","date":"10–12 nov 2026","title":"Kast descarta por ahora un cambio de gabinete",
-     "text":"En la reunión con los partidos oficialistas en Cerro Castillo, el Presidente descartó cambiar ministros en el corto plazo. El vocero Gonzalo Arenas informó que se acordó una agenda común. Según un registro de El Periodista, al 30 de octubre el gobierno sumaba 59 salidas o cambios de autoridades: 3 ministras, 8 subsecretarios, 46 seremis y 2 delegados.",
-     "why":"Los cambios de ministros suelen marcar giros en las prioridades del Gobierno.",
-     "sources":[{"n":"El Dínamo","u":"https://www.eldinamo.cl/politica/2026/11/11/gobierno-desecha-idea-de-cambio-de-gabinete-en-cumbre-de-cerro-castillo/"},{"n":"Publimetro","u":"https://www.publimetro.cl/noticias/2026/11/12/kast-descarta-cambio-de-gabinete-y-sella-pacto-de-hermetismo-con-el-oficialismo/"},{"n":"El Periodista","u":"https://www.elperiodista.cl/2026/11/gobierno-de-kast-acumula-59-salidas-y-cambios-de-autoridades/"},{"n":"Radio U. de Chile","u":"https://radio.uchile.cl/2026/11/06/gobierno-insiste-en-cerrar-la-puerta-al-cambio-de-gabinete-todos-los-ministros-cuentan-con-el-respaldo-del-presidente/"}]},
-    {"cat":"calle","date":"11 nov 2026","title":"Protesta estudiantil frente al Mineduc obligó a cortar la Alameda",
-     "text":"La Confech protestó contra los recortes del Presupuesto 2027 frente al Ministerio de Educación. Cerca de una hora después hubo enfrentamientos con Carabineros, que usó gases lacrimógenos, y se cortó el tránsito por la Alameda. Los estudiantes entregaron una carta a la ministra María Paz Arzola pidiendo reponer recursos. No se informó cifra de detenidos.",
-     "why":"Es el inicio de un ciclo de movilizaciones que seguirá hasta diciembre.",
-     "sources":[{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/region-metropolitana/2026/11/11/cortan-la-alameda-en-santiago-tras-incidentes-por-protesta-confech-afuera-del-mineduc.shtml"}]},
-    {"cat":"congreso","date":"10–11 nov 2026","title":"Gobierno retira en menos de 24 horas su proyecto para topar alzas",
-     "text":"La Segpres retiró de la Cámara el proyecto que limitaba a $20 por litro las alzas de bencina y diésel durante 90 días. Había ingresado con discusión inmediata en medio del paro. El Gobierno dijo que lo ajustará y lo volverá a presentar, y luego anunció el congelamiento de precios.",
-     "why":"Muestra la urgencia del Gobierno por responder al paro y la dificultad para encontrar una fórmula.",
-     "sources":[{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-retira-proyecto-de-ley-para-frenar-alza-de-combustibles.shtml"},{"n":"The Clinic","u":"https://www.theclinic.cl/2026/11/11/gobierno-retira-del-congreso-el-proyecto-recien-ingresado-que-limitaba-el-alza-de-los-combustibles-ejecutivo-prepara-ajustes-al-articulado/"}]},
-    {"cat":"ley","date":"Vigente desde nov 2026","title":"Ley de Reconstrucción: lo que empieza a regir este mes",
-     "text":"La Ley 21.850 de Reconstrucción Nacional y Desarrollo Económico y Social se publicó en el Diario Oficial el 17 de octubre. Desde noviembre, el fondo de emergencia por incendios sube a $1,2 billones e incluye a Ñuble y Biobío, además de Valparaíso. También crea un crédito tributario para empresas que exportan servicios y cambia los topes de la franquicia Sence.",
-     "why":"Es la principal reforma económica del Gobierno: trae cambios tributarios y apoyo a zonas afectadas por incendios y a adultos mayores.",
-     "sources":[{"n":"CNN Chile","u":"https://www.cnnchile.com/pais/megarreforma-del-gobierno-es-publicada-en-el-diario-oficial-que-medidas-comenzaran-a-regir-en-noviembre/"},{"n":"Cooperativa","u":"https://www.cooperativa.cl/noticias/pais/politica/agenda-legislativa/publicada-en-el-diario-oficial-la-ley-de-reconstruccion-iniciara-su/2026-10-17/154253.html"},{"n":"SII","u":"https://www.sii.cl/noticias/2026/191026noti01pcr.htm"}]},
-    {"cat":"calle","date":"18 oct 2026","title":"Contexto: 29 detenidos en la marcha por el aniversario del estallido",
-     "text":"En la marcha por los siete años del estallido social, unas 2.800 personas avanzaron por la Alameda. Carabineros informó 29 detenidos por porte de elementos incendiarios y robos a locales. Hubo cortes de tránsito entre Plaza Baquedano y Santa Lucía y cierre preventivo de estaciones de Metro.",
-     "why":"Sirve de referencia sobre cómo pueden desarrollarse las próximas marchas en el centro de Santiago.",
-     "sources":[{"n":"Cooperativa","u":"https://www.cooperativa.cl/noticias/pais/manifestaciones/al-menos-29-detenidos-tras-marcha-por-aniversario-del-estallido-social/2026-10-18/193033.html"}]}
-  ],
-  "laws": [
-    {"name":"Ley 21.850 de Reconstrucción Nacional","status":"publicada","label":"Publicada","text":"Medidas tributarias, fondo para incendios y apoyo a adultos mayores. Sus medidas entran en vigencia por etapas.","date":"17 oct 2026"},
-    {"name":"Presupuesto 2027 · partida Educación","status":"rechazada","label":"Rechazada en la Cámara","text":"Empate 72-72 sobre la propuesta del Gobierno. Sigue el trámite del Presupuesto.","date":"12 nov 2026"},
-    {"name":"Presupuesto 2027 · partida Interior","status":"rechazada","label":"Rechazada en la Cámara","text":"Primera partida rechazada en la Sala esta semana.","date":"10 nov 2026"},
-    {"name":"Tope de $20 a las alzas de combustibles","status":"retirado","label":"Retirado","text":"El Gobierno lo sacó del Congreso para ajustarlo. Lo reemplazó el anuncio de congelamiento de precios.","date":"11 nov 2026"},
-    {"name":"Anulación del alza de combustibles y congelamiento hasta feb. 2027","status":"tramite","label":"Anunciado","text":"El Gobierno enviará un proyecto. Si se aprueba y promulga rápido, el alza de esta semana se revierte.","date":"11 nov 2026"},
-    {"name":"Derogación de la Ley 19.856 (rebajas de condena)","status":"tramite","label":"En discusión","text":"Iniciativa de parlamentarios con apoyo del Gobierno. Las rebajas están suspendidas desde el 9 de noviembre.","date":"6–9 nov 2026"}
-  ],
-  "votes": {
-    "note":"Votos en la Sala de la Cámara, 11 de noviembre de 2026. Fuente: El Mostrador.",
-    "rows":[
-      {"name":"Defensa","yes":124,"no":3,"result":"Aprobada"},
-      {"name":"Obras Públicas","yes":102,"no":29,"result":"Aprobada"},
-      {"name":"Justicia","yes":85,"no":59,"result":"Aprobada"},
-      {"name":"Agricultura","yes":65,"no":61,"result":"Aprobada"},
-      {"name":"Educación","yes":72,"no":72,"result":"Rechazada"}
-    ]
+ "updated": "2026-11-12T12:45:00-03:00",
+ "lede": "Semana tensa para el Gobierno: paro de camioneros por el precio del diésel, congelamiento de combustibles hasta febrero, derrotas en el Presupuesto 2027 y la polémica por rebajas de condena que apunta al ministro de Justicia.",
+ "essentials": [
+  {
+   "cat": "economia",
+   "title": "Combustibles congelados",
+   "text": "El Gobierno congela precios de bencina y diésel hasta el 3 de febrero de 2027 y busca anular el alza de esta semana."
   },
-  "mobStats": [
-    {"value":"+600","label":"camioneros movilizados en Arica y Parinacota y Tarapacá"},
-    {"value":"3","label":"jornadas de protesta convocadas hasta diciembre"},
-    {"value":"29","label":"detenidos en la última gran marcha en Santiago (18 oct)"},
-    {"value":"+53,5%","label":"alza del diésel en 2026, motivo del paro"}
-  ],
-  "agenda": [
-    {"status":"now","when":"Desde 10 nov","sub":"sin fecha de término","title":"Paro nacional de camioneros","place":"Autopistas y rutas del norte y sur; falta de combustible en Temuco y Padre Las Casas","text":"Pequeños y medianos camioneros piden congelar precios, suspender el impuesto específico y revisar peajes. Tras el anuncio del congelamiento de combustibles, los gremios consultan a sus bases si deponen el paro.","sources":[{"n":"Infobae","u":"https://www.infobae.com/movant/2026/11/12/el-costo-del-diesel-en-chile-empuja-un-paro-de-camioneros-con-efectos-en-el-suministro-regional/"},{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-anuncia-congelamiento-de-precios-de-combustibles-hasta-febrero-de-2027.shtml"}]},
-    {"status":"now","when":"11 nov","sub":"ayer","title":"Protesta de la Confech contra recortes en educación","place":"Mineduc, Alameda (Santiago); Congreso (Valparaíso); Seremis en regiones","text":"Hubo enfrentamientos con Carabineros, gases lacrimógenos y corte de la Alameda. No se informó cifra de detenidos. Abre el ciclo de protestas del Frente Común.","sources":[{"n":"BioBioChile","u":"https://www.biobiochile.cl/noticias/nacional/region-metropolitana/2026/11/11/cortan-la-alameda-en-santiago-tras-incidentes-por-protesta-confech-afuera-del-mineduc.shtml"}]},
-    {"status":"next","when":"18 nov","sub":"miércoles","title":"Jornada nacional de protesta de la CUT","place":"Todo el país","text":"Manifestaciones contra los recortes del Presupuesto 2027 y por el reajuste del sector público.","sources":[{"n":"Canal 9 BioBío","u":"https://www.canal9.cl/episodios/2026/11/10/agrupaciones-de-trabajadores-y-estudiantes-anuncian-movilizaciones-contra-gobierno-desde-el-miercoles"}]},
-    {"status":"next","when":"27 nov","sub":"viernes","title":"Protesta de pobladores frente al Minvu","place":"Ministerio de Vivienda, Santiago","text":"El Movimiento Nacional de Pobladores pedirá la salida del ministro de Vivienda, Iván Poduje. El ciclo de protestas del Frente Común seguiría hasta la primera semana de diciembre.","sources":[{"n":"Canal 9 BioBío","u":"https://www.canal9.cl/episodios/2026/11/10/agrupaciones-de-trabajadores-y-estudiantes-anuncian-movilizaciones-contra-gobierno-desde-el-miercoles"}]}
-  ],
-  "gloss": [
-    {"t":"Partida presupuestaria","d":"Es el capítulo del Presupuesto que corresponde a un ministerio. Rechazar una partida significa que la Cámara no aprobó la propuesta de dinero para ese ministerio."},
-    {"t":"Acusación constitucional","d":"Herramienta del Congreso para hacer responsable a una autoridad. Si se aprueba, la persona es destituida y no puede ejercer cargos públicos por 5 años."},
-    {"t":"Discusión inmediata","d":"Urgencia que pone el Gobierno a un proyecto para que el Congreso lo vote en pocos días."},
-    {"t":"Impuesto específico","d":"Impuesto fijo por litro que se cobra a los combustibles. Los transportistas pueden recuperar una parte."}
-  ],
-  "outlets": [
-    {"n":"BioBioChile","u":"https://www.biobiochile.cl"},
-    {"n":"Cooperativa","u":"https://www.cooperativa.cl"},
-    {"n":"CNN Chile","u":"https://www.cnnchile.com"},
-    {"n":"El Mostrador","u":"https://www.elmostrador.cl"},
-    {"n":"The Clinic","u":"https://www.theclinic.cl"},
-    {"n":"El Dínamo","u":"https://www.eldinamo.cl"},
-    {"n":"Radio U. de Chile","u":"https://radio.uchile.cl"},
-    {"n":"El Periodista","u":"https://www.elperiodista.cl"},
-    {"n":"Publimetro","u":"https://www.publimetro.cl"},
-    {"n":"T13 / Ex-Ante","u":"https://www.t13.cl"},
-    {"n":"Infobae","u":"https://www.infobae.com"},
-    {"n":"Canal 9 BioBío","u":"https://www.canal9.cl"}
+  {
+   "cat": "congreso",
+   "title": "Revés en el Presupuesto",
+   "text": "La Cámara rechazó las partidas de Educación (empate 72-72) e Interior del Presupuesto 2027."
+  },
+  {
+   "cat": "calle",
+   "title": "Movilizaciones en curso",
+   "text": "Paro nacional de camioneros desde el 10 de noviembre y jornada de protesta de la CUT el 18 de noviembre."
+  }
+ ],
+ "news": [
+  {
+   "cat": "economia",
+   "date": "11 nov 2026",
+   "title": "Gobierno congela el precio de los combustibles hasta febrero",
+   "text": "El biministro Claudio Alvarado anunció que el precio de las bencinas y del diésel quedará congelado hasta el 3 de febrero de 2027. Además, el Gobierno enviará un proyecto para anular el alza prevista para esta semana ($42 por litro en diésel y $39 en gasolinas) y extender hasta diciembre de 2027 la devolución del impuesto específico a transportistas.",
+   "why": "Afecta directamente lo que pagas al cargar combustible y el costo de transportar alimentos y productos.",
+   "sources": [
+    {
+     "n": "BioBioChile",
+     "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-anuncia-congelamiento-de-precios-de-combustibles-hasta-febrero-de-2027.shtml"
+    }
+   ]
+  },
+  {
+   "cat": "calle",
+   "date": "10–12 nov 2026",
+   "title": "Paro de camioneros: bloqueos y falta de combustible en regiones",
+   "text": "Desde el martes 10 de noviembre, pequeños y medianos camioneros mantienen un paro nacional con bloqueos parciales en rutas de varias regiones. El 12 de noviembre se sumó Fedequinta, que agrupa a unos 800 transportistas de Valparaíso, y la Confederación de Transportistas Fuerza del Norte rechazó formalmente la propuesta del Gobierno y pidió una rebaja del combustible. Las confederaciones nacionales CNTC y CNDC no se han sumado y siguen conversando con La Moneda.",
+   "why": "Un paro largo puede provocar desabastecimiento de combustible y alzas en productos básicos, sobre todo en regiones.",
+   "sources": [
+    {
+     "n": "Cooperativa",
+     "u": "https://www.cooperativa.cl/noticias/pais/manifestaciones/paro-transportistas-del-norte-rechazaron-oficialmente-propuesta-del/2026-11-12/073801.html"
+    },
+    {
+     "n": "Infobae (EFE)",
+     "u": "https://www.infobae.com/america/agencias/2026/11/12/nuevos-gremios-de-transportistas-se-unen-al-paro-en-chile-pese-a-los-anuncios-del-gobierno/"
+    },
+    {
+     "n": "BioBioChile (análisis)",
+     "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/camioneros-presionan-kast-negocia-y-los-chilenos-pagan-el-costo-oculto-de-la-crisis.shtml"
+    }
+   ]
+  },
+  {
+   "cat": "congreso",
+   "date": "12 nov 2026",
+   "title": "La Cámara rechaza el presupuesto de Educación por empate",
+   "text": "La propuesta del Gobierno para la partida de Educación del Presupuesto 2027 empató 72 a 72, por lo que fue rechazada. Se suma al rechazo de la partida de Interior del martes. Ese mismo día se aprobaron Justicia, Defensa, Obras Públicas y Agricultura.",
+   "why": "El presupuesto define cuánto dinero tendrán colegios, universidades y servicios públicos en 2027. Las partidas rechazadas deben resolverse en el resto del trámite.",
+   "sources": [
+    {
+     "n": "El Mostrador",
+     "u": "https://www.elmostrador.cl/noticias/pais/2026/11/12/nuevo-reves-para-kast-camara-rechaza-presupuesto-de-educacion-y-suma-otra-derrota-para-el-gobierno"
+    },
+    {
+     "n": "Infobae",
+     "u": "https://www.infobae.com/america/agencias/2026/11/11/congreso-chileno-desafia-recortes-presupuestarios-de-kast-con-rechazo-a-partida-educativa/"
+    }
+   ]
+  },
+  {
+   "cat": "justicia",
+   "date": "6–11 nov 2026",
+   "title": "Crisis por rebajas de condena: el Gobierno apoya derogar la ley",
+   "text": "Tras la polémica por 56 rebajas de condena otorgadas a personas condenadas por delitos graves, varios de ellos sexuales contra menores, el Gobierno respaldó derogar la Ley 19.856 y suspendió las rebajas el 9 de noviembre. Los decretos fueron firmados por el ministro de Justicia, Fernando Rabat. El Presidente reconoció el error pero lo mantiene en el cargo, y la oposición prepara una acusación constitucional en su contra.",
+   "why": "Define si seguirán existiendo rebajas de pena por buena conducta y puede costarle el cargo a un ministro.",
+   "sources": [
+    {
+     "n": "BioBioChile",
+     "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-apuesta-por-derogar-ley-de-rebajas-de-condena-solucion-a-crisis-de-rabat-o-un-nuevo-error.shtml"
+    },
+    {
+     "n": "T13 / Ex-Ante",
+     "u": "https://www.t13.cl/noticia/ex-ante/politica/los-detalles-del-polemico-proyecto-rebaja-penas-kast-busca-salir-crisis-12-11-2026"
+    }
+   ]
+  },
+  {
+   "cat": "gobierno",
+   "date": "10–12 nov 2026",
+   "title": "Kast descarta por ahora un cambio de gabinete",
+   "text": "En la reunión con los partidos oficialistas en Cerro Castillo, el Presidente descartó cambiar ministros en el corto plazo. El vocero Gonzalo Arenas informó que se acordó una agenda común. Según un registro de El Periodista, al 30 de octubre el gobierno sumaba 59 salidas o cambios de autoridades: 3 ministras, 8 subsecretarios, 46 seremis y 2 delegados.",
+   "why": "Los cambios de ministros suelen marcar giros en las prioridades del Gobierno.",
+   "sources": [
+    {
+     "n": "El Dínamo",
+     "u": "https://www.eldinamo.cl/politica/2026/11/11/gobierno-desecha-idea-de-cambio-de-gabinete-en-cumbre-de-cerro-castillo/"
+    },
+    {
+     "n": "Publimetro",
+     "u": "https://www.publimetro.cl/noticias/2026/11/12/kast-descarta-cambio-de-gabinete-y-sella-pacto-de-hermetismo-con-el-oficialismo/"
+    },
+    {
+     "n": "El Periodista",
+     "u": "https://www.elperiodista.cl/2026/11/gobierno-de-kast-acumula-59-salidas-y-cambios-de-autoridades/"
+    },
+    {
+     "n": "Radio U. de Chile",
+     "u": "https://radio.uchile.cl/2026/11/06/gobierno-insiste-en-cerrar-la-puerta-al-cambio-de-gabinete-todos-los-ministros-cuentan-con-el-respaldo-del-presidente/"
+    }
+   ]
+  },
+  {
+   "cat": "calle",
+   "date": "11 nov 2026",
+   "title": "Protesta estudiantil frente al Mineduc obligó a cortar la Alameda",
+   "text": "La Confech protestó contra los recortes del Presupuesto 2027 frente al Ministerio de Educación. Cerca de una hora después hubo enfrentamientos con Carabineros, que usó gases lacrimógenos, y se cortó el tránsito por la Alameda. Los estudiantes entregaron una carta a la ministra María Paz Arzola pidiendo reponer recursos. No se informó cifra de detenidos.",
+   "why": "Es el inicio de un ciclo de movilizaciones que seguirá hasta diciembre.",
+   "sources": [
+    {
+     "n": "BioBioChile",
+     "u": "https://www.biobiochile.cl/noticias/nacional/region-metropolitana/2026/11/11/cortan-la-alameda-en-santiago-tras-incidentes-por-protesta-confech-afuera-del-mineduc.shtml"
+    }
+   ]
+  },
+  {
+   "cat": "congreso",
+   "date": "10–11 nov 2026",
+   "title": "Gobierno retira en menos de 24 horas su proyecto para topar alzas",
+   "text": "La Segpres retiró de la Cámara el proyecto que limitaba a $20 por litro las alzas de bencina y diésel durante 90 días. Había ingresado con discusión inmediata en medio del paro. El Gobierno dijo que lo ajustará y lo volverá a presentar, y luego anunció el congelamiento de precios.",
+   "why": "Muestra la urgencia del Gobierno por responder al paro y la dificultad para encontrar una fórmula.",
+   "sources": [
+    {
+     "n": "BioBioChile",
+     "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-retira-proyecto-de-ley-para-frenar-alza-de-combustibles.shtml"
+    },
+    {
+     "n": "The Clinic",
+     "u": "https://www.theclinic.cl/2026/11/11/gobierno-retira-del-congreso-el-proyecto-recien-ingresado-que-limitaba-el-alza-de-los-combustibles-ejecutivo-prepara-ajustes-al-articulado/"
+    }
+   ]
+  },
+  {
+   "cat": "ley",
+   "date": "Vigente desde nov 2026",
+   "title": "Ley de Reconstrucción: lo que empieza a regir este mes",
+   "text": "La Ley 21.850 de Reconstrucción Nacional y Desarrollo Económico y Social se publicó en el Diario Oficial el 17 de octubre. Desde noviembre, el fondo de emergencia por incendios sube a $1,2 billones e incluye a Ñuble y Biobío, además de Valparaíso. También crea un crédito tributario para empresas que exportan servicios y cambia los topes de la franquicia Sence.",
+   "why": "Es la principal reforma económica del Gobierno: trae cambios tributarios y apoyo a zonas afectadas por incendios y a adultos mayores.",
+   "sources": [
+    {
+     "n": "CNN Chile",
+     "u": "https://www.cnnchile.com/pais/megarreforma-del-gobierno-es-publicada-en-el-diario-oficial-que-medidas-comenzaran-a-regir-en-noviembre/"
+    },
+    {
+     "n": "Cooperativa",
+     "u": "https://www.cooperativa.cl/noticias/pais/politica/agenda-legislativa/publicada-en-el-diario-oficial-la-ley-de-reconstruccion-iniciara-su/2026-10-17/154253.html"
+    },
+    {
+     "n": "SII",
+     "u": "https://www.sii.cl/noticias/2026/191026noti01pcr.htm"
+    }
+   ]
+  },
+  {
+   "cat": "calle",
+   "date": "18 oct 2026",
+   "title": "Contexto: 29 detenidos en la marcha por el aniversario del estallido",
+   "text": "En la marcha por los siete años del estallido social, unas 2.800 personas avanzaron por la Alameda. Carabineros informó 29 detenidos por porte de elementos incendiarios y robos a locales. Hubo cortes de tránsito entre Plaza Baquedano y Santa Lucía y cierre preventivo de estaciones de Metro.",
+   "why": "Sirve de referencia sobre cómo pueden desarrollarse las próximas marchas en el centro de Santiago.",
+   "sources": [
+    {
+     "n": "Cooperativa",
+     "u": "https://www.cooperativa.cl/noticias/pais/manifestaciones/al-menos-29-detenidos-tras-marcha-por-aniversario-del-estallido-social/2026-10-18/193033.html"
+    }
+   ]
+  }
+ ],
+ "laws": [
+  {
+   "name": "Ley 21.850 de Reconstrucción Nacional",
+   "status": "publicada",
+   "label": "Publicada",
+   "text": "Medidas tributarias, fondo para incendios y apoyo a adultos mayores. Sus medidas entran en vigencia por etapas.",
+   "date": "17 oct 2026"
+  },
+  {
+   "name": "Presupuesto 2027 · partida Educación",
+   "status": "rechazada",
+   "label": "Rechazada en la Cámara",
+   "text": "Empate 72-72 sobre la propuesta del Gobierno. Sigue el trámite del Presupuesto.",
+   "date": "12 nov 2026"
+  },
+  {
+   "name": "Presupuesto 2027 · partida Interior",
+   "status": "rechazada",
+   "label": "Rechazada en la Cámara",
+   "text": "Primera partida rechazada en la Sala esta semana.",
+   "date": "10 nov 2026"
+  },
+  {
+   "name": "Tope de $20 a las alzas de combustibles",
+   "status": "retirado",
+   "label": "Retirado",
+   "text": "El Gobierno lo sacó del Congreso para ajustarlo. Lo reemplazó el anuncio de congelamiento de precios.",
+   "date": "11 nov 2026"
+  },
+  {
+   "name": "Anulación del alza de combustibles y congelamiento hasta feb. 2027",
+   "status": "tramite",
+   "label": "Anunciado",
+   "text": "El Gobierno enviará un proyecto. Si se aprueba y promulga rápido, el alza de esta semana se revierte.",
+   "date": "11 nov 2026"
+  },
+  {
+   "name": "Derogación de la Ley 19.856 (rebajas de condena)",
+   "status": "tramite",
+   "label": "En discusión",
+   "text": "Iniciativa de parlamentarios con apoyo del Gobierno. Las rebajas están suspendidas desde el 9 de noviembre.",
+   "date": "6–9 nov 2026"
+  }
+ ],
+ "votes": {
+  "note": "Votos en la Sala de la Cámara, 11 de noviembre de 2026. Fuente: El Mostrador.",
+  "rows": [
+   {
+    "name": "Defensa",
+    "yes": 124,
+    "no": 3,
+    "result": "Aprobada"
+   },
+   {
+    "name": "Obras Públicas",
+    "yes": 102,
+    "no": 29,
+    "result": "Aprobada"
+   },
+   {
+    "name": "Justicia",
+    "yes": 85,
+    "no": 59,
+    "result": "Aprobada"
+   },
+   {
+    "name": "Agricultura",
+    "yes": 65,
+    "no": 61,
+    "result": "Aprobada"
+   },
+   {
+    "name": "Educación",
+    "yes": 72,
+    "no": 72,
+    "result": "Rechazada"
+   }
   ]
+ },
+ "mobStats": [
+  {
+   "value": "+600",
+   "label": "camioneros movilizados en Arica y Parinacota y Tarapacá"
+  },
+  {
+   "value": "3",
+   "label": "jornadas de protesta convocadas hasta diciembre"
+  },
+  {
+   "value": "29",
+   "label": "detenidos en la última gran marcha en Santiago (18 oct)"
+  },
+  {
+   "value": "+53,5%",
+   "label": "alza del diésel en 2026, motivo del paro"
+  }
+ ],
+ "agenda": [
+  {
+   "status": "now",
+   "when": "Desde 10 nov",
+   "sub": "sin fecha de término",
+   "title": "Paro nacional de camioneros",
+   "place": "Autopistas y rutas del norte y sur; falta de combustible en Temuco y Padre Las Casas",
+   "text": "Se sumó Fedequinta (Valparaíso) y los transportistas del norte rechazaron la propuesta del Gobierno. Hay restricciones en las rutas 5 Sur, 68, 78 y 1. Revisa la sección de cortes más abajo.",
+   "sources": [
+    {
+     "n": "Infobae",
+     "u": "https://www.infobae.com/movant/2026/11/12/el-costo-del-diesel-en-chile-empuja-un-paro-de-camioneros-con-efectos-en-el-suministro-regional/"
+    },
+    {
+     "n": "BioBioChile",
+     "u": "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/gobierno-anuncia-congelamiento-de-precios-de-combustibles-hasta-febrero-de-2027.shtml"
+    }
+   ]
+  },
+  {
+   "status": "now",
+   "when": "11 nov",
+   "sub": "ayer",
+   "title": "Protesta de la Confech contra recortes en educación",
+   "place": "Mineduc, Alameda (Santiago); Congreso (Valparaíso); Seremis en regiones",
+   "text": "Hubo enfrentamientos con Carabineros, gases lacrimógenos y corte de la Alameda. No se informó cifra de detenidos. Abre el ciclo de protestas del Frente Común.",
+   "sources": [
+    {
+     "n": "BioBioChile",
+     "u": "https://www.biobiochile.cl/noticias/nacional/region-metropolitana/2026/11/11/cortan-la-alameda-en-santiago-tras-incidentes-por-protesta-confech-afuera-del-mineduc.shtml"
+    }
+   ]
+  },
+  {
+   "status": "next",
+   "when": "18 nov",
+   "sub": "miércoles",
+   "title": "Jornada nacional de protesta de la CUT",
+   "place": "Todo el país",
+   "text": "Manifestaciones contra los recortes del Presupuesto 2027 y por el reajuste del sector público.",
+   "sources": [
+    {
+     "n": "Canal 9 BioBío",
+     "u": "https://www.canal9.cl/episodios/2026/11/10/agrupaciones-de-trabajadores-y-estudiantes-anuncian-movilizaciones-contra-gobierno-desde-el-miercoles"
+    }
+   ]
+  },
+  {
+   "status": "next",
+   "when": "27 nov",
+   "sub": "viernes",
+   "title": "Protesta de pobladores frente al Minvu",
+   "place": "Ministerio de Vivienda, Santiago",
+   "text": "El Movimiento Nacional de Pobladores pedirá la salida del ministro de Vivienda, Iván Poduje. El ciclo de protestas del Frente Común seguiría hasta la primera semana de diciembre.",
+   "sources": [
+    {
+     "n": "Canal 9 BioBío",
+     "u": "https://www.canal9.cl/episodios/2026/11/10/agrupaciones-de-trabajadores-y-estudiantes-anuncian-movilizaciones-contra-gobierno-desde-el-miercoles"
+    }
+   ]
+  }
+ ],
+ "gloss": [
+  {
+   "t": "Partida presupuestaria",
+   "d": "Es el capítulo del Presupuesto que corresponde a un ministerio. Rechazar una partida significa que la Cámara no aprobó la propuesta de dinero para ese ministerio."
+  },
+  {
+   "t": "Acusación constitucional",
+   "d": "Herramienta del Congreso para hacer responsable a una autoridad. Si se aprueba, la persona es destituida y no puede ejercer cargos públicos por 5 años."
+  },
+  {
+   "t": "Discusión inmediata",
+   "d": "Urgencia que pone el Gobierno a un proyecto para que el Congreso lo vote en pocos días."
+  },
+  {
+   "t": "Impuesto específico",
+   "d": "Impuesto fijo por litro que se cobra a los combustibles. Los transportistas pueden recuperar una parte."
+  }
+ ],
+ "outlets": [
+  {
+   "n": "BioBioChile",
+   "u": "https://www.biobiochile.cl"
+  },
+  {
+   "n": "Cooperativa",
+   "u": "https://www.cooperativa.cl"
+  },
+  {
+   "n": "CNN Chile",
+   "u": "https://www.cnnchile.com"
+  },
+  {
+   "n": "El Mostrador",
+   "u": "https://www.elmostrador.cl"
+  },
+  {
+   "n": "The Clinic",
+   "u": "https://www.theclinic.cl"
+  },
+  {
+   "n": "El Dínamo",
+   "u": "https://www.eldinamo.cl"
+  },
+  {
+   "n": "Radio U. de Chile",
+   "u": "https://radio.uchile.cl"
+  },
+  {
+   "n": "El Periodista",
+   "u": "https://www.elperiodista.cl"
+  },
+  {
+   "n": "Publimetro",
+   "u": "https://www.publimetro.cl"
+  },
+  {
+   "n": "T13 / Ex-Ante",
+   "u": "https://www.t13.cl"
+  },
+  {
+   "n": "Infobae",
+   "u": "https://www.infobae.com"
+  },
+  {
+   "n": "Canal 9 BioBío",
+   "u": "https://www.canal9.cl"
+  }
+ ],
+ "traffic": {
+  "note": "Estado informado por concesionarias, Transporte Informa y medios en la mañana del 12 de noviembre. Puede cambiar durante el día: antes de viajar, revisa las cuentas oficiales.",
+  "items": [
+   {
+    "region": "Región Metropolitana",
+    "where": "Ruta 5 Sur, Lo Herrera (San Bernardo), km 27",
+    "level": "parcial",
+    "detail": "Camiones ocupan las pistas derecha y central. Acceso Lo Herrera cerrado."
+   },
+   {
+    "region": "Región Metropolitana",
+    "where": "Ruta 68, Ciudad de Los Valles (Pudahuel), km 11 a 12",
+    "level": "parcial",
+    "detail": "Restricción de pistas en ambos sentidos; según Cooperativa, solo una pista habilitada."
+   },
+   {
+    "region": "Región Metropolitana",
+    "where": "Ruta 78, Talagante, km 38",
+    "level": "parcial",
+    "detail": "Restricción de pistas por transportistas movilizados."
+   },
+   {
+    "region": "Región Metropolitana",
+    "where": "Ruta 5 Sur, Linderos (Buin), km 40",
+    "level": "parcial",
+    "detail": "Solo una pista habilitada."
+   },
+   {
+    "region": "Valparaíso",
+    "where": "Ruta 68, enlaces Algarrobo y La Pólvora",
+    "level": "congestion",
+    "detail": "Unos 50 camiones detenidos a la orilla; tránsito lento hacia Valparaíso."
+   },
+   {
+    "region": "Valparaíso",
+    "where": "Ruta 5 Norte, enlace La Ligua, km 147",
+    "level": "parcial",
+    "detail": "Restricción de pistas."
+   },
+   {
+    "region": "O'Higgins y Maule",
+    "where": "Ruta 5 Sur, Rengo (km 112) y Talca (km 249)",
+    "level": "parcial",
+    "detail": "Tránsito reducido a una pista por sentido."
+   },
+   {
+    "region": "Biobío",
+    "where": "Ruta 5 Sur, entre Los Ángeles y Mulchén",
+    "level": "congestion",
+    "detail": "Más de 700 camiones detenidos en un tramo de 40 km. Sin corte total informado."
+   },
+   {
+    "region": "Tarapacá",
+    "where": "Ruta 1, entre Patillos y Patache",
+    "level": "corte",
+    "detail": "Corte de tránsito; los transportistas impiden el paso de vehículos de pasajeros."
+   }
+  ],
+  "sources": [
+   {
+    "n": "CNN Chile",
+    "u": "https://www.cnnchile.com/pais/paro-camioneros-rutas-cortes-congestion-12-noviembre/"
+   },
+   {
+    "n": "Pauta",
+    "u": "https://www.pauta.cl/actualidad/2026/11/12/paro-de-camioneros-en-chile-revisa-las-rutas-con-cortes-y-congestion-este-jueves.html"
+   },
+   {
+    "n": "Cooperativa",
+    "u": "https://www.cooperativa.cl/noticias/pais/manifestaciones/paro-transportistas-del-norte-rechazaron-oficialmente-propuesta-del/2026-11-12/073801.html"
+   }
+  ],
+  "metro": {
+   "status": "sin-info",
+   "label": "Sin alteraciones informadas hoy",
+   "text": "No se encontraron reportes de cierres en el Metro de Santiago para hoy. En las protestas estudiantiles del 5 de noviembre se cerraron accesos en el centro (Universidad de Chile, La Moneda, Los Héroes) y la estación República. Ante marchas, esas estaciones suelen ser las primeras en cerrar.",
+   "stations": [],
+   "sources": [
+    {
+     "n": "Metro de Santiago",
+     "u": "https://www.metro.cl"
+    },
+    {
+     "n": "T13 (5 nov)",
+     "u": "https://www.t13.cl/noticia/nacional/metro-santiago-cierra-accesos-estaciones-linea-1-5-por-manifestaciones-5-11-2026"
+    }
+   ]
+  }
+ }
 }
 </script>
 
@@ -518,6 +952,29 @@ footer a{font-weight:600}
   var ms=document.getElementById('mob-stats');
   (D.mobStats||[]).forEach(function(x){var c=el('div','stat'); c.appendChild(el('b',null,x.value)); c.appendChild(el('span',null,x.label)); ms.appendChild(c);});
   if(!(D.mobStats||[]).length) ms.hidden=true;
+
+  // Cortes de tránsito y Metro
+  (function(){
+    var T=D.traffic; var sec=document.getElementById('h-transito').closest('section');
+    if(!T){sec.hidden=true;return;}
+    document.getElementById('traffic-note').textContent=T.note||'';
+    var LV={corte:'Corte total',parcial:'Corte parcial',congestion:'Congestión',normal:'Normalizado'};
+    var list=document.getElementById('traffic-list'); var groups={}; var order=[];
+    (T.items||[]).forEach(function(it){if(!groups[it.region]){groups[it.region]=[];order.push(it.region);} groups[it.region].push(it);});
+    if(!order.length){list.appendChild(el('p','traffic-empty','Sin cortes de rutas o calles informados al momento de esta actualización.'));}
+    order.forEach(function(r){
+      var g=el('div','region'); g.appendChild(el('h3',null,r));
+      groups[r].forEach(function(it){var c=el('div','cut'); c.appendChild(el('b',null,it.where)); c.appendChild(el('span','lv lv-'+it.level,LV[it.level]||it.level)); if(it.detail) c.appendChild(el('p',null,it.detail)); g.appendChild(c);});
+      list.appendChild(g);
+    });
+    if(T.sources&&T.sources.length){var s=el('div','sources'); s.style.marginTop='14px'; T.sources.forEach(function(src){var l=el('a','src',src.n); l.href=safeUrl(src.u); l.target='_blank'; l.rel='noopener'; s.appendChild(l);}); list.appendChild(s);}
+    var M=T.metro||{status:'sin-info',label:'Sin información',text:''}; var mc=document.getElementById('metro-card');
+    mc.appendChild(el('div','eyebrow','Metro de Santiago'));
+    var b=el('div','metro-badge '+(M.status||'')); b.appendChild(el('i')); b.appendChild(document.createTextNode(M.label||'')); mc.appendChild(b);
+    if(M.text) mc.appendChild(el('p',null,M.text));
+    if(M.stations&&M.stations.length){var ul=el('ul'); M.stations.forEach(function(x){ul.appendChild(el('li',null,x));}); mc.appendChild(ul);}
+    if(M.sources&&M.sources.length){var s2=el('div','sources'); M.sources.forEach(function(src){var l=el('a','src',src.n); l.href=safeUrl(src.u); l.target='_blank'; l.rel='noopener'; s2.appendChild(l);}); mc.appendChild(s2);}
+  })();
 
   // Glosario
   var gl=document.getElementById('gloss');
